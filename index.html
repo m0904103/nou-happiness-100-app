@@ -693,7 +693,23 @@ function nextMCQ() { state.mcqIdx++; renderMCQ(); }
 // SWIPE
 // ────────────────────────────────────────────────
 function startSwipe() {
-  state.swQueue = [...TF].sort(() => .5 - Math.random()).slice(0, 10);
+  let seen = JSON.parse(localStorage.getItem('nou_swipe_seen') || '[]');
+  let unseenQs = TF.filter(q => !seen.includes(TF.indexOf(q)));
+  let seenQs = TF.filter(q => seen.includes(TF.indexOf(q)));
+  
+  unseenQs.sort(() => .5 - Math.random());
+  seenQs.sort(() => .5 - Math.random());
+  
+  let queue = [];
+  if (unseenQs.length >= 10) {
+      queue = unseenQs.slice(0, 10);
+  } else {
+      queue = unseenQs;
+      let remain = 10 - queue.length;
+      queue = queue.concat(seenQs.slice(0, remain));
+  }
+  
+  state.swQueue = queue.sort(() => .5 - Math.random());
   state.swIdx = 0; state.swScore = 0;
   show('s-swipe'); renderSwipe();
 }
