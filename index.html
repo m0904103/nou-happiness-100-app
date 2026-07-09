@@ -652,13 +652,24 @@ function renderMCQ() {
   if (state.mcqIdx >= state.mcqQueue.length) { showResult('mcq'); return; }
   const q = state.mcqQueue[state.mcqIdx];
   state.mcqAnswered = false;
+  
+  if (!q.currentDisplayOpts || state.mcqIdx === 0 || true) {
+      let opts = q.options.map((text, i) => {
+          let cleanText = text.replace(/^\(\s*[A-Z]\s*\)\s*/, '');
+          return { text: cleanText, isCorrect: i === q.ans };
+      });
+      opts.sort(() => Math.random() - 0.5);
+      q.currentDisplayOpts = opts;
+      q.currentAnsIdx = opts.findIndex(o => o.isCorrect);
+  }
+
   document.getElementById('mcq-area').innerHTML = `
     <div class="q-tag">第 ${state.mcqIdx+1} 題</div>
     <div class="q-text slide-up" style="animation-delay:0.05s">${q.q}</div>
     <div class="options slide-up">
-${q.options.map((o,i) => `
+${q.currentDisplayOpts.map((o,i) => `
         <button class="opt" id="opt${i}" onclick="checkMCQ(${i})">
-          <div class="opt-letter">${letters[i]}</div>${o}
+          <div class="opt-letter">${letters[i]}</div>${o.text}
         </button>`).join('')}
     </div>
     <div class="exp-box" id="exp-box">
@@ -674,14 +685,14 @@ function checkMCQ(idx) {
   const q = state.mcqQueue[state.mcqIdx];
   const opts = document.querySelectorAll('.opt');
   opts.forEach(o => o.disabled = true);
-  if (idx === q.ans) {
+  if (idx === q.currentAnsIdx) {
     opts[idx].classList.add('correct'); beep('ok'); state.mcqScore++;
     const lbl = document.getElementById('mcq-score-lbl'); lbl.textContent = `✦ ${state.mcqScore} 答對`; lbl.classList.remove('score-pop'); void lbl.offsetWidth; lbl.classList.add('score-pop');
     saveProgress(q.id, 2);
     setTimeout(() => nextMCQ(), 700);
   } else {
     opts[idx].classList.add('wrong'); opts[idx].classList.add('shake');
-    opts[q.ans].classList.add('correct'); beep('err');
+    opts[q.currentAnsIdx].classList.add('correct'); beep('err');
     document.getElementById('exp-box').classList.add('show');
     document.getElementById('btn-next').disabled = false;
     saveProgress(q.id, 1);
