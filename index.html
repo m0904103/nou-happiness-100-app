@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f172a">
+<title>人生100 幸福處方箋 ✦ 期末衝刺</title>
+<style>
+/* ─── Design Tokens ─── */
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface2: #263248;
+  --border: rgba(148,163,184,.15);
+  --accent: #818cf8;
+  --accent2: #c084fc;
+  --green: #34d399;
+  --red: #f87171;
+  --amber: #fbbf24;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --card: #1e293b;
+  --r: 20px;
+  --sh: 0 0 0 1px rgba(148,163,184,.1), 0 20px 50px rgba(0,0,0,.5);
+  --safe-top: env(safe-area-inset-top);
+  --safe-bot: env(safe-area-inset-bottom);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
+  font-family:'Helvetica Neue',Arial,'Noto Sans TC',sans-serif;font-size:16px;line-height:1.5}
+
+/* ─── App Shell ─── */
+#app{height:100dvh;display:flex;flex-direction:column;max-width:430px;margin:0 auto;overflow:hidden}
+
+/* ─── Scrollable content area ─── */
+.screen{flex:1;overflow-y:auto;overflow-x:hidden;padding:16px 16px calc(16px + var(--safe-bot));padding-top:calc(var(--safe-top) + 16px);scroll-behavior:smooth;display:none}
+.screen.active{display:block}
+
+/* ─── Animations ─── */
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+@keyframes pop{0%{transform:scale(.8);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes gradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+.slide-up{animation:slideUp .4s cubic-bezier(.22,1,.36,1) both}
+.fade-in{animation:fadeIn .3s ease both}
+.shake{animation:shake .4s ease}
+.pop{animation:pop .4s cubic-bezier(.175,.885,.32,1.275) both}
+
+/* ─── HOME SCREEN ─── */
+.home-hero{padding:32px 0 24px;text-align:center}
+.home-pill{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border-radius:99px;padding:4px 14px;font-size:.72rem;font-weight:700;letter-spacing:.08em;margin-bottom:16px;text-transform:uppercase}
+.home-title{font-size:1.65rem;font-weight:800;background:linear-gradient(135deg,#e0e7ff,var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;margin-bottom:10px}
+.home-sub{font-size:.92rem;color:var(--muted);line-height:1.55;margin-bottom:8px}
+
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:14px 8px;text-align:center}
+.stat-num{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-lbl{font-size:.72rem;color:var(--muted);margin-top:2px}
+
+.module-grid{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.module-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px;display:flex;align-items:center;gap:16px;cursor:pointer;
+  transition:transform .2s ease,background .2s,box-shadow .2s}
+.module-card:active{transform:scale(.97)}
+.module-card:hover{background:var(--surface2);box-shadow:var(--sh)}
+.module-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.55rem;flex-shrink:0}
+.icon-a{background:linear-gradient(135deg,#312e81,#4c1d95)}
+.icon-b{background:linear-gradient(135deg,#1e3a5f,#0c4a6e)}
+.icon-c{background:linear-gradient(135deg,#14532d,#065f46)}
+.icon-d{background:linear-gradient(135deg,#7c2d12,#92400e)}
+.module-info h3{font-size:1rem;font-weight:700;margin-bottom:3px}
+.module-info p{font-size:.8rem;color:var(--muted);line-height:1.4}
+.module-badge{margin-left:auto;background:rgba(129,140,248,.15);color:var(--accent);
+  font-size:.7rem;font-weight:700;border-radius:99px;padding:3px 10px;white-space:nowrap}
+
+/* ─── COMMON COMPONENTS ─── */
+.top-bar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.btn-back{width:38px;height:38px;border-radius:12px;background:var(--surface);border:1px solid var(--border);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  color:var(--text);transition:.2s;flex-shrink:0}
+.btn-back:active{transform:scale(.9)}
+.top-title{font-size:1.05rem;font-weight:700;flex:1}
+.top-count{font-size:.82rem;color:var(--muted);font-weight:600}
+
+.progress-wrap{margin-bottom:20px}
+.progress-track{height:5px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-bottom:6px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:width .5s ease}
+.progress-label{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:16px;box-shadow:var(--sh)}
+.q-tag{display:inline-block;font-size:.68rem;font-weight:700;color:var(--accent);
+  background:rgba(129,140,248,.12);border-radius:99px;padding:3px 10px;margin-bottom:12px;letter-spacing:.06em;text-transform:uppercase}
+.q-text{font-size:1.08rem;font-weight:600;line-height:1.6;color:var(--text)}
+
+.options{display:flex;flex-direction:column;gap:10px}
+.opt{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;
+  padding:15px 16px;font-size:.95rem;cursor:pointer;text-align:left;color:var(--text);
+  transition:all .25s ease;display:flex;align-items:center;gap:12px;line-height:1.45}
+.opt-letter{width:30px;height:30px;border-radius:9px;background:rgba(148,163,184,.1);
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0;color:var(--muted)}
+.opt:active{transform:scale(.97)}
+.opt.correct{background:rgba(52,211,153,.12);border-color:var(--green);color:var(--green)}
+.opt.correct .opt-letter{background:var(--green);color:#fff}
+.opt.wrong{background:rgba(248,113,113,.12);border-color:var(--red);color:var(--red)}
+.opt.wrong .opt-letter{background:var(--red);color:#fff}
+.opt:hover:not(:disabled){border-color:var(--accent);background:rgba(129,140,248,.08)}
+
+.exp-box{background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(251,191,36,.03));
+  border:1px solid rgba(251,191,36,.25);border-radius:14px;padding:16px;margin-top:14px;display:none}
+.exp-box.show{display:block}
+.exp-head{font-size:.75rem;font-weight:700;color:var(--amber);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.exp-text{font-size:.88rem;color:var(--text);line-height:1.65;opacity:.9}
+.exp-src{font-size:.72rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+
+.btn-next{width:100%;padding:17px;border-radius:16px;font-size:1.05rem;font-weight:700;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;
+  cursor:pointer;margin-top:16px;transition:.2s;box-shadow:0 8px 24px rgba(129,140,248,.3)}
+.btn-next:active{transform:scale(.97);box-shadow:none}
+.btn-next:disabled{opacity:.4;pointer-events:none}
+
+/* ─── SWIPE CARD MODULE ─── */
+.swipe-scene{position:relative;height:340px;margin:0 0 16px;display:flex;align-items:center;justify-content:center;perspective:800px}
+.swipe-card{position:relative; margin-top:20px;width:100%;height:320px;background:var(--card);
+  border:1px solid var(--border);border-radius:24px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:32px 28px;text-align:center;
+  cursor:grab;user-select:none;touch-action:none;box-shadow:var(--sh);
+  transition:none;will-change:transform}
+.swipe-card:active{cursor:grabbing}
+.swipe-card-text{font-size:1.15rem;font-weight:600;line-height:1.65;color:var(--text);pointer-events:none}
+.swipe-chip{display:inline-block;font-size:.7rem;font-weight:700;border-radius:99px;
+  padding:3px 12px;margin-bottom:16px;letter-spacing:.06em;pointer-events:none}
+.chip-tf{background:rgba(129,140,248,.15);color:var(--accent)}
+
+.swipe-labels{position:absolute;top:20px;width:calc(100% - 8px);display:flex;justify-content:space-between;pointer-events:none;}
+.label-no{color:var(--red);font-size:1.05rem;font-weight:800;border:2.5px solid var(--red);border-radius:10px;padding:4px 14px;transform:rotate(10deg);opacity:0;transition:opacity .1s}
+.label-yes{color:var(--green);font-size:1.05rem;font-weight:800;border:2.5px solid var(--green);border-radius:10px;padding:4px 14px;transform:rotate(-10deg);opacity:0;transition:opacity .1s}
+
+.swipe-buttons{display:flex;gap:20px;justify-content:center;margin-top:4px}
+.swipe-btn{width:70px;height:70px;border-radius:50%;border:none;font-size:1.8rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:transform .2s cubic-bezier(.175,.885,.32,1.275)}
+.swipe-btn:active{transform:scale(.88)!important}
+.sb-no{background:rgba(248,113,113,.15);color:var(--red);border:2px solid rgba(248,113,113,.3)}
+.sb-yes{background:rgba(52,211,153,.15);color:var(--green);border:2px solid rgba(52,211,153,.3)}
+
+/* ─── MATCH GAME ─── */
+.match-board{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.match-item{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;
+  padding:14px 12px;font-size:.85rem;text-align:center;cursor:pointer;line-height:1.5;
+  transition:all .25s;min-height:76px;display:flex;align-items:center;justify-content:center;font-weight:600}
+.match-item:active{transform:scale(.95)}
+.match-item.selected{border-color:var(--amber);background:rgba(251,191,36,.1);color:var(--amber)}
+.match-item.matched{background:rgba(52,211,153,.12);border-color:var(--green);color:var(--green);pointer-events:none;opacity:.6;transform:scale(.96)}
+.match-item.wrong-flash{border-color:var(--red);background:rgba(248,113,113,.1);animation:shake .35s ease}
+.match-hint{text-align:center;font-size:.78rem;color:var(--muted);margin-bottom:14px}
+
+/* ─── RESULT SCREEN ─── */
+.result-wrap{text-align:center;padding:20px 0}
+.result-emoji{font-size:5rem;margin-bottom:16px;display:block}
+.result-score{font-size:2.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.result-label{font-size:1rem;color:var(--muted);margin-bottom:28px}
+.result-msg{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:18px;font-size:.92rem;line-height:1.65;margin-bottom:24px;color:var(--muted)}
+.result-msg strong{color:var(--text)}
+
+/* ─── FLASHCARD ─── */
+.flash-card{background:var(--card);border:1px solid var(--border);border-radius:24px;
+  min-height:240px;padding:32px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;box-shadow:var(--sh);cursor:pointer;
+  position:relative;overflow:hidden;margin-bottom:16px}
+.flash-front{font-size:1.25rem;font-weight:700;line-height:1.55;color:var(--text)}
+.flash-back{display:none;font-size:.95rem;line-height:1.7;color:var(--muted)}
+.flash-back strong{color:var(--text)}
+.flash-card.flipped .flash-front{display:none}
+.flash-card.flipped .flash-back{display:block}
+.flash-tap{font-size:.72rem;color:var(--accent);margin-top:14px;opacity:.7}
+.flash-nav{display:flex;gap:12px;justify-content:center;align-items:center;margin-top:4px}
+.flash-nav-btn{padding:12px 24px;border-radius:12px;border:1.5px solid var(--border);
+  background:var(--surface);color:var(--text);font-size:.9rem;font-weight:600;cursor:pointer;transition:.2s}
+.flash-nav-btn:active{transform:scale(.95)}
+
+
+/* ─── STUDY MODULE (Accordion) ─── */
+.study-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r); margin-bottom:14px; overflow:hidden; box-shadow:var(--sh); transition:all 0.3s ease; }
+.study-head { padding:20px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; background:var(--surface); }
+.study-head h3 { font-size:1.1rem; font-weight:700; color:var(--text); margin:0; line-height:1.4; }
+.study-head .ch-badge { display:inline-block; font-size:0.7rem; color:var(--accent); background:rgba(129,140,248,.15); padding:3px 10px; border-radius:99px; margin-bottom:6px; font-weight:700; }
+.study-icon { font-size:1.2rem; color:var(--muted); transition:transform 0.3s ease; }
+.study-card.open .study-icon { transform:rotate(180deg); color:var(--accent); }
+.study-body { max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); background:var(--card); }
+.study-card.open .study-body { max-height: 1200px; }
+.study-content { padding:20px; border-top:1px solid var(--border); font-size:0.95rem; line-height:1.7; color:var(--text); }
+.study-content p { margin-bottom:12px; color:var(--muted); }
+.study-content strong { color:var(--text); }
+.study-highlight { background:rgba(52,211,153,.1); border-left:4px solid var(--green); padding:12px 14px; border-radius:4px 8px 8px 4px; margin:14px 0; font-size:0.9rem; }
+.study-highlight h4 { color:var(--green); margin-bottom:6px; font-size:0.95rem; }
+.study-case { background:linear-gradient(135deg, rgba(129,140,248,.1), rgba(192,132,252,.05)); border:1px solid rgba(129,140,248,.2); padding:14px; border-radius:12px; margin-top:14px; }
+.study-case h4 { color:var(--accent2); margin-bottom:6px; font-size:0.95rem; display:flex; align-items:center; gap:6px; }
+.study-footer-btn { width:100%; margin-top:20px; padding:16px; background:linear-gradient(135deg,var(--surface2),var(--surface)); color:var(--text); border:1px solid var(--border); border-radius:14px; font-weight:700; cursor:pointer; }
+.study-footer-btn:active { transform:scale(0.97); }
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(148,163,184,.2);border-radius:99px}
+
+/* ─── CONFETTI canvas ─── */
+#confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+
+/* ─── PROGRESS PANEL ─── */
+.progress-panel-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; display:flex; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition:opacity 0.3s; backdrop-filter:blur(5px); }
+.progress-panel-overlay.show { opacity:1; pointer-events:all; }
+.progress-panel { background:var(--card); width:90%; max-width:400px; border-radius:24px; padding:24px; transform:translateY(30px); transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275); box-shadow:var(--sh); border:1px solid rgba(255,255,255,0.2); }
+.progress-panel-overlay.show .progress-panel { transform:translateY(0); }
+.pp-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+.pp-title { font-size:1.2rem; font-weight:800; color:var(--text); }
+.pp-close { background:var(--surface); border:none; width:36px; height:36px; border-radius:18px; font-size:1.2rem; color:var(--muted); cursor:pointer; }
+.pp-grid { display:grid; grid-template-columns:repeat(10, 1fr); gap:6px; }
+.pp-node { width:100%; aspect-ratio:1; border-radius:4px; transition:all 0.3s; background:var(--surface); border:1px solid var(--border); }
+.pp-node.status-0 { background:var(--surface); } /* 未答 */
+.pp-node.status-1 { background:var(--red); border-color:var(--red); box-shadow:0 0 8px rgba(248,113,113,0.4); } /* 答錯 */
+.pp-node.status-2 { background:var(--green); border-color:var(--green); box-shadow:0 0 8px rgba(74,222,128,0.4); } /* 答對 */
+
+
+/* ─── GAMIFICATION & DOPAMINE ─── */
+.confetti { position:fixed; top:-10px; width:10px; height:10px; z-index:9999; animation:fall 2.5s linear forwards; border-radius:2px; }
+@keyframes fall { to { transform: translateY(105vh) rotate(720deg); opacity:0; } }
+.badge-unlocked { animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform: scale(0); display:inline-block; margin-top: 15px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 8px 16px; border-radius: 99px; font-weight: bold; box-shadow: 0 4px 15px rgba(245,158,11,0.4); }
+@keyframes popIn { to { transform: scale(1); } }
+.score-pop { animation: scorePop 0.4s ease; color: var(--green); font-weight: 900; }
+@keyframes scorePop { 0% { transform: scale(1); } 50% { transform: scale(1.5); color: #10b981; } 100% { transform: scale(1); } }
+
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+<div id="app">
+  <!-- HOME -->
+  <div class="screen active" id="s-home">
+    <div class="home-hero slide-up">
+      <div class="home-pill">✦ 期末考衝刺特訓</div>
+      <h1 class="home-title">人生100<br>幸福處方箋</h1>
+      <p class="home-sub">整合全六章課程語音講義<br>60 題精準題庫 × 3 大核心模組</p>
+    </div>
+    <div class="stats-row slide-up">
+      <div class="stat-card"><div class="stat-num">60</div><div class="stat-lbl">章節題目</div></div>
+      <div class="stat-card"><div class="stat-num">3</div><div class="stat-lbl">核心模組</div></div>
+      <div class="stat-card"><div class="stat-num">6</div><div class="stat-lbl">章節覆蓋</div></div>
+    </div>
+    <div class="module-grid slide-up">
+      
+      <div class="module-card" onclick="startStudy()" style="animation-delay: 0.1s">
+        <div class="module-icon" style="background:linear-gradient(135deg,#b45309,#78350f)">📚</div>
+        <div class="module-info">
+          <h3>課程重點精華</h3>
+          <p>全六章導讀，先看筆記再測驗！</p>
+        </div>
+        <div class="module-badge" style="background:rgba(251,191,36,.15);color:var(--amber)">必讀</div>
+      </div>
+      <div class="module-card" onclick="startMCQ()">
+        <div class="module-icon icon-a">🎮</div>
+        <div class="module-info">
+          <h3>全真模擬選擇題</h3>
+          <p>隨機10題，完整解析，答錯立刻反思</p>
+        </div>
+        <div class="module-badge">30題庫</div>
+      </div>
+      <div class="module-card" onclick="startSwipe()">
+        <div class="module-icon icon-b">🃏</div>
+        <div class="module-info">
+          <h3>是非題滑滑卡</h3>
+          <p>左滑❌右滑⭕，訓練直覺反射肌肉記憶</p>
+        </div>
+        <div class="module-badge">20題庫</div>
+      </div>
+    </div> <!-- module-grid -->
+  </div> <!-- s-home -->
+
+  <!-- MCQ SCREEN -->
+  <div class="screen" id="s-mcq">
+    <div class="topbar">
+      <button class="btn-back" onclick="show('s-home')">←</button>
+      <div class="topbar-title">全真模擬選擇題 <button class="btn-progress" onclick="openProgress()">查看進度</button></div>
+      <div class="score-badge" id="mcq-score-lbl">✦ 0 答對</div>
+    </div>
+    <div class="quiz-area" id="mcq-area"></div>
+  </div>
+
+  <!-- SWIPE SCREEN -->
+  <div class="screen" id="s-swipe">
+    <div class="topbar">
+      <button class="btn-back" onclick="show('s-home')">←</button>
+      <div class="topbar-title">是非題滑滑卡</div>
+      <div class="score-badge" id="sw-count">0 / 0</div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="sw-progress"></div></div>
+    <div class="quiz-area" id="swipe-area" style="overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center;"></div>
+  </div>
+
+
+  <!-- STUDY SCREEN -->
+  <div class="screen" id="s-study">
+    <div class="topbar">
+      <button class="btn-back" onclick="show('s-home')">←</button>
+      <div class="topbar-title">課程重點精華</div>
+    </div>
+    <div style="margin-bottom:20px;color:var(--muted);font-size:0.9rem;text-align:center;" class="fade-in">點擊下方章節展開閱讀，建立核心觀念</div>
+    
+    <div id="study-accordion" class="slide-up">
+      <!-- CH1 -->
+      <div class="study-card" onclick="toggleStudy(this)">
+        <div class="study-head">
+          <div><div class="ch-badge">第一章</div><h3>社會轉型與學習觀的變遷</h3></div>
+          <div class="study-icon">▼</div>
+        </div>
+        <div class="study-body"><div class="study-content">
+          <p>本章探討在工業社會向後工業社會過渡中，人們的價值觀與學習觀的根本性轉變。</p>
+          <div class="study-highlight">
+            <h4>💡 核心重點與專有名詞</h4>
+            <strong>1. 從「佔有慾望」到「存在慾望」</strong>：過去人們追求物質與金錢（佔有），現在更渴望獲得社會認可、良好人際關係與生存意義（存在）。<br><br>
+            <strong>2. 伊斯特林悖論 (Easterlin Paradox)</strong>：經濟發展與所得提升到一定程度後，人們的幸福感與滿足感反而會停滯甚至下降。<br><br>
+            <strong>3. Panopticon (圓形監獄)</strong>：英國哲學家邊沁提出。隱喻傳統學校的空間設計（老師在高台監控學生），象徵工業化時代對人民的標準化與規訓。<br><br>
+            <strong>4. 幸福感三大決定因素</strong>：健康、良好的人際關係、以及<strong>「自我決定」</strong>（能掌控自己人生的感覺）。
+          </div>
+          <div class="study-highlight" style="background:rgba(239,68,68,0.05); border-left:4px solid var(--red);">
+            <h4 style="color:var(--red);">⚠️ 考前防呆陷阱</h4>
+            • 考試若說「現代人的終極目標依然是追求物質財富」，請選 <strong>(X)</strong>，應為「追求存在的意義」。<br>
+            • 考試若說「學校是唯一合法的學習場域」，請選 <strong>(X)</strong>，學習必須回歸社會與生活。
+          </div>
+          <div class="study-case">
+            <h4>🌟 經典案例：岡媽媽之家 TOMO (居場所)</h4>
+            日本長輩透過「稍微打開私宅空間」，將閒置空屋變成不設門檻的社區客廳。這不僅解決了獨居老人的孤立，更創造了跨世代交融的「居場所 (Ibasho)」。
+          </div>
+        </div></div>
+      </div>
+
+      <!-- CH2 -->
+      <div class="study-card" onclick="toggleStudy(this)">
+        <div class="study-head">
+          <div><div class="ch-badge">第二章</div><h3>百年人生與學習的轉機</h3></div>
+          <div class="study-icon">▼</div>
+        </div>
+        <div class="study-body"><div class="study-content">
+          <p>人生 100 年時代來臨，傳統「求學-就業-退休」的三段式劇本已經失效。我們必須擁抱多段式的動態人生。</p>
+          <div class="study-highlight">
+            <h4>💡 核心重點與專有名詞</h4>
+            <strong>1. 棺材型社會 (多死社會)</strong>：日本人口結構的改變，不再是金字塔型，而是多數人都能活到自然壽命終點的「棺材型」。這象徵著人類醫療與社會的巨大成功。<br><br>
+            <strong>2. 流體智力 vs. 晶體智力</strong>：<br>
+            &nbsp;&nbsp;&nbsp;• <strong>流體智力</strong>：記憶力、運算速度（隨年齡衰退）。<br>
+            &nbsp;&nbsp;&nbsp;• <strong>晶體智力</strong>：人生經驗、溝通協調、解決問題的能力（隨年齡<strong>持續增長</strong>）。<br><br>
+            <strong>3. Generativity (世代傳承 / 關懷下一代)</strong>：人類的本質情感。長輩透過關心與指導年輕世代，不僅能傳承智慧，還能讓自己獲得極大的幸福感與被需要感。
+          </div>
+          <div class="study-highlight" style="background:rgba(239,68,68,0.05); border-left:4px solid var(--red);">
+            <h4 style="color:var(--red);">⚠️ 考前防呆陷阱</h4>
+            • 考試若說「高齡化社會是社會的負擔與失敗」，請選 <strong>(X)</strong>，這是人類醫療進步的「成功果實」。<br>
+            • 考試若說「長輩的智力會全面衰退」，請選 <strong>(X)</strong>，「晶體智力」是隨年齡增長的。
+          </div>
+          <div class="study-case">
+            <h4>🌟 經典案例：社區的小雞蛋</h4>
+            日本農村長輩協助照顧雙薪家庭的孫子女。這不僅解決了年輕父母的托育問題，也打破了長輩的雙重孤立，完美發揮了 Generativity。
+          </div>
+        </div></div>
+      </div>
+
+      <!-- CH3 -->
+      <div class="study-card" onclick="toggleStudy(this)">
+        <div class="study-head">
+          <div><div class="ch-badge">第三章</div><h3>學校制度與非正式空間</h3></div>
+          <div class="study-icon">▼</div>
+        </div>
+        <div class="study-body"><div class="study-content">
+          <p>打破單一標準的學校圍牆，重新發現「生活即學習」。社區的每個角落都可以是充滿連結的學習場域。</p>
+          <div class="study-highlight">
+            <h4>💡 核心重點與專有名詞</h4>
+            <strong>1. 非正式學習空間</strong>：有別於正式學校。廟口、農田、麵攤等日常空間，都是建立信任與交流生活智慧的絕佳教室。<br><br>
+            <strong>2. 甜甜圈理論</strong>：社區就像甜甜圈。外圍本體是經濟、福利等功能，但中間的「洞」必須是<strong>「學習」</strong>。沒有學習作為核心串聯，社區功能就無法發揮。<br><br>
+            <strong>3. 陪跑教練 (陪走)</strong>：政府或老師的角色轉變。不再是高壓的「監考官」或包辦一切的「服務提供者」，而是陪伴居民尋找解方的同行者。<br><br>
+            <strong>4. 當事者意識</strong>：居民不依賴政府發放補助，而是將社區問題視為「自己的事」，主動參與解決的主人翁精神。
+          </div>
+          <div class="study-highlight" style="background:rgba(239,68,68,0.05); border-left:4px solid var(--red);">
+            <h4 style="color:var(--red);">⚠️ 考前防呆陷阱</h4>
+            • 若題目說「政府應該幫居民包辦所有社區服務」，請選 <strong>(X)</strong>，這會讓居民退化為被動消費者，喪失當事者意識。
+          </div>
+          <div class="study-case">
+            <h4>🌟 經典案例：益田市的跨世代對話</h4>
+            政府不強迫年輕人留鄉，而是舉辦對話，讓長輩分享真實（甚至失敗）的人生故事。這打破了年輕人覺得長輩無聊的偏見，成功建立對家鄉的親密感。
+          </div>
+        </div></div>
+      </div>
+
+      <!-- CH4 -->
+      <div class="study-card" onclick="toggleStudy(this)">
+        <div class="study-head">
+          <div><div class="ch-badge">第四章</div><h3>政策脈絡與制度建構</h3></div>
+          <div class="study-icon">▼</div>
+        </div>
+        <div class="study-body"><div class="study-content">
+          <p>政府與企業必須提供制度保障，讓民眾能無壓力地「回流學習」，並透過社會處方箋對抗孤立疾病。</p>
+          <div class="study-highlight">
+            <h4>💡 核心重點與專有名詞</h4>
+            <strong>1. 終身教育的初衷 (1965)</strong>：因為科技發展過快，單靠學校教育已無法應付社會變遷，必須持續更新知識。<br><br>
+            <strong>2. 回流教育 (Recurrent Education)</strong>：OECD 提倡。推動「有薪教育假」，讓在職勞工帶薪回校進修，且必須由<strong>國家層級的勞動政策</strong>介入保障，不能單靠企業老闆。<br><br>
+            <strong>3. 社會處方箋</strong>：現代許多疾病源於孤立。醫療界不再只開藥，而是開立參與社團、志工等「社會連結」處方，以促進身心健康。<br><br>
+            <strong>4. 共食防孤立</strong>：長達11年的研究證實，「與人共餐」是延長健康壽命的關鍵。一個人「孤食」會使死亡危險度增加1.5倍。
+          </div>
+          <div class="study-highlight" style="background:rgba(239,68,68,0.05); border-left:4px solid var(--red);">
+            <h4 style="color:var(--red);">⚠️ 考前防呆陷阱</h4>
+            • 若題目說「回流教育是為了讓長輩打發時間」，請選 <strong>(X)</strong>，是為了解決在職勞工技能落後的現實困境。
+          </div>
+          <div class="study-case">
+            <h4>🌟 經典案例：青年人走向鄉村 (日本豐田市)</h4>
+            不是要求農村青年留下，而是吸引有興趣的都市青年來農村，與長輩建立互相尊重、雙向學習的「第二故鄉」家人關係。
+          </div>
+        </div></div>
+      </div>
+
+      <!-- CH5 -->
+      <div class="study-card" onclick="toggleStudy(this)">
+        <div class="study-head">
+          <div><div class="ch-badge">第五章</div><h3>當代生活型態與自我實驗</h3></div>
+          <div class="study-icon">▼</div>
+        </div>
+        <div class="study-body"><div class="study-content">
+          <p>面對充滿變數的多樣化社會，不要害怕失敗，應該把生活當作一場「自我設計的無壓力實驗」。</p>
+          <div class="study-highlight">
+            <h4>💡 核心重點與專有名詞</h4>
+            <strong>1. AAR 循環</strong>：取代高壓、嚴肅的 PDCA 循環。<br>
+            &nbsp;&nbsp;&nbsp;• <strong>A (Anticipation / 預期)</strong>：帶著好奇心與好玩的期待。<br>
+            &nbsp;&nbsp;&nbsp;• <strong>A (Action / 行動)</strong>：無壓力地去嘗試實驗。<br>
+            &nbsp;&nbsp;&nbsp;• <strong>R (Reflection / 反思)</strong>：反思感覺，好玩就繼續，不好就調整。<br><br>
+            <strong>2. 擺脫顧客化 / 消費者化</strong>：不要把長輩或居民當成只能被動接受服務的「消費者」。要讓他們重新找回生活的主導權與生產力。<br><br>
+            <strong>3. 第三人生</strong>：退休後不再是等待終老的餘生，而是可以自由探索、重新定義自我的黃金第三人生。
+          </div>
+          <div class="study-highlight" style="background:rgba(239,68,68,0.05); border-left:4px solid var(--red);">
+            <h4 style="color:var(--red);">⚠️ 考前防呆陷阱</h4>
+            • 考試若說「AAR循環的目的是為了嚴格監督員工達成業績」，請選 <strong>(X)</strong>，AAR是充滿好奇、低壓且允許失敗的實驗。
+          </div>
+          <div class="study-case">
+            <h4>🌟 經典案例：審計新村微型創業</h4>
+            台灣的成功案例。透過政府提供低門檻的空間活化，讓年輕人以低成本進行創業「實驗」，實踐了 AAR 的容錯精神。
+          </div>
+        </div></div>
+      </div>
+
+      <!-- CH6 -->
+      <div class="study-card" onclick="toggleStudy(this)">
+        <div class="study-head">
+          <div><div class="ch-badge">第六章</div><h3>學習的倫理實踐與統整</h3></div>
+          <div class="study-icon">▼</div>
+        </div>
+        <div class="study-body"><div class="study-content">
+          <p>學習的終極目標是從吸收知識轉為「實踐 (Doer)」，發揮共感，透過恩送建立溫暖互助的社會。</p>
+          <div class="study-highlight">
+            <h4>💡 核心重點與專有名詞</h4>
+            <strong>1. 恩送 (Pay it forward)</strong>：受到幫助後，不只是向原恩人報恩，而是將這份善意無條件地傳遞給周遭的人與下一代，形成善的循環。<br><br>
+            <strong>2. 共感 (Compassion)</strong>：超越單純的同情 (Sympathy)。共感是將對方的痛苦視為自己的痛苦，並主動陪伴對方度過難關。<br><br>
+            <strong>3. 動態拼圖模式</strong>：每個人都有優缺點（凹凸面）。不論年齡，我們都能透過社會連結與他人形成完美鑲嵌、無壓力的互補關係。<br><br>
+            <strong>4. 老年期超越 (Gerotranscendence)</strong>：發揮共感與世代傳承後達到的最高境界。脫離世俗利害關係，不再恐懼死亡，感到極度平靜、滿足與幸福。
+          </div>
+          <div class="study-highlight" style="background:rgba(239,68,68,0.05); border-left:4px solid var(--red);">
+            <h4 style="color:var(--red);">⚠️ 考前防呆陷阱</h4>
+            • 考試若說「共感就是站在高處同情弱者」，請選 <strong>(X)</strong>，共感是平等的陪伴與共同承擔。
+          </div>
+          <div class="study-case">
+            <h4>🌟 經典案例：沖繩移動式攤販公民館</h4>
+            公務員的最高指導原則是刻意「留白（什麼都不做）」。只推著攤車在旁陪伴聆聽，反而成功激發居民主動解決問題的「當事者意識」。
+          </div>
+        </div></div>
+      </div>
+    </div>
+    <button class="study-footer-btn slide-up" onclick="startMCQ()">讀完了？立刻去挑戰全真模擬選擇題 🚀</button>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div class="screen" id="s-result">
+    <div class="result-box" id="result-content"></div>
+  </div>
+</div> <!-- app -->
+
+
+<script>
+const TF = [
+  { q: "「生活即學習」的概念強調日常角落如麵攤、農田，都是獲取生活智慧與建立關係的學習場域。", t: true, exp: "此為正確觀念。學習不限於學校教室，生活中的每個角落與人際互動，都是累積「晶體智力」的寶貴經驗。" },
+  { q: "傳統學校制度下，用單一標準（如考試分數）評估學生，容易讓每個人都充滿自信與動力。", t: false, exp: "錯！單一標準會產生比較與壓力，否定個體多樣價值，容易讓人感到挫折。" },
+  { q: "現代社會許多身心疾病源自孤立。醫療界提倡「社會處方箋」來促進健康。", t: true, exp: "完全正確！「社會處方箋」鼓勵人們走出家門參與社會活動，以人際連結來預防和改善身心疾病。" },
+  { q: "科學研究指出，若與家人同住卻「一個人孤單的吃飯」，對健康完全沒有任何影響。", t: false, exp: "錯！研究顯示「孤食」會增加憂鬱與死亡風險，缺乏交流的進食對身心健康有負面影響。" },
+  { q: "日本島根縣益田市在推動地方創生時，單向要求年輕人留鄉反而造成反感。", t: true, exp: "正確！社區營造必須雙向溝通，單向的道德綁架只會造成反彈，應該創造吸引年輕人的共好環境。" },
+  { q: "活到100歲是人類醫療進步的禮物，我們應該告別傳統單線的「英雄旅程」，發展多段式人生。", t: true, exp: "正確！單線路徑（求學->就業->退休）已不適用，我們需要隨時重塑自我、展開多段式新生活。" },
+  { q: "在長壽社會中，人的「流體智力」會隨著年紀增長而不斷進化，記憶力會越來越好。", t: false, exp: "錯！「流體智力」（如記憶力、反應速度）會隨年齡下降；但經驗累積的「晶體智力」會不斷進化。" },
+  { q: "現代人幸福感的前三名不再只是賺錢，而是：身體健康、良好人際關係、自我決定。", t: true, exp: "正確！根據研究，能掌握自己生活節奏、擁有健康與社交圈，才是長壽社會中最幸福的事。" },
+  { q: "未來的學習主要是為了獲取更多文憑，避免在職場上被年輕人淘汰。", t: false, exp: "錯！未來的學習不僅是獲取知識，更重要的是「創造新的人際連結」，在互相陪伴中肯定彼此的存在價值。" },
+  { q: "長輩可以成為年輕世代心靈上的「故鄉」，在陪伴中寫下新劇本。", t: true, exp: "正確！例如日本的小雞蛋專案，長輩的傾聽與陪伴能成為年輕人的避風港，實現世代共好。" },
+  { q: "「AAR循環」中的R代表Reflection（反思），如果覺得好玩就繼續，不好就調整。", t: true, exp: "正確！Anticipation(預期) -> Action(行動) -> Reflection(反思)，是無壓力嘗試新事物的最佳策略。" },
+  { q: "社會處方箋只適用於已經生病住院的患者，健康的人不需要。", t: false, exp: "錯！社會處方箋不僅是預防醫學，它鼓勵所有人在日常中透過藝術、園藝或志工活動參與社區，重建社會互助網絡。" },
+  { q: "「世代傳承與關懷下一代 (Generativity)」是人類美好的本質，當高齡者將經驗與智慧傳遞給下一代，不僅能幫助社會，也能獲得極大的自我肯定與幸福感。", t: true, exp: "完全正確！Makino教授認為這與「共感」同為人類的兩大美好本質，也是達到老年期超越的重要關鍵。" },
+  { q: "在推動社區營造時，應該由政府單向主導，不需要傾聽當地居民的需求。", t: false, exp: "錯！政府不應把居民當作單純接收服務的「消費者」，而是該扮演「陪跑教練」的角色，雙向溝通並陪伴居民成為解決地方問題的主人翁。" },
+  { q: "「老年期超越」是指高齡者能跳脫物質與理性的束縛，達到心靈上的寧靜與宇宙觀的提升。", t: true, exp: "正確！這是心理學家提出的概念，高齡者不再執著於過往成就，而是達到一種與宇宙合一的平靜境界。" },
+  { q: "在長壽社會中，學習應該要是跨世代的「青銀共學」，長輩與年輕人可以在同一個場域中互相學習、共同成長。", t: true, exp: "完全正確！打破年齡的藩籬，長輩傳承晶體智力，年輕人帶來新思維，跨世代互動是未來學習的重要型態。" },
+  { q: "退休後就應該完全停止任何學習與工作，在家中靜養才是最幸福的。", t: false, exp: "錯！完全中斷社會參與會加速老化並導致孤立。保持適度學習與人際互動，才是維持幸福感的關鍵。" },
+  { q: "單線人生觀（求學->就業->退休）在現代社會已經逐漸瓦解失效。", t: true, exp: "正確！隨著壽命延長至100歲，我們必須拋棄僵化的單線劇本，勇敢探索人生的各種可能性。" },
+  { q: "回流教育（Recurrent Education）指的是在工作與學習之間交替進行的教育模式。", t: true, exp: "正確！這鼓勵人們在職涯中隨時重返校園或學習新技能，以因應快速變遷的社會需求。" },
+  { q: "面對少子高齡化的長壽社會，我們應該抱持極度悲觀的態度，認為社會即將崩潰。", t: false, exp: "錯！長壽是禮物。我們應以積極態度面對，透過終身學習與跨世代互動，創造全新的社會價值。" },
+  { q: "人類追求心靈滿足有兩大美好本質，除了關懷下一代之外，另一個是「共感 (Compassion)」，即將別人的痛苦視為自己的痛苦並主動協助解決。", t: true, exp: "正確！發揮共感的本質，不僅能幫助別人，自己也能從中獲得深刻的幸福感，進而建立起「共感幸福小社會」。" },
+  { q: "學習的最高境界之一是「恩送（Pay it forward）」，意指將感受到學習的美好或他人的善意，無條件地傳遞給周遭的人與下一代。", t: true, exp: "正確！這種善意不斷循環的過程，能促使我們從被動的接收者轉變為主動的「實踐者（Doer）」。" },
+  { q: "社會就像一幅「動態拼圖」，我們必須強迫自己改變缺點變成完美的形狀，才能順利融入社區。", t: false, exp: "錯！每個人都有獨特的凹凸面（優缺點），我們不需要追求完美，而是透過與他人建立連結，找到互補的夥伴互相支援。" },
+  { q: "現代社會已經從過去追求金錢與物質的「存在慾望社會」，轉變為追求被社會認可的「佔有慾望社會」。", t: false, exp: "錯！方向相反。社會是從追求物質的「佔有慾望」轉向追求自我價值與社會認可的「存在慾望」。" },
+  { q: "牧野教授的「甜甜圈理論」認為，社區的硬體設施是甜甜圈的本體，而「學習」是中間的洞，是將一切串聯、整合起來的關鍵。", t: true, exp: "正確！沒有了「學習」這個串聯的核心，社區的各項計畫與建設都會變得空洞且無效。" }
+];
+
+const MCQ = [{"q": "1. 決定現代人主觀幸福感的前三大因素中，取代過去「金錢與學歷」成為第三大的是？", "options": ["( A ) 物質佔有", "( B ) 自我決定", "( C ) 身高優勢"], "ans": 1, "exp": "考古題重點精華", "id": 0, "chapter": "all"}, {"q": "2. 關於「伊斯特林悖論（Easterlin paradox）」，下列哪項描述符合課程的解釋？", "options": ["( A ) 經濟越發展，人們的主觀幸福感會無限上升", "( B ) 經濟發展到一定水準後，人們對生活的滿足感反而開始下降", "( C ) 經濟衰退時，人們的幸福感反而達到最高點"], "ans": 1, "exp": "考古題重點精華", "id": 1, "chapter": "all"}, {"q": "3. 過去工業化社會的學校制度，主要被設計來培養什麼樣的人才？", "options": ["( A ) 具備多樣化價值觀的創意人才", "( B ) 能適應大量生產與大量消費的標準化勞動力", "( C ) 專門解決社區問題的地方創生領袖"], "ans": 1, "exp": "考古題重點精華", "id": 2, "chapter": "all"}, {"q": "4. 日本「岡媽媽之家」活化空屋的核心作法是什麼？", "options": ["( A ) 由政府全額出資改建為大型綜合活動中心", "( B ) 將空屋拍賣給企業作為純商業用途", "( C ) 稍微打開空間，作為零門檻的社區客廳與孩童安全網"], "ans": 2, "exp": "考古題重點精華", "id": 3, "chapter": "all"}, {"q": "5. 社會從「佔有慾望」轉向「存在慾望」，代表現代人追求的重心變成了什麼？", "options": ["( A ) 累積更多的財富與私人土地", "( B ) 在人際網絡中互相承認，尋找自己存在的價值與根基", "( C ) 獲得比他人更高的學歷與薪水"], "ans": 1, "exp": "考古題重點精華", "id": 4, "chapter": "all"}, {"q": "6. 傳統工業化社會對於人生規劃的「三階段標準化劇本」是指什麼？", "options": ["( A ) 求學、就業、退休", "( B ) 幼年、壯年、老年", "( C ) 探索、實踐、回流"], "ans": 0, "exp": "考古題重點精華", "id": 5, "chapter": "all"}, {"q": "7. 課程中提到台中的「審計新村」，主要展現了哪一種魔法？", "options": ["( A ) 老屋空間打開與青年微型創業再利用的魔法", "( B ) 國家政策強制青年返鄉的成果", "( C ) 跨國大型企業進駐壟斷市場的經濟效益"], "ans": 0, "exp": "考古題重點精華", "id": 6, "chapter": "all"}, {"q": "8. 傳統教室中「老師站在高高講台上」的空間設計，源自於哪一種工業社會思想？", "options": ["( A ) 自由平等的圓桌會議", "( B ) 為了高效率管理與規訓聽話個體的「圓形監獄（監控）」", "( C ) 協同合作的開放空間"], "ans": 1, "exp": "考古題重點精華", "id": 7, "chapter": "all"}, {"q": "9. 面對長壽社會與 AI 科技快速發展的危機，我們應依靠什麼來重新掌握人生？", "options": ["( A ) 單純依賴政府提供的各項現金補助", "( B ) 遵循過往單一的成功路線與固定劇本", "( C ) 主動的終身學習與自我決定"], "ans": 2, "exp": "考古題重點精華", "id": 8, "chapter": "all"}, {"q": "10. 關於現代的「學習場域」，課程提出了何種觀念翻轉？", "options": ["( A ) 學習只能在學校或補習班發生", "( B ) 學習場域被解放，生活各個角落皆是豐富的教材", "( C ) 學習僅限於虛擬網路空間"], "ans": 1, "exp": "第 2 章 自我評量", "id": 9, "chapter": "2"}, {"q": "1. 隨著少子化與高齡化，日本目前的人口年齡結構圖已經從金字塔型轉變為何種形狀？", "options": ["( A ) 圓形", "( B ) 棺材型", "( C ) 沙漏型"], "ans": 1, "exp": "考古題重點精華", "id": 10, "chapter": "all"}, {"q": "2. 牧野篤教授對於「少子化與人口減少」的高齡社會抱持何種態度？", "options": ["( A ) 極度悲觀，認為社會將面臨沉重負擔與崩潰", "( B ) 認為這代表人類成功創造了多數人能安享自然壽命的美好物質條件", "( C ) 認為這是醫療退步與社會倒退的必然結果"], "ans": 1, "exp": "考古題重點精華", "id": 11, "chapter": "all"}, {"q": "3. 雖然年齡增長會讓記憶力衰退，但人類的哪一種認知能力會持續進化與上升？", "options": ["( A ) 基於人生經驗的晶體智力（如對話與解決問題的能力）", "( B ) 身體的爆發力與反應速度", "( C ) 快速背誦外語單字的流體智力"], "ans": 0, "exp": "考古題重點精華", "id": 12, "chapter": "all"}, {"q": "4. 為什麼「強制所有人統一在 65 歲退休」的制度在長壽社會已不再適用？", "options": ["( A ) 因為政府無法負擔統一發放的退休金", "( B ) 因為所有高齡者的體力都完全沒有衰退", "( C ) 因為高齡者的個體差異隨年齡逐漸拉大，不能再用同一標準處理"], "ans": 2, "exp": "考古題重點精華", "id": 13, "chapter": "all"}, {"q": "5. 人生 100 年的時代，生命故事的發展應該從過去打敗魔王就結束的「英雄旅程」轉變為何種模式？", "options": ["( A ) 快速完結的悲劇故事", "( B ) 永續且不斷寫下去的動態故事", "( C ) 不斷重複循環的固定劇本"], "ans": 1, "exp": "考古題重點精華", "id": 14, "chapter": "all"}, {"q": "6. 日本「小雞蛋計畫」為了解決農村長輩孤獨的問題，採取了什麼創新作法？", "options": ["( A ) 將別人家的孫子女當作自己的孫子女來陪伴與照顧", "( B ) 規定長輩必須到托兒所當全職老師", "( C ) 強制都市的年輕人必須回鄉定居"], "ans": 0, "exp": "考古題重點精華", "id": 15, "chapter": "all"}, {"q": "7. 「小雞蛋計畫」成功激發了長輩的哪一項人類本質，使他們感到幸福？", "options": ["( A ) 佔有財富與資源的慾望", "( B ) 關懷下一代的情感（Generativity）", "( C ) 與同儕競爭比較的心理"], "ans": 1, "exp": "考古題重點精華", "id": 16, "chapter": "all"}, {"q": "8. 過去「多生多死」的社會如今轉變為「少生少死」，其中「少死」主要是指什麼？", "options": ["( A ) 老年人永遠不會死亡", "( B ) 人類發明了長生不老的藥物", "( C ) 嬰兒死亡率極低，多數人出生後能活到自然壽命"], "ans": 2, "exp": "考古題重點精華", "id": 17, "chapter": "all"}, {"q": "9. 台灣南區區公所為長青學院舉辦竹工藝班作品展，主要滿足了長輩的什麼心理需求？", "options": ["( A ) 重新獲得社會肯定與強烈的「被需要感」", "( B ) 賺取大量金錢的物質需求", "( C ) 與年輕世代對抗的優越感"], "ans": 0, "exp": "考古題重點精華", "id": 18, "chapter": "all"}, {"q": "10. 課程提倡在長壽社會中，我們應該透過經驗傳承，成為年輕世代生命中的什麼？", "options": ["( A ) 充滿溫暖歸屬感的「故鄉」", "( B ) 嚴格把關的「監考官」", "( C ) 互不相欠的「陌生人」"], "ans": 0, "exp": "第 3 章 自我評量", "id": 19, "chapter": "3"}, {"q": "1. 古代的「私塾」與現代工業化學校最大的不同在於？", "options": ["( A ) 私塾有嚴格的統一進度與標準化考試", "( B ) 私塾是混齡學習，老師扮演陪伴的「陪跑教練」角色", "( C ) 私塾僅限於貴族參加"], "ans": 1, "exp": "考古題重點精華", "id": 20, "chapter": "all"}, {"q": "2. 在「非正式學習空間」中，學習的內涵從單向的知識傳授轉變為什麼？", "options": ["( A ) 建立平等且互相尊重的信任與溝通關係", "( B ) 追求檢定考試的滿分", "( C ) 嚴格遵守標準化的作業流程"], "ans": 0, "exp": "考古題重點精華", "id": 21, "chapter": "all"}, {"q": "3. 日本島根縣益田市在推動地方創生時，發現單向要求年輕人留鄉反而造成反感，後來改採什麼有效策略？", "options": ["( A ) 舉辦跨世代對話，讓長輩分享自己真實（包含失敗）的人生故事", "( B ) 大幅提高返鄉的現金補助", "( C ) 關閉通往大城市的交通路線"], "ans": 0, "exp": "考古題重點精華", "id": 22, "chapter": "all"}, {"q": "4. 在益田市的跨世代對話中，年輕人聽了長輩的人生故事後產生了什麼改變？", "options": ["( A ) 覺得長輩更加無聊且囉嗦", "( B ) 打破長輩「無聊」的偏見，對在地與長輩產生親密感與認同感", "( C ) 感到恐懼而加速離開故鄉"], "ans": 1, "exp": "考古題重點精華", "id": 23, "chapter": "all"}, {"q": "5. 課程中將社區各項獨立功能比喻為「甜甜圈」，中間的洞必須靠什麼來貫穿與整合？", "options": ["( A ) 金錢", "( B ) 法律法規", "( C ) 學習"], "ans": 2, "exp": "考古題重點精華", "id": 24, "chapter": "all"}, {"q": "6. 在社區營造與學習中，政府最理想的行政哲學與角色應該是什麼？", "options": ["( A ) 幫居民包辦所有服務，讓居民成為被動消費者", "( B ) 陪伴居民一起尋找解方，激發自治力的「陪走」教練", "( C ) 完全不干涉的冷漠旁觀者"], "ans": 1, "exp": "考古題重點精華", "id": 25, "chapter": "all"}, {"q": "7. 若社區過度依賴政府的補助與直接介入，可能會導致什麼負面結果？", "options": ["( A ) 居民失去解決問題的「當事者意識」與主動性", "( B ) 社區功能會自動無限倍數增長", "( C ) 年輕人會因為補助大量返鄉"], "ans": 0, "exp": "考古題重點精華", "id": 26, "chapter": "all"}, {"q": "8. 台灣的南和里活動中心在在地實踐中，被課程稱之為什麼？", "options": ["( A ) 最好的社會教室", "( B ) 封閉的菁英學堂", "( C ) 標準化的技能訓練站"], "ans": 0, "exp": "考古題重點精華", "id": 27, "chapter": "all"}, {"q": "9. 傳統學校制度下，用單一標準（如考試分數）評估學生，容易帶來什麼影響？", "options": ["( A ) 產生比較與壓力，甚至讓分數否定個體多樣化的真實價值", "( B ) 讓每個人都充滿自信與動力", "( C ) 徹底消除社會階級"], "ans": 0, "exp": "考古題重點精華", "id": 28, "chapter": "all"}, {"q": "10. 「生活即學習」的概念強調什麼？", "options": ["( A ) 日常角落如麵攤、農田或管委會，都是獲取生活智慧與建立關係的學習場域", "( B ) 生活中只有能賺錢的技能才是有用的學習", "( C ) 必須將生活完全脫離學習，人生才能感到放鬆"], "ans": 0, "exp": "第 4 章 自我評量", "id": 29, "chapter": "4"}, {"q": "1. 聯合國教科文組織於1965年提出「終身教育」最初的時空背景為何？", "options": ["( A ) 為了讓長輩退休後打發休閒時間", "( B ) 為了取代傳統的大學教育制度", "( C ) 因應經濟與科技快速發展，避免人們畢業後跟不上時代變化"], "ans": 2, "exp": "考古題重點精華", "id": 30, "chapter": "all"}, {"q": "2. 為了讓在職勞工能安心回歸校園更新技能，OECD提倡政府與企業應推動哪一項制度？", "options": ["( A ) 強制提早退休", "( B ) 有薪教育假", "( C ) 減薪懲罰"], "ans": 1, "exp": "考古題重點精華", "id": 31, "chapter": "all"}, {"q": "3. 過去工業化時期，政府發補助金要求農民「不種田」，這對農民造成了什麼深遠的負面影響？", "options": ["( A ) 讓農民順利轉型為成功的企業家", "( B ) 促成了農村經濟的完全獨立自主", "( C ) 嚴重剝奪了農民作為生命主人的自尊心與自豪感"], "ans": 2, "exp": "考古題重點精華", "id": 32, "chapter": "all"}, {"q": "4. 日本豐田市如何成功解決農村荒廢危機？", "options": ["( A ) 號召對農村生活有興趣的都市青年來與長輩互相尊重、雙向學習", "( B ) 強制在地青年必須返鄉接班", "( C ) 將農地全面改建為高科技汽車工廠"], "ans": 0, "exp": "考古題重點精華", "id": 33, "chapter": "all"}, {"q": "5. 現代醫療界為了解決孤立帶來的身心疾病，開始重視哪一種處方？", "options": ["( A ) 基因改造處方", "( B ) 社會處方箋", "( C ) 嚴格隔離處方"], "ans": 1, "exp": "考古題重點精華", "id": 34, "chapter": "all"}, {"q": "6. 根據日本長達11年的追蹤調查，下列哪一種日常行為對延長健康壽命的影響最為顯著？", "options": ["( A ) 跟朋友或家人一起運動及共餐等社會參與", "( B ) 總是獨自一個人進食", "( C ) 獨自在家進行高強度運動"], "ans": 0, "exp": "考古題重點精華", "id": 35, "chapter": "all"}, {"q": "7. 科學研究指出，若與家人同住卻「一個人孤單的吃飯」，會對健康造成什麼影響？", "options": ["( A ) 免疫力大幅提升", "( B ) 對健康完全沒有任何影響", "( C ) 死亡危險度會顯著增加"], "ans": 2, "exp": "考古題重點精華", "id": 36, "chapter": "all"}, {"q": "8. 企業老闆常擔憂員工利用教育假學成後「跳槽」，這突顯了回流教育必須仰賴什麼？", "options": ["( A ) 國家層級的勞動政策介入規劃與保障", "( B ) 企業全面禁止員工進修", "( C ) 員工在職期間自動放棄學習"], "ans": 0, "exp": "考古題重點精華", "id": 37, "chapter": "all"}, {"q": "9. 科學預測指出，擁有良好人際關係與社會連結的高齡者，下列哪一種疾病的罹患比例會明顯下降？", "options": ["( A ) 流行性感冒", "( B ) 失智症", "( C ) 近視"], "ans": 1, "exp": "考古題重點精華", "id": 38, "chapter": "all"}, {"q": "10. 在台灣的實踐案例中，南區區公所與空大台中中心合作，共同撐起了什麼？", "options": ["( A ) 競爭激烈的商業貿易區", "( B ) 充滿溫度的社區溫暖防護網", "( C ) 嚴格的軍事化管理基地"], "ans": 1, "exp": "第 5 章 自我評量", "id": 39, "chapter": "5"}, {"q": "1. 面對多樣化的長壽社會，課程提倡我們應該抱持何種心態來面對生活？", "options": ["( A ) 嚴格遵循長輩安排的唯一標準", "( B ) 徹底放棄任何目標與規劃", "( C ) 把生活當作一場「自我設計的實驗」"], "ans": 2, "exp": "考古題重點精華", "id": 40, "chapter": "all"}, {"q": "2. 傳統高壓的管理模式是「PDCA」，本課程則提倡哪一種低壓且適合終身學習的行動模式？", "options": ["( A ) KPI （關鍵績效） 模式", "( B ) AAR （預期、行動、反思） 模式", "( C ) SOP （標準作業） 模式"], "ans": 1, "exp": "考古題重點精華", "id": 41, "chapter": "all"}, {"q": "3. 在 AAR 模式中，驅動第一步「預期 (Anticipation)」的核心動力是什麼？", "options": ["( A ) 帶有愉悅情感的好奇心與對他人的關懷", "( B ) 對失敗的深層恐懼與焦慮", "( C ) 被迫達成業績的義務感"], "ans": 0, "exp": "考古題重點精華", "id": 42, "chapter": "all"}, {"q": "4. 將學習視為「非黑即白（考滿分才算成功）」，這種舊有學校思維在生活中會導致什麼結果？", "options": ["( A ) 讓人充滿無所畏懼的嘗試精神", "( B ) 大幅提升學習的純粹樂趣", "( C ) 讓人因為害怕達不到目標或浪費錢，而不敢跨出學習的第一步"], "ans": 2, "exp": "考古題重點精華", "id": 43, "chapter": "all"}, {"q": "5. 在農村「自給自足家族（模擬家族）」案例中，都市年輕人一開始是如何幫助長輩分擔天災風險？", "options": ["( A ) 捐贈大量高科技無人農機", "( B ) 以預付資金的方式購買優質稻米", "( C ) 在網路上發起抗議連署"], "ans": 1, "exp": "考古題重點精華", "id": 44, "chapter": "all"}, {"q": "6. 在「模擬家族」案例中，年輕人與農村長輩的關係發生了什麼最具價值的昇華？", "options": ["( A ) 從單純的買賣關係，昇華為彼此關心、分享生活的「第二故鄉家人」", "( B ) 演變成嚴格的上司與下屬階級", "( C ) 因為分潤不均而徹底決裂"], "ans": 0, "exp": "考古題重點精華", "id": 45, "chapter": "all"}, {"q": "7. 當社會充滿多樣性，每個人獨特的優缺點都能互相彌補時，這種零壓力的關係被比喻為什麼模式？", "options": ["( A ) 標準化生產線模式", "( B ) 動態拼圖模式（Jigsaw Puzzle）", "( C ) 孤立島嶼模式"], "ans": 1, "exp": "考古題重點精華", "id": 46, "chapter": "all"}, {"q": "8. 「動態拼圖模式」強調人際關係的哪一種特性？", "options": ["( A ) 拼好後就永遠靜止不動，鎖死在固定位置", "( B ) 強迫將每塊拼圖切割成完全相同的形狀", "( C ) 隨著行動與學習，在動態互補中持續探索並改變社會面貌"], "ans": 2, "exp": "考古題重點精華", "id": 47, "chapter": "all"}, {"q": "9. 將「生活即學習」帶入家庭，親子關係應如何轉變才能創造出良好的共學空間？", "options": ["( A ) 建立平行、平等且互相尊重的對話關係", "( B ) 強化父母上對下的絕對威權", "( C ) 父母絕對不可以向孩子認錯"], "ans": 0, "exp": "考古題重點精華", "id": 48, "chapter": "all"}, {"q": "10. 審計新村的微型創業青年們，如何具體實踐 AAR 實驗精神？", "options": ["( A ) 關起門來埋頭苦幹，完全不理會市場的真實反應", "( B ) 堅持花十年寫出完美企劃書才敢踏出第一步", "( C ) 先推出產品試試看，透過客群真實反饋立刻反思與彈性調整"], "ans": 2, "exp": "第 6 章 自我評量", "id": 49, "chapter": "6"}, {"q": "1. 課程提到的「恩送 (Pay it forward)」概念是指什麼？", "options": ["( A ) 受到恩惠後，將這份好意無條件傳遞給周遭的人或下一代", "( B ) 受到幫助後，必須要求施恩者給予更多的好處", "( C ) 一定要用等價的金錢還給最初幫助自己的人"], "ans": 0, "exp": "考古題重點精華", "id": 50, "chapter": "all"}, {"q": "2. 學習的終極目標不僅是吸收知識，更是為了讓自己從被動接受者轉變為什麼角色？", "options": ["( A ) 主動發揮正向影響力、付出行動的實踐者（Doer）", "( B ) 被動等待救濟的消費者", "( C ) 置身事外的冷漠旁觀者"], "ans": 0, "exp": "考古題重點精華", "id": 51, "chapter": "all"}, {"q": "3. 台灣花蓮發生水災時，被稱為「鏟子超人」的外地人主動請假前往幫忙，這主要展現了人類的哪一種美好本質？", "options": ["( A ) 競爭意識", "( B ) 共感（Compassion）", "( C ) 佔有慾望"], "ans": 1, "exp": "考古題重點精華", "id": 52, "chapter": "all"}, {"q": "4. 在日本沖繩市的「移動攤販式公民館」案例中，公務人員的最高指導原則是什麼？", "options": ["( A ) 強勢主導並分配所有任務", "( B ) 什麼都不做（留白），只在旁陪伴與聆聽", "( C ) 強制驅離未經報名的民眾"], "ans": 1, "exp": "考古題重點精華", "id": 53, "chapter": "all"}, {"q": "5. 「移動攤販式公民館」刻意「留白」不主動幫居民解決問題，其主要目的是為了什麼？", "options": ["( A ) 激發居民的好奇心，促使居民產生當事者意識並主動互助", "( B ) 因為政府沒有足夠的預算可以動用", "( C ) 為了讓社區更快走向荒廢以利都市更"], "ans": 0, "exp": "考古題重點精華", "id": 54, "chapter": "all"}, {"q": "6. 為什麼日本有偏鄉長輩願意讓「國中生」擔任社區發展協會的理事長？", "options": ["( A ) 建立在跨世代平等與互相尊重的基礎上，年輕人藉此向全社區「恩送」回饋", "( B ) 因為村裡已經完全沒有任何成年人可以擔任", "( C ) 因為政府強制規定協會必須由未成年人主導"], "ans": 0, "exp": "考古題重點精華", "id": 55, "chapter": "all"}, {"q": "7. 當我們充分發揮對他人的共感與「關懷下一代（Generativity）」的本質時，最終能達到什麼境界？", "options": ["( A ) 物質慾望無限膨脹", "( B ) 老年期超越 （Gerotranscendence），脫離利害關係並感受到平靜與滿足", "( C ) 極度焦慮與不安"], "ans": 1, "exp": "考古題重點精華", "id": 56, "chapter": "all"}, {"q": "8. 本課程總結認為，在人生100年的長壽社會中，最珍貴的「幸福處方箋」是什麼？", "options": ["( A ) 建立共感幸福的小社會，將溫暖的連結傳承給下一代", "( B ) 囤積大量的財富以備不時之需", "( C ) 隔離外界，獨自一人隱居修練"], "ans": 0, "exp": "考古題重點精華", "id": 57, "chapter": "all"}, {"q": "9. 社會的典範轉移，已經從過去追求物質與金錢的「佔有慾望」，轉變為何種慾望的追求？", "options": ["( A ) 毀滅慾望", "( B ) 權力支配慾望", "( C ) 存在慾望（尋找存在的根基與人際價值）"], "ans": 2, "exp": "考古題重點精華", "id": 58, "chapter": "all"}, {"q": "10. 在沖繩移動公民館的運作過程中，當地長輩找回了什麼重要的心理感受？", "options": ["( A ) 因為什麼都不做而感到無聊", "( B ) 在協助幼童的過程中獲得尊重，重拾了「還有用」的主人翁尊嚴", "( C ) 覺得自己徹底成了社會的負擔"], "ans": 1, "exp": "考古題重點精華", "id": 59, "chapter": "all"}];
+
+const FLASH = [];
+const letters = ['( A )', '( B )', '( C )', '( D )'];
+const state = {
+  mcqQueue: [], mcqIdx: 0, mcqScore: 0, mcqAnswered: false,
+  swQueue: [], swIdx: 0, swScore: 0
+};
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playTone(f, t, type) {
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = type; osc.frequency.value = f;
+  osc.connect(gain); gain.connect(audioCtx.destination);
+  osc.start(); gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + t);
+  osc.stop(audioCtx.currentTime + t);
+}
+function beep(type) {
+  if (type==='ok') { playTone(600, 0.1, 'sine'); setTimeout(()=>playTone(800, 0.15, 'sine'), 100); }
+  else if (type==='err') { playTone(300, 0.3, 'square'); }
+  else if (type==='victory') { [523,659,783,1046].forEach((f,i)=>setTimeout(()=>playTone(f,0.2,'sine'), i*100)); }
+}
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ─── INIT CTAs & PROGRESS ───
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.acc-body').forEach((body, idx) => {
+    let chapter = idx; 
+    let cta = document.createElement('a');
+    cta.className = 'cta-quiz';
+    cta.href = `#/quiz?chapter=${chapter}`;
+    cta.innerHTML = `👉 立即驗證第 ${chapter} 章記憶`;
+    body.appendChild(cta);
+  });
+  
+  document.body.insertAdjacentHTML('beforeend', `
+    <div class="progress-panel-overlay" id="pp-overlay" onclick="if(event.target===this) closeProgress()">
+      <div class="progress-panel">
+        <div class="pp-header">
+          <div class="pp-title">🧩 60題進度追蹤拼圖</div>
+          <button class="pp-close" onclick="closeProgress()">✕</button>
+        </div>
+        <div class="pp-grid" id="pp-grid"></div>
+        <div style="margin-top:12px; font-size:0.75rem; color:#555; text-align:center;">灰色: 未答 | 紅色: 答錯待加強 | 綠色: 熟練掌握</div>
+      </div>
+    </div>
+  `);
+  initProgressGrid();
+  window.addEventListener('hashchange', handleRoute);
+});
+
+function handleRoute() {
+  const hash = window.location.hash;
+  if (hash.startsWith('#/quiz')) {
+    const params = new URLSearchParams(hash.split('?')[1]);
+    const chapter = params.get('chapter');
+    startMCQ(chapter);
+    window.history.replaceState(null, null, ' ');
+  }
+}
+
+let userProgress = {};
+function initProgressGrid() {
+  try {
+    const saved = localStorage.getItem('nou_progress');
+    if (saved) userProgress = JSON.parse(saved);
+  } catch(e) {}
+  
+  let gridHTML = '';
+  for(let i=0; i<60; i++) {
+    let status = userProgress[i] || 0;
+    gridHTML += `<div class="pp-node status-${status}" id="pp-node-${i}" title="第 ${i+1} 題"></div>`;
+  }
+  document.getElementById('pp-grid').innerHTML = gridHTML;
+}
+
+function saveProgress(id, status) {
+  userProgress[id] = status;
+  localStorage.setItem('nou_progress', JSON.stringify(userProgress));
+  let node = document.getElementById(`pp-node-${id}`);
+  if(node) {
+    node.className = `pp-node status-${status}`;
+  }
+}
+
+function openProgress() { document.getElementById('pp-overlay').classList.add('show'); }
+function closeProgress() { document.getElementById('pp-overlay').classList.remove('show'); }
+
+function startMCQ(chapterFilter = null) {
+  let pool = MCQ;
+  if (chapterFilter && chapterFilter !== 'all') {
+    pool = MCQ.filter(q => q.chapter == chapterFilter);
+    if(pool.length === 0) pool = MCQ;
+  }
+  
+  let s0 = [], s1 = [], s2 = [];
+  pool.forEach(q => {
+    let stat = userProgress[q.id] || 0;
+    if(stat === 0) s0.push(q);
+    else if(stat === 1) s1.push(q);
+    else s2.push(q);
+  });
+  
+  const shuf = arr => arr.sort(() => .5 - Math.random());
+  shuf(s0); shuf(s1); shuf(s2);
+  
+  let selected = [];
+  let needed = Math.min(10, pool.length);
+  
+  let pick0 = Math.min(7, s0.length);
+  selected = selected.concat(s0.slice(0, pick0));
+  
+  let remain = needed - selected.length;
+  let pick1 = Math.min(remain + (7 - pick0), s1.length);
+  selected = selected.concat(s1.slice(0, pick1));
+  
+  remain = needed - selected.length;
+  selected = selected.concat(s2.slice(0, remain));
+  
+  state.mcqQueue = shuf(selected);
+  state.mcqIdx = 0; state.mcqScore = 0;
+  show('s-mcq'); renderMCQ();
+}
+
+function renderMCQ() {
+  if (state.mcqIdx >= state.mcqQueue.length) { showResult('mcq'); return; }
+  const q = state.mcqQueue[state.mcqIdx];
+  state.mcqAnswered = false;
+  document.getElementById('mcq-area').innerHTML = `
+    <div class="q-tag">第 ${state.mcqIdx+1} 題</div>
+    <div class="q-text slide-up" style="animation-delay:0.05s">${q.q}</div>
+    <div class="options slide-up">
+${q.options.map((o,i) => `
+        <button class="opt" id="opt${i}" onclick="checkMCQ(${i})">
+          <div class="opt-letter">${letters[i]}</div>${o}
+        </button>`).join('')}
+    </div>
+    <div class="exp-box" id="exp-box">
+      <div class="exp-head">📖 深度解析</div>
+      <div class="exp-text">${q.exp}</div>
+    </div>
+    <button class="btn-next" id="btn-next" onclick="nextMCQ()" disabled>繼續下一題 →</button>
+  `;
+}
+function checkMCQ(idx) {
+  if (state.mcqAnswered) return;
+  state.mcqAnswered = true;
+  const q = state.mcqQueue[state.mcqIdx];
+  const opts = document.querySelectorAll('.opt');
+  opts.forEach(o => o.disabled = true);
+  if (idx === q.ans) {
+    opts[idx].classList.add('correct'); beep('ok'); state.mcqScore++;
+    const lbl = document.getElementById('mcq-score-lbl'); lbl.textContent = `✦ ${state.mcqScore} 答對`; lbl.classList.remove('score-pop'); void lbl.offsetWidth; lbl.classList.add('score-pop');
+    saveProgress(q.id, 2);
+    setTimeout(() => nextMCQ(), 700);
+  } else {
+    opts[idx].classList.add('wrong'); opts[idx].classList.add('shake');
+    opts[q.ans].classList.add('correct'); beep('err');
+    document.getElementById('exp-box').classList.add('show');
+    document.getElementById('btn-next').disabled = false;
+    saveProgress(q.id, 1);
+  }
+}
+function nextMCQ() { state.mcqIdx++; renderMCQ(); }
+
+// ────────────────────────────────────────────────
+// SWIPE
+// ────────────────────────────────────────────────
+function startSwipe() {
+  state.swQueue = [...TF].sort(() => .5 - Math.random()).slice(0, 10);
+  state.swIdx = 0; state.swScore = 0;
+  show('s-swipe'); renderSwipe();
+}
+function renderSwipe() {
+  if (state.swIdx >= state.swQueue.length) { showResult('sw'); return; }
+  const q = state.swQueue[state.swIdx];
+  const pct = Math.round(state.swIdx / state.swQueue.length * 100);
+  document.getElementById('sw-count').textContent = `${state.swIdx+1} / ${state.swQueue.length}`;
+  document.getElementById('sw-progress').style.width = pct + '%';
+  document.getElementById('swipe-area').innerHTML = `
+    <div class="swipe-scene">
+      <div class="swipe-card" id="sw-card">
+        <div id="sw-labels" class="swipe-labels">
+          <div class="label-yes">⭕ 是</div>
+          <div class="label-no">❌ 非</div>
+        </div>
+        <div class="swipe-chip chip-tf">是非題</div>
+        <div class="swipe-card-text">${q.q}</div>
+      </div>
+    </div>
+    <div class="swipe-buttons">
+      <button class="swipe-btn sb-no" onclick="doSwipe(false)">❌</button>
+      <button class="swipe-btn sb-yes" onclick="doSwipe(true)">⭕</button>
+    </div>
+    <div class="exp-box" id="sw-exp">
+      <div class="exp-head">📖 深度解析</div>
+      <div class="exp-text" id="sw-exp-text"></div>
+    </div>
+    <button class="btn-next" id="sw-next" onclick="nextSwipe()" disabled style="margin-top:14px">繼續下一題 →</button>
+  `;
+  initSwipeTouch();
+}
+function initSwipeTouch() {
+  const card = document.getElementById('sw-card');
+  if (!card) return;
+  
+
+
+let startX = 0;
+  card.addEventListener('touchstart', e => { startX = e.changedTouches[0].clientX; card.style.transition='none'; }, {passive:true});
+  card.addEventListener('touchmove', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    card.style.transform = `translateX(${dx}px) rotate(${dx * .05}deg)`;
+    const labelYes = document.querySelector('.label-yes');
+    const labelNo = document.querySelector('.label-no');
+    if (dx > 0) {
+      if (labelYes) labelYes.style.opacity = Math.min(dx / 60, 1);
+      if (labelNo) labelNo.style.opacity = 0;
+    } else {
+      if (labelNo) labelNo.style.opacity = Math.min(Math.abs(dx) / 60, 1);
+      if (labelYes) labelYes.style.opacity = 0;
+    }
+  }, {passive:true});
+  card.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    card.style.transition = 'transform .3s ease, opacity .3s ease';
+    if (dx > 80) doSwipe(true);
+    else if (dx < -80) doSwipe(false);
+    else { 
+      card.style.transform = 'translateX(0) rotate(0)'; 
+      if(document.querySelector('.label-yes')) document.querySelector('.label-yes').style.opacity=0;
+      if(document.querySelector('.label-no')) document.querySelector('.label-no').style.opacity=0;
+    }
+  });
+}
+function doSwipe(ans) {
+  const q = state.swQueue[state.swIdx];
+  const card = document.getElementById('sw-card');
+  card.style.transition = 'transform .35s ease, opacity .35s ease';
+  card.style.transform = `translateX(${ans ? 600 : -600}px) rotate(${ans ? 25 : -25}deg)`;
+  card.style.opacity = '0';
+  document.querySelectorAll('.swipe-btn').forEach(b => b.disabled = true);
+  if (ans === q.t) {
+    beep('ok'); state.swScore++;
+    setTimeout(() => nextSwipe(), 350);
+  } else {
+    beep('err');
+    const exp = document.getElementById('sw-exp');
+    document.getElementById('sw-exp-text').textContent = q.exp;
+    exp.classList.add('show');
+    document.getElementById('sw-next').disabled = false;
+  }
+}
+function nextSwipe() { state.swIdx++; renderSwipe(); }
+
+// ────────────────────────────────────────────────
+// FLASHCARD
+// ────────────────────────────────────────────────
+function startFlash() {
+  state.flashIdx = 0; state.flashFlipped = false;
+  show('s-flash'); renderFlash();
+}
+function renderFlash() {
+  const f = FLASH[state.flashIdx];
+  state.flashFlipped = false;
+  document.getElementById('flash-count').textContent = `${state.flashIdx+1} / ${FLASH.length}`;
+  document.getElementById('flash-area').innerHTML = `
+    <div class="flash-card slide-up" id="flash-card" onclick="flipFlash()">
+      <div class="flash-front">${f.front}</div>
+      <div class="flash-back"><strong>解答：</strong><br><br>${f.back}</div>
+      <div class="flash-tap">👆 點我翻面看解答</div>
+    </div>
+    <div class="flash-nav">
+      <button class="flash-nav-btn" onclick="prevFlash()">← 上一張</button>
+      <button class="flash-nav-btn" onclick="nextFlash()">下一張 →</button>
+    </div>
+  `;
+}
+function flipFlash() {
+  const card = document.getElementById('flash-card');
+  card.classList.toggle('flipped');
+  state.flashFlipped = !state.flashFlipped;
+  card.querySelector('.flash-tap').textContent = state.flashFlipped ? '👆 再點一下看問題' : '👆 點我翻面看解答';
+}
+function nextFlash() { if (state.flashIdx < FLASH.length-1) { state.flashIdx++; renderFlash(); } else { showResult('flash'); } }
+function prevFlash() { if (state.flashIdx > 0) { state.flashIdx--; renderFlash(); } }
+
+// ────────────────────────────────────────────────
+// RESULT
+// ────────────────────────────────────────────────
+
+function shootConfetti() {
+  const colors = ['#fbbf24', '#f87171', '#34d399', '#60a5fa', '#a78bfa'];
+  for(let i=0; i<80; i++) {
+    const conf = document.createElement('div');
+    conf.className = 'confetti';
+    conf.style.left = Math.random() * 100 + 'vw';
+    conf.style.animationDelay = Math.random() * 0.5 + 's';
+    conf.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+    if(Math.random()>0.5) conf.style.borderRadius = '50%';
+    document.body.appendChild(conf);
+    setTimeout(() => conf.remove(), 3000);
+  }
+}
+
+function showResult(type) {
+  beep('victory');
+  shootConfetti();
+  show('s-result');
+  let html = '';
+  let msg = '';
+  let badge = '';
+  let score = 0;
+  let total = 0;
+  
+  if (type==='mcq') {
+    score = state.mcqScore; total = state.mcqQueue.length;
+    if(score === total) { msg = '太神啦！滿分通關！'; badge = '<div class="badge-unlocked">🏅 獲得勳章：終身學習大師</div>'; }
+    else if(score >= total*0.6) { msg = '表現不錯！繼續保持！'; badge = '<div class="badge-unlocked">🥈 獲得勳章：社區陪跑員</div>'; }
+    else { msg = '再接再厲！看筆記可以變得更強！'; }
+    
+    html = `
+      <div style="font-size:4rem; margin-bottom:1rem; animation: popIn 0.5s ease forwards; transform: scale(0);">🏆</div>
+      <h2 style="margin-bottom:0.5rem">選擇題測驗完成</h2>
+      <div style="font-size:1.1rem; color:var(--muted); margin-bottom:1rem">${msg}</div>
+      <div style="font-size:3rem; font-weight:900; color:var(--primary); margin-bottom:0.5rem">${score} / ${total}</div>
+      ${badge}
+      <div style="margin-top: 2rem;">
+        <button class="btn-primary" onclick="startMCQ()" style="width:100%; margin-bottom:1rem">再測一次</button>
+        <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.05); color:var(--text)">回首頁</button>
+      </div>
+    `;
+  } else if (type==='sw') {
+    score = state.swScore; total = state.swQueue.length;
+    if(score === total) { msg = '直覺神準！'; badge = '<div class="badge-unlocked">🏅 獲得勳章：直覺反射王</div>'; }
+    else { msg = '滑滑卡訓練完成！'; }
+    
+    html = `
+      <div style="font-size:4rem; margin-bottom:1rem; animation: popIn 0.5s ease forwards; transform: scale(0);">🎉</div>
+      <h2 style="margin-bottom:0.5rem">滑滑卡測驗完成</h2>
+      <div style="font-size:1.1rem; color:var(--muted); margin-bottom:1rem">${msg}</div>
+      <div style="font-size:3rem; font-weight:900; color:var(--primary); margin-bottom:0.5rem">${score} / ${total}</div>
+      ${badge}
+      <div style="margin-top: 2rem;">
+        <button class="btn-primary" onclick="startSwipe()" style="width:100%; margin-bottom:1rem">再滑一次</button>
+        <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.05); color:var(--text)">回首頁</button>
+      </div>
+    `;
+  }
+  document.getElementById('result-content').innerHTML = html;
+}
+
+
+// ────────────────────────────────────────────────
+// STUDY MODULE (Accordion)
+// ────────────────────────────────────────────────
+function startStudy() {
+  show('s-study');
+}
+function toggleStudy(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.study-card').forEach(card => card.classList.remove('open'));
+  if (!isOpen) {
+    el.classList.add('open');
+    setTimeout(() => { el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 300);
+  }
+}
+
+</script>
+</body>
+</html>
