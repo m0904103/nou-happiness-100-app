@@ -240,7 +240,37 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
 .score-pop { animation: scorePop 0.4s ease; color: var(--green); font-weight: 900; }
 @keyframes scorePop { 0% { transform: scale(1); } 50% { transform: scale(1.5); color: #10b981; } 100% { transform: scale(1); } }
 
+
+/* ─── COUNTDOWN TIMER ─── */
+.countdown-box {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+}
+.countdown-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+  animation: shine 3s infinite;
+}
+@keyframes shine { 100% { left: 200%; } }
+.cd-title { font-size: 1.1rem; color: #38bdf8; font-weight: 800; margin-bottom: 8px; letter-spacing: 1px;}
+.cd-subtitle { font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px; }
+.cd-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
+.cd-item { background: rgba(0,0,0,0.3); padding: 10px 5px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+.cd-num { font-size: 1.8rem; font-weight: 900; color: #f8fafc; font-family: monospace; line-height: 1; margin-bottom: 4px; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+.cd-label { font-size: 0.7rem; color: #64748b; font-weight: 700; text-transform: uppercase; }
+.cd-footer { font-size: 0.95rem; color: #fbbf24; font-weight: 700; background: rgba(251,191,36,0.1); padding: 8px; border-radius: 8px; }
+.cd-footer span { font-size: 1.1rem; }
 </style>
+
 </head>
 <body>
 
@@ -898,7 +928,37 @@ function showResult(type) {
                   0% { transform: translate(-50%, -50%) rotate(0deg); }
                   100% { transform: translate(-50%, -50%) rotate(-360deg); }
               }
-              </style>
+              
+/* ─── COUNTDOWN TIMER ─── */
+.countdown-box {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+}
+.countdown-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+  animation: shine 3s infinite;
+}
+@keyframes shine { 100% { left: 200%; } }
+.cd-title { font-size: 1.1rem; color: #38bdf8; font-weight: 800; margin-bottom: 8px; letter-spacing: 1px;}
+.cd-subtitle { font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px; }
+.cd-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
+.cd-item { background: rgba(0,0,0,0.3); padding: 10px 5px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+.cd-num { font-size: 1.8rem; font-weight: 900; color: #f8fafc; font-family: monospace; line-height: 1; margin-bottom: 4px; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+.cd-label { font-size: 0.7rem; color: #64748b; font-weight: 700; text-transform: uppercase; }
+.cd-footer { font-size: 0.95rem; color: #fbbf24; font-weight: 700; background: rgba(251,191,36,0.1); padding: 8px; border-radius: 8px; }
+.cd-footer span { font-size: 1.1rem; }
+</style>
+
               <div style="background: linear-gradient(135deg, #00C9FF, #92FE9D); padding: 35px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4); text-align: center; color: #fff; animation: diamondPulse 2s infinite; position: relative; overflow: hidden; margin: -10px;">
                 <div style="position: absolute; top: 50%; left: 50%; width: 200%; height: 200%; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.2) 0deg 20deg, transparent 20deg 40deg); animation: spinDiamond 20s linear infinite; pointer-events: none; transform-origin: 0 0;"></div>
                 <div style="font-size:5rem; margin-bottom:0.5rem; animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform: scale(0); text-shadow: 0 10px 20px rgba(0,150,150,0.5); position: relative; z-index: 1;">💎</div>
@@ -988,7 +1048,37 @@ function showResult(type) {
                   0% { transform: translate(-50%, -50%) rotate(0deg); }
                   100% { transform: translate(-50%, -50%) rotate(360deg); }
               }
-              </style>
+              
+/* ─── COUNTDOWN TIMER ─── */
+.countdown-box {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+}
+.countdown-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+  animation: shine 3s infinite;
+}
+@keyframes shine { 100% { left: 200%; } }
+.cd-title { font-size: 1.1rem; color: #38bdf8; font-weight: 800; margin-bottom: 8px; letter-spacing: 1px;}
+.cd-subtitle { font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px; }
+.cd-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
+.cd-item { background: rgba(0,0,0,0.3); padding: 10px 5px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+.cd-num { font-size: 1.8rem; font-weight: 900; color: #f8fafc; font-family: monospace; line-height: 1; margin-bottom: 4px; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+.cd-label { font-size: 0.7rem; color: #64748b; font-weight: 700; text-transform: uppercase; }
+.cd-footer { font-size: 0.95rem; color: #fbbf24; font-weight: 700; background: rgba(251,191,36,0.1); padding: 8px; border-radius: 8px; }
+.cd-footer span { font-size: 1.1rem; }
+</style>
+
               <div style="background: linear-gradient(135deg, #FFD700, #FF8C00); padding: 35px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4); text-align: center; color: #fff; animation: ultimatePulse 2s infinite; position: relative; overflow: hidden; margin: -10px;">
                 <div style="position: absolute; top: 50%; left: 50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%); animation: spinBackground 15s linear infinite; pointer-events: none; transform-origin: 0 0;"></div>
                 <div style="font-size:5rem; margin-bottom:0.5rem; animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform: scale(0); text-shadow: 0 10px 20px rgba(0,0,0,0.3); position: relative; z-index: 1;">🏆</div>
