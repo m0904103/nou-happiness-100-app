@@ -885,35 +885,67 @@ function showResult(type) {
     let unlocked = seen.length;
     
     if (unlocked >= totalQs) {
-        // MEGA CELEBRATION
-        [523,659,783,1046, 1318, 1567, 2093].forEach((f,i)=>setTimeout(()=>playTone(f,0.15,'sine'), i*100));
-        setTimeout(shootConfetti, 300);
-        setTimeout(shootConfetti, 800);
-        
-        html = `
-          <style>
-          @keyframes ultimatePulse {
-              0% { transform: scale(1); box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4); }
-              50% { transform: scale(1.02); box-shadow: 0 15px 50px rgba(255, 215, 0, 0.7); }
-              100% { transform: scale(1); box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4); }
-          }
-          @keyframes spinBackground {
-              0% { transform: translate(-50%, -50%) rotate(0deg); }
-              100% { transform: translate(-50%, -50%) rotate(360deg); }
-          }
-          </style>
-          <div style="background: linear-gradient(135deg, #FFD700, #FF8C00); padding: 35px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4); text-align: center; color: #fff; animation: ultimatePulse 2s infinite; position: relative; overflow: hidden; margin: -10px;">
-            <div style="position: absolute; top: 50%; left: 50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%); animation: spinBackground 15s linear infinite; pointer-events: none; transform-origin: 0 0;"></div>
-            <div style="font-size:5rem; margin-bottom:0.5rem; animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform: scale(0); text-shadow: 0 10px 20px rgba(0,0,0,0.3); position: relative; z-index: 1;">🏆</div>
-            <h1 style="margin-bottom:0.5rem; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.3); font-size:1.8rem; font-weight: 900; position: relative; z-index: 1;">究極制霸：牧野篤的傳人</h1>
-            <div style="font-size:1.1rem; margin-bottom:1.5rem; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.2); position: relative; z-index: 1;">您已 100% 看破所有陷阱！</div>
-            <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(255,255,255,0.25); padding: 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.4); position: relative; z-index: 1;">得分: ${score} / ${total}</div>
-            <div style="margin-top: 2rem; position: relative; z-index: 1;">
-              <button class="btn-primary" onclick="startSwipe()" style="width:100%; margin-bottom:1rem; background: #fff; color: #E67E22; font-weight: 900; border: none; box-shadow: 0 6px 20px rgba(0,0,0,0.2); transform: translateY(0); transition: all 0.2s;">進入宗師境界 (隨機複習)</button>
-              <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: 1px solid rgba(255,255,255,0.3); font-weight: bold;">回首頁</button>
-            </div>
-          </div>
-        `;
+        // MASTER MODE
+        if (score === total) {
+            // FLAWLESS
+            [523,659,783,1046, 1318, 1567, 2093].forEach((f,i)=>setTimeout(()=>playTone(f,0.15,'sine'), i*100));
+            setTimeout(shootConfetti, 300);
+            setTimeout(shootConfetti, 800);
+            html = `
+              <style>
+              @keyframes ultimatePulse {
+                  0% { transform: scale(1); box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4); }
+                  50% { transform: scale(1.02); box-shadow: 0 15px 50px rgba(255, 215, 0, 0.7); }
+                  100% { transform: scale(1); box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4); }
+              }
+              @keyframes spinBackground {
+                  0% { transform: translate(-50%, -50%) rotate(0deg); }
+                  100% { transform: translate(-50%, -50%) rotate(360deg); }
+              }
+              </style>
+              <div style="background: linear-gradient(135deg, #FFD700, #FF8C00); padding: 35px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4); text-align: center; color: #fff; animation: ultimatePulse 2s infinite; position: relative; overflow: hidden; margin: -10px;">
+                <div style="position: absolute; top: 50%; left: 50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%); animation: spinBackground 15s linear infinite; pointer-events: none; transform-origin: 0 0;"></div>
+                <div style="font-size:5rem; margin-bottom:0.5rem; animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform: scale(0); text-shadow: 0 10px 20px rgba(0,0,0,0.3); position: relative; z-index: 1;">🏆</div>
+                <h1 style="margin-bottom:0.5rem; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.3); font-size:1.8rem; font-weight: 900; position: relative; z-index: 1;">完美無瑕：牧野篤的傳人</h1>
+                <div style="font-size:1.1rem; margin-bottom:1.5rem; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.2); position: relative; z-index: 1;">直覺神準，考試 100% 沒問題！</div>
+                <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(255,255,255,0.25); padding: 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.4); position: relative; z-index: 1;">得分: ${score} / ${total}</div>
+                <div style="margin-top: 2rem; position: relative; z-index: 1;">
+                  <button class="btn-primary" onclick="startSwipe()" style="width:100%; margin-bottom:1rem; background: #fff; color: #E67E22; font-weight: 900; border: none; box-shadow: 0 6px 20px rgba(0,0,0,0.2); transform: translateY(0); transition: all 0.2s;">進入宗師境界 (隨機複習)</button>
+                  <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: 1px solid rgba(255,255,255,0.3); font-weight: bold;">回首頁</button>
+                </div>
+              </div>
+            `;
+        } else if (score >= 8) {
+            // SILVER
+            setTimeout(()=>playTone(600, 0.1, 'sine'), 100);
+            html = `
+              <div style="background: linear-gradient(135deg, #94a3b8, #475569); padding: 35px 20px; border-radius: 20px; text-align: center; color: #fff; margin: -10px;">
+                <div style="font-size:5rem; margin-bottom:0.5rem; animation: popIn 0.5s ease forwards; transform: scale(0);">🛡️</div>
+                <h1 style="margin-bottom:0.5rem; color: #fff; font-size:1.6rem; font-weight: 900;">大意了！小心隱藏陷阱</h1>
+                <div style="font-size:1.1rem; margin-bottom:1.5rem; font-weight: 600;">身為宗師，不能掉以輕心</div>
+                <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 15px;">得分: ${score} / ${total}</div>
+                <div style="margin-top: 2rem;">
+                  <button class="btn-primary" onclick="startSwipe()" style="width:100%; margin-bottom:1rem; background: #fff; color: #475569; font-weight: bold; border: none;">再戰一次 (找回完美)</button>
+                  <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: none;">回首頁</button>
+                </div>
+              </div>
+            `;
+        } else {
+            // RED / WARNING
+            setTimeout(()=>playTone(300, 0.3, 'square'), 100);
+            html = `
+              <div style="background: linear-gradient(135deg, #ef4444, #b91c1c); padding: 35px 20px; border-radius: 20px; text-align: center; color: #fff; margin: -10px; animation: shake 0.5s;">
+                <div style="font-size:5rem; margin-bottom:0.5rem; animation: popIn 0.5s ease forwards; transform: scale(0);">⚠️</div>
+                <h1 style="margin-bottom:0.5rem; color: #fff; font-size:1.6rem; font-weight: 900;">宗師失常！記憶正在衰退</h1>
+                <div style="font-size:1.1rem; margin-bottom:1.5rem; font-weight: 600;">請立刻找回肌肉反射手感！</div>
+                <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 15px;">得分: ${score} / ${total}</div>
+                <div style="margin-top: 2rem;">
+                  <button class="btn-primary" onclick="startSwipe()" style="width:100%; margin-bottom:1rem; background: #fff; color: #b91c1c; font-weight: bold; border: none;">緊急特訓 (找回手感)</button>
+                  <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: none;">回首頁</button>
+                </div>
+              </div>
+            `;
+        }
     } else {
         if(score === total) { msg = '直覺神準！'; badge = '<div class="badge-unlocked">🏅 獲得勳章：直覺反射王</div>'; }
         else { msg = '滑滑卡訓練完成！'; }
