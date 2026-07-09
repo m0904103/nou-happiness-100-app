@@ -863,21 +863,93 @@ function showResult(type) {
   
   if (type==='mcq') {
     score = state.mcqScore; total = state.mcqQueue.length;
-    if(score === total) { msg = '太神啦！滿分通關！'; badge = '<div class="badge-unlocked">🏅 獲得勳章：終身學習大師</div>'; }
-    else if(score >= total*0.6) { msg = '表現不錯！繼續保持！'; badge = '<div class="badge-unlocked">🥈 獲得勳章：社區陪跑員</div>'; }
-    else { msg = '再接再厲！看筆記可以變得更強！'; }
+    let totalQs = 60;
+    let mastered = Object.values(userProgress).filter(v => v === 2).length;
     
-    html = `
-      <div style="font-size:4rem; margin-bottom:1rem; animation: popIn 0.5s ease forwards; transform: scale(0);">🏆</div>
-      <h2 style="margin-bottom:0.5rem">選擇題測驗完成</h2>
-      <div style="font-size:1.1rem; color:var(--muted); margin-bottom:1rem">${msg}</div>
-      <div style="font-size:3rem; font-weight:900; color:var(--primary); margin-bottom:0.5rem">${score} / ${total}</div>
-      ${badge}
-      <div style="margin-top: 2rem;">
-        <button class="btn-primary" onclick="startMCQ()" style="width:100%; margin-bottom:1rem">再測一次</button>
-        <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.05); color:var(--text)">回首頁</button>
-      </div>
-    `;
+    if (mastered >= totalQs) {
+        // MASTER MODE FOR MCQ
+        if (score === total) {
+            // FLAWLESS
+            [523,659,783,1046, 1318, 1567, 2093].forEach((f,i)=>setTimeout(()=>playTone(f,0.15,'sine'), i*100));
+            setTimeout(shootConfetti, 300);
+            setTimeout(shootConfetti, 800);
+            html = `
+              <style>
+              @keyframes diamondPulse {
+                  0% { transform: scale(1); box-shadow: 0 10px 40px rgba(0, 255, 255, 0.4); }
+                  50% { transform: scale(1.02); box-shadow: 0 15px 60px rgba(0, 255, 255, 0.7); }
+                  100% { transform: scale(1); box-shadow: 0 10px 40px rgba(0, 255, 255, 0.4); }
+              }
+              @keyframes spinDiamond {
+                  0% { transform: translate(-50%, -50%) rotate(0deg); }
+                  100% { transform: translate(-50%, -50%) rotate(-360deg); }
+              }
+              </style>
+              <div style="background: linear-gradient(135deg, #00C9FF, #92FE9D); padding: 35px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4); text-align: center; color: #fff; animation: diamondPulse 2s infinite; position: relative; overflow: hidden; margin: -10px;">
+                <div style="position: absolute; top: 50%; left: 50%; width: 200%; height: 200%; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.2) 0deg 20deg, transparent 20deg 40deg); animation: spinDiamond 20s linear infinite; pointer-events: none; transform-origin: 0 0;"></div>
+                <div style="font-size:5rem; margin-bottom:0.5rem; animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform: scale(0); text-shadow: 0 10px 20px rgba(0,150,150,0.5); position: relative; z-index: 1;">💎</div>
+                <h1 style="margin-bottom:0.5rem; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.3); font-size:1.8rem; font-weight: 900; position: relative; z-index: 1;">究極制霸：終身學習之神</h1>
+                <div style="font-size:1.1rem; margin-bottom:1.5rem; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.2); position: relative; z-index: 1;">60 題綠燈全亮，無懈可擊！</div>
+                <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(255,255,255,0.25); padding: 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.4); position: relative; z-index: 1;">得分: ${score} / ${total}</div>
+                <div style="margin-top: 2rem; position: relative; z-index: 1;">
+                  <button class="btn-primary" onclick="startMCQ()" style="width:100%; margin-bottom:1rem; background: #fff; color: #009688; font-weight: 900; border: none; box-shadow: 0 6px 20px rgba(0,0,0,0.2); transform: translateY(0); transition: all 0.2s;">進入宗師境界 (隨機複習)</button>
+                  <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: 1px solid rgba(255,255,255,0.3); font-weight: bold;">回首頁</button>
+                </div>
+              </div>
+            `;
+        } else if (score >= total * 0.8) {
+            // SILVER
+            setTimeout(()=>playTone(600, 0.1, 'sine'), 100);
+            html = `
+              <div style="background: linear-gradient(135deg, #1e3a8a, #3b82f6); padding: 35px 20px; border-radius: 20px; text-align: center; color: #fff; margin: -10px;">
+                <div style="font-size:5rem; margin-bottom:0.5rem; animation: popIn 0.5s ease forwards; transform: scale(0);">🛡️</div>
+                <h1 style="margin-bottom:0.5rem; color: #fff; font-size:1.6rem; font-weight: 900;">大意了！小心考場陷阱</h1>
+                <div style="font-size:1.1rem; margin-bottom:1.5rem; font-weight: 600;">身為終身學習之神，絕不容許小失誤</div>
+                <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 15px;">得分: ${score} / ${total}</div>
+                <div style="margin-top: 2rem;">
+                  <button class="btn-primary" onclick="startMCQ()" style="width:100%; margin-bottom:1rem; background: #fff; color: #1e3a8a; font-weight: bold; border: none;">再戰一次 (找回完美)</button>
+                  <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: none;">回首頁</button>
+                </div>
+              </div>
+            `;
+        } else {
+            // RED
+            setTimeout(()=>playTone(300, 0.3, 'square'), 100);
+            html = `
+              <div style="background: linear-gradient(135deg, #7f1d1d, #ef4444); padding: 35px 20px; border-radius: 20px; text-align: center; color: #fff; margin: -10px; animation: shake 0.5s;">
+                <div style="font-size:5rem; margin-bottom:0.5rem; animation: popIn 0.5s ease forwards; transform: scale(0);">🚨</div>
+                <h1 style="margin-bottom:0.5rem; color: #fff; font-size:1.6rem; font-weight: 900;">宗師失常！綠燈正在熄滅</h1>
+                <div style="font-size:1.1rem; margin-bottom:1.5rem; font-weight: 600;">請立刻進行緊急特訓找回手感！</div>
+                <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 15px;">得分: ${score} / ${total}</div>
+                <div style="margin-top: 2rem;">
+                  <button class="btn-primary" onclick="startMCQ()" style="width:100%; margin-bottom:1rem; background: #fff; color: #7f1d1d; font-weight: bold; border: none;">緊急特訓 (找回手感)</button>
+                  <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: none;">回首頁</button>
+                </div>
+              </div>
+            `;
+        }
+    } else {
+        // NORMAL PROGRESS
+        if(score === total) { msg = '太神啦！滿分通關！'; badge = '<div class="badge-unlocked">🏅 獲得勳章：終身學習大師</div>'; }
+        else if(score >= total*0.6) { msg = '表現不錯！繼續保持！'; badge = '<div class="badge-unlocked">🥈 獲得勳章：社區陪跑員</div>'; }
+        else { msg = '再接再厲！看筆記可以變得更強！'; badge = ''; }
+        
+        let progMsg = `🔥 60題庫綠燈達成率：${mastered} / ${totalQs} 題`;
+        let btnText = '繼續解鎖新題目';
+        
+        html = `
+          <div style="font-size:4rem; margin-bottom:1rem; animation: popIn 0.5s ease forwards; transform: scale(0);">🏆</div>
+          <h2 style="margin-bottom:0.5rem">選擇題測驗完成</h2>
+          <div style="font-size:1.1rem; color:var(--muted); margin-bottom:1rem">${msg}</div>
+          <div style="font-size:3rem; font-weight:900; color:var(--primary); margin-bottom:0.5rem">${score} / ${total}</div>
+          ${badge}
+          <div style="font-size:1.1rem; color:#0ea5e9; font-weight:bold; margin-top:15px; padding:10px; background:rgba(14,165,233,0.1); border-radius:12px;">${progMsg}</div>
+          <div style="margin-top: 2rem;">
+            <button class="btn-primary" onclick="startMCQ()" style="width:100%; margin-bottom:1rem">${btnText}</button>
+            <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.05); color:var(--text)">回首頁</button>
+          </div>
+        `;
+    }
   } else if (type==='sw') {
     score = state.swScore; total = state.swQueue.length;
     let seen = JSON.parse(localStorage.getItem('nou_swipe_seen') || '[]');
