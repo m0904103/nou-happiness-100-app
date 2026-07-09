@@ -762,6 +762,12 @@ let startX = 0;
 function doSwipe(ans) {
   const q = state.swQueue[state.swIdx];
   const card = document.getElementById('sw-card');
+  let seen = JSON.parse(localStorage.getItem('nou_swipe_seen') || '[]');
+  let idx = TF.indexOf(q);
+  if (!seen.includes(idx) && idx !== -1) {
+      seen.push(idx);
+      localStorage.setItem('nou_swipe_seen', JSON.stringify(seen));
+  }
   card.style.transition = 'transform .35s ease, opacity .35s ease';
   card.style.transform = `translateX(${ans ? 600 : -600}px) rotate(${ans ? 25 : -25}deg)`;
   card.style.opacity = '0';
@@ -861,14 +867,21 @@ function showResult(type) {
     if(score === total) { msg = '直覺神準！'; badge = '<div class="badge-unlocked">🏅 獲得勳章：直覺反射王</div>'; }
     else { msg = '滑滑卡訓練完成！'; }
     
+    let seen = JSON.parse(localStorage.getItem('nou_swipe_seen') || '[]');
+    let totalQs = TF.length;
+    let unlocked = seen.length;
+    let progMsg = `🔥 總題庫解鎖進度：${unlocked} / ${totalQs} 題`;
+    let btnText = unlocked >= totalQs ? '再滑一次 (已制霸)' : '繼續解鎖新題目';
+    
     html = `
       <div style="font-size:4rem; margin-bottom:1rem; animation: popIn 0.5s ease forwards; transform: scale(0);">🎉</div>
       <h2 style="margin-bottom:0.5rem">滑滑卡測驗完成</h2>
       <div style="font-size:1.1rem; color:var(--muted); margin-bottom:1rem">${msg}</div>
       <div style="font-size:3rem; font-weight:900; color:var(--primary); margin-bottom:0.5rem">${score} / ${total}</div>
       ${badge}
+      <div style="font-size:1.1rem; color:#10b981; font-weight:bold; margin-top:15px; padding:10px; background:rgba(16,185,129,0.1); border-radius:12px;">${progMsg}</div>
       <div style="margin-top: 2rem;">
-        <button class="btn-primary" onclick="startSwipe()" style="width:100%; margin-bottom:1rem">再滑一次</button>
+        <button class="btn-primary" onclick="startSwipe()" style="width:100%; margin-bottom:1rem">${btnText}</button>
         <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.05); color:var(--text)">回首頁</button>
       </div>
     `;
