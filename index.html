@@ -877,7 +877,14 @@ function showResult(type) {
     let totalQs = 60;
     let mastered = Object.values(userProgress).filter(v => v === 2).length;
     
+    // 如果曾經達成 60 題全綠，就永久解鎖宗師反饋模式
+    let hasMastered = localStorage.getItem('nou_mcq_mastered') === 'true';
     if (mastered >= totalQs) {
+        hasMastered = true;
+        localStorage.setItem('nou_mcq_mastered', 'true');
+    }
+    
+    if (hasMastered) {
         // MASTER MODE FOR MCQ
         if (score === total) {
             // FLAWLESS
