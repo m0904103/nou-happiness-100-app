@@ -91,6 +91,11 @@
         .timeline-container span {
             color: #fff; font-size: 1rem; font-weight: bold; width: 60px; text-align: center;
         }
+        .ctrl-btn {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); border-radius: 6px;
+            color: #facc15; font-size: 1.2rem; cursor: pointer; padding: 4px 12px; display: flex; align-items: center; justify-content: center;
+        }
+        .ctrl-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
         
         .timer-circle {
             width: 150px; height: 150px; border-radius: 50%; background: #ef4444;
@@ -120,8 +125,9 @@
             .floating-controls select { padding: 3px; font-size: 0.8rem; max-width: 75px;}
             .floating-controls span { font-size: 0.8rem !important; margin-left: 2px !important;}
             .floating-controls button { padding: 3px 6px !important; font-size: 0.8rem !important; margin-left: 2px !important;}
-            .timeline-container { padding: 10px 15px; gap: 8px;}
-            .timeline-container span { font-size: 0.8rem; width: 40px;}
+            .timeline-container { padding: 10px 10px; gap: 6px;}
+            .timeline-container span { font-size: 0.8rem; width: 45px;}
+            .ctrl-btn { padding: 4px 8px; font-size: 1rem; }
             .timer-circle { width: 100px; height: 100px; font-size: 3.5rem; margin: 15px auto; }
             #start-screen h1 { font-size: 2.2rem !important; margin-bottom: 10px; }
             #start-screen h2 { font-size: 1.1rem !important; margin-bottom: 15px; }
@@ -762,6 +768,9 @@
 
     <div class="timeline-container">
         <span id="timeline-progress">0/0</span>
+        <button onclick="jumpToSlide(currentSlide - 1)" class="ctrl-btn" title="上一頁">◀</button>
+        <button onclick="jumpToSlide(currentSlide)" class="ctrl-btn" title="重播本頁">↺</button>
+        <button onclick="jumpToSlide(currentSlide + 1)" class="ctrl-btn" title="下一頁">▶</button>
         <input type="range" id="timelineSlider" min="0" max="0" value="0" onchange="jumpToSlide(this.value)">
     </div>
 </div>
