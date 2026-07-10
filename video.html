@@ -80,6 +80,18 @@
         }
         .floating-controls select option { background: #1e293b; color: #fff; }
         
+        .timeline-container {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: rgba(0,0,0,0.6); padding: 15px 20px; z-index: 100;
+            display: flex; gap: 15px; align-items: center; box-sizing: border-box;
+        }
+        .timeline-container input[type=range] {
+            flex: 1; cursor: pointer; accent-color: #facc15;
+        }
+        .timeline-container span {
+            color: #fff; font-size: 1rem; font-weight: bold; width: 60px; text-align: center;
+        }
+        
         .timer-circle {
             width: 150px; height: 150px; border-radius: 50%; background: #ef4444;
             display: flex; justify-content: center; align-items: center;
@@ -118,7 +130,16 @@
 
 <div id="presentation">
     <div class="floating-controls">
-        <span style="font-size:1rem;color:#ccc">語速</span>
+        <select id="chapterSelect" onchange="jumpToSlide(this.value)">
+            <option value="0">開場簡介</option>
+            <option value="2">第一章</option>
+            <option value="8">第二章</option>
+            <option value="13">第三章</option>
+            <option value="17">第四章</option>
+            <option value="21">第五章</option>
+            <option value="25">第六章</option>
+        </select>
+        <span style="font-size:1rem;color:#ccc; margin-left:10px;">語速</span>
         <select id="floatSpeed" onchange="syncSpeed(this.value); updateCurrentSpeechRate()">
             <option value="0.8">0.8x</option>
             <option value="1.0">1.0x</option>
@@ -254,6 +275,10 @@
         <h1 style='font-size: 3rem; color:#facc15'>期末考必勝！</h1><p style='font-size: 2rem;'>不要忘記我們的約定：<br>考前一週、考前三天、考前一晚<br>開啟這份救命丸進行間隔重複與主動回想！</p><p style='font-size: 1.5rem; margin-top:30px'>祝您高分 All Pass，人生 100 幸福圓滿！</p>
     </div>
 
+    <div class="timeline-container">
+        <span id="timeline-progress">0/0</span>
+        <input type="range" id="timelineSlider" min="0" max="0" value="0" onchange="jumpToSlide(this.value)">
+    </div>
 </div>
 
 <script>
@@ -263,6 +288,9 @@
     let selectedVoice = null;
     let globalSpeechRate = 1.15;
     let currentUtterance = null;
+    
+    // Initialize slider max
+    document.getElementById('timelineSlider').max = slides.length - 1;
 
     function syncSpeed(val) {
         globalSpeechRate = parseFloat(val);
@@ -271,10 +299,14 @@
     }
 
     function updateCurrentSpeechRate() {
-        // Unfortunately Web Speech API doesn't allow changing rate on the fly reliably across all browsers.
-        // We have to stop and restart the current slide to apply the new rate instantly, or wait for next slide.
-        // To be safe and avoid breaking the flow, we will just restart the current slide.
         showSlide(currentSlide);
+    }
+    
+    function jumpToSlide(indexStr) {
+        const idx = parseInt(indexStr);
+        if(!isNaN(idx) && idx >= 0 && idx < slides.length) {
+            showSlide(idx);
+        }
     }
 
     window.speechSynthesis.onvoiceschanged = () => {
@@ -307,6 +339,20 @@
         slides.forEach(s => s.classList.remove('active'));
         slides[index].classList.add('active');
         currentSlide = index;
+        
+        // Update timeline UI
+        document.getElementById('timelineSlider').value = index;
+        document.getElementById('timeline-progress').innerText = `${index + 1}/${slides.length}`;
+        
+        // Update Chapter Select UI logic
+        const chSelect = document.getElementById('chapterSelect');
+        if(index >= 25) chSelect.value = "25";
+        else if(index >= 21) chSelect.value = "21";
+        else if(index >= 17) chSelect.value = "17";
+        else if(index >= 13) chSelect.value = "13";
+        else if(index >= 8) chSelect.value = "8";
+        else if(index >= 2) chSelect.value = "2";
+        else chSelect.value = "0";
 
         const textToSpeak = slides[index].getAttribute('data-text');
         window.speechSynthesis.cancel();
