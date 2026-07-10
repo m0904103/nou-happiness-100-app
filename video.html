@@ -385,9 +385,9 @@
         <span style='color:#facc15; font-size:1.8rem'>Q10. 課程提倡在長壽社會中，我們應該透過經驗傳承，成為年輕世代生命中的什麼？</span>
         <div class='timer-circle'>3</div>
     </div>
-    <div class="slide" data-text="正確答案是：互不相欠的「陌生人」！">
+    <div class="slide" data-text="正確答案是：充滿溫暖歸屬感的「故鄉」！">
         <span style='color:#facc15; font-size:1.8rem'>Q10. 課程提倡在長壽社會中，我們應該透過經驗傳承，成為年輕世代生命中的什麼？</span>
-        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>互不相欠的「陌生人」</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>課程鼓勵長輩發揮智慧關懷年輕世代，成為他們心靈依賴的「別人的故鄉」，在互相尊重的互動中找到新的人生價值。 對應來源：2-2 工作與學習的重新定位</div>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>充滿溫暖歸屬感的「故鄉」</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>課程鼓勵長輩發揮智慧關懷年輕世代，成為他們心靈依賴的「別人的故鄉」，在互相尊重的互動中找到新的人生價值。 對應來源：2-2 工作與學習的重新定位</div>
     </div>
     <div class="slide" data-text="進入第三章。以前的「私塾」是非常進步的混齡學習，老師扮演「陪跑教練」。另外，社區有很多功能就像甜甜圈的麵包體，而中間貫穿一切的洞，就是「學習」！透過學習，社區才能活起來。">
         <h2>第三章：非正式學習空間</h2>
@@ -769,6 +769,7 @@
     <div class="timeline-container">
         <span id="timeline-progress">0/0</span>
         <button onclick="jumpToSlide(currentSlide - 1)" class="ctrl-btn" title="上一頁">◀</button>
+        <button onclick="togglePause()" class="ctrl-btn" id="pauseBtn" title="暫停/播放" style="width:40px; font-size:1.5rem">⏸</button>
         <button onclick="jumpToSlide(currentSlide)" class="ctrl-btn" title="重播本頁">↺</button>
         <button onclick="jumpToSlide(currentSlide + 1)" class="ctrl-btn" title="下一頁">▶</button>
         <input type="range" id="timelineSlider" min="0" max="0" value="0" onchange="jumpToSlide(this.value)">
@@ -791,9 +792,22 @@
     let globalSpeechRate = 1.3; // Default to 1.3 since 60 questions will take longer
     let currentUtterance = null;
     let timerActive = false;
+    let isPaused = false;
     
     // Initialize slider max
     document.getElementById('timelineSlider').max = slides.length - 1;
+
+    function togglePause() {
+        isPaused = !isPaused;
+        const btn = document.getElementById('pauseBtn');
+        if (isPaused) {
+            btn.innerText = '▶';
+            window.speechSynthesis.pause();
+        } else {
+            btn.innerText = '⏸';
+            window.speechSynthesis.resume();
+        }
+    }
 
     function syncSpeed(val) {
         globalSpeechRate = parseFloat(val);
@@ -840,6 +854,10 @@
         }
         
         timerActive = false; // reset any active timers conceptually
+        isPaused = false;
+        const pBtn = document.getElementById('pauseBtn');
+        if(pBtn) pBtn.innerText = '⏸';
+        if(window.speechSynthesis.paused) window.speechSynthesis.resume();
         
         slides.forEach(s => {
             s.classList.remove('active');
@@ -902,6 +920,8 @@
         timerEl.innerText = count;
         
         const tick = setInterval(() => {
+            if (isPaused) return; // wait if paused
+            
             if(!slides[currentSlide].querySelector('.timer-circle') || slides[currentSlide].querySelector('.timer-circle') !== timerEl) {
                 // We navigated away manually
                 clearInterval(tick);
