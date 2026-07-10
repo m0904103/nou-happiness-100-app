@@ -84,9 +84,8 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
 
 /* ─── COMMON COMPONENTS ─── */
 .top-bar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.btn-back{width:38px;height:38px;border-radius:12px;background:var(--surface);border:1px solid var(--border);
-  cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;
-  color:var(--text);transition:.2s;flex-shrink:0}
+.btn-back{padding: 0 16px; height:38px; border-radius:99px; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.3); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:0.95rem; font-weight:700; color:#38bdf8; transition:.2s; flex-shrink:0; gap:4px;}
+.btn-back:active{transform:scale(.95); background:rgba(56,189,248,0.2);}
 .btn-back:active{transform:scale(.9)}
 .top-title{font-size:1.05rem;font-weight:700;flex:1}
 .top-count{font-size:.82rem;color:var(--muted);font-weight:600}
@@ -292,7 +291,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
   <!-- MCQ SCREEN -->
   <div class="screen" id="s-mcq">
     <div class="topbar">
-      <button class="btn-back" onclick="show('s-home')">←</button>
+      <button class="btn-back" onclick="show('s-home')"><span>◀</span> 返回</button>
       <div class="topbar-title">全真模擬選擇題 <button class="btn-progress" onclick="openProgress()">查看進度</button></div>
       <div class="score-badge" id="mcq-score-lbl">✦ 0 答對</div>
     </div>
@@ -302,7 +301,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
   <!-- SWIPE SCREEN -->
   <div class="screen" id="s-swipe">
     <div class="topbar">
-      <button class="btn-back" onclick="show('s-home')">←</button>
+      <button class="btn-back" onclick="show('s-home')"><span>◀</span> 返回</button>
       <div class="topbar-title">是非題滑滑卡</div>
       <div class="score-badge" id="sw-count">0 / 0</div>
     </div>
@@ -314,7 +313,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
   <!-- STUDY SCREEN -->
   <div class="screen" id="s-study">
     <div class="topbar">
-      <button class="btn-back" onclick="show('s-home')">←</button>
+      <button class="btn-back" onclick="show('s-home')"><span>◀</span> 返回</button>
       <div class="topbar-title">課程重點精華</div>
     </div>
     <div style="margin-bottom:20px;color:var(--muted);font-size:0.9rem;text-align:center;" class="fade-in">點擊下方章節展開閱讀，建立核心觀念</div>
