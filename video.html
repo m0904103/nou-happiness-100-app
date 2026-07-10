@@ -309,6 +309,14 @@
     </div>
 </div>
 
+<div id="custom-alert" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center; flex-direction:column;">
+    <div style="background:#1e293b; padding:40px; border-radius:16px; text-align:center; max-width:85%; border:2px solid #facc15; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <h2 style="color:#facc15; margin-top:0; font-size: 2rem !important;">空大輔考研究社</h2>
+        <p style="font-size:1.5rem !important; margin: 20px 0;">全劇終！祝您期末考順利高分通過！</p>
+        <button class="btn" style="padding:10px 30px; font-size:1.2rem; margin-top:10px;" onclick="document.getElementById('custom-alert').style.display='none'; window.location.href='index.html'">返回首頁</button>
+    </div>
+</div>
+
 <script>
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
@@ -360,7 +368,7 @@
 
     function showSlide(index) {
         if(index >= slides.length) {
-            alert("全劇終！祝您期末考順利高分通過！");
+            document.getElementById('custom-alert').style.display = 'flex';
             return;
         }
         
