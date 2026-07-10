@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>人生100幸福處方箋 考前衝刺特訓影片</title>
+    <title>期末考 1小時終極大補丸</title>
     <style>
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
@@ -138,7 +138,7 @@
 <div id="start-screen">
     <a href="index.html" class="back-btn-start">◀ 返回首頁</a>
     <h1>人生100幸福處方箋</h1>
-    <h2 style="color:white">期末考 30 分鐘救命丸 (全自動播放版)</h2>
+    <h2 style="color:white">期末考 1小時終極大補丸 (60題完整版)</h2>
     <p style="font-size: 1.2rem; margin-bottom: 20px;">※ 建議使用全螢幕觀看，包含全程教練語音講解，請開啟音響或戴上耳機。</p>
     
     <div class="speed-control">
@@ -146,160 +146,617 @@
         <select id="startSpeed" onchange="syncSpeed(this.value)">
             <option value="0.8">0.8x (慢速)</option>
             <option value="1.0">1.0x (正常)</option>
-            <option value="1.15" selected>1.15x (教練節奏)</option>
-            <option value="1.3">1.3x (快速)</option>
+            <option value="1.15">1.15x (教練節奏)</option>
+            <option value="1.3" selected>1.3x (快速/推薦)</option>
             <option value="1.5">1.5x (超快)</option>
             <option value="2.0">2.0x (極速)</option>
         </select>
     </div>
     
-    <button class="btn" style="margin-top: 30px;" onclick="startVideo()">▶ 開始 30 分鐘特訓</button>
+    <button class="btn" style="margin-top: 30px;" onclick="startVideo()">▶ 開始 1小時特訓</button>
 </div>
 
 <div id="presentation">
     <div class="floating-controls">
         <select id="chapterSelect" onchange="jumpToSlide(this.value)">
             <option value="0">開場簡介</option>
-            <option value="2">第一章</option>
-            <option value="8">第二章</option>
-            <option value="13">第三章</option>
-            <option value="17">第四章</option>
-            <option value="21">第五章</option>
-            <option value="25">第六章</option>
+            <option value="2">第1章</option>
+            <option value="27">第2章</option>
+            <option value="51">第3章</option>
+            <option value="74">第4章</option>
+            <option value="97">第5章</option>
+            <option value="120">第6章</option>
+
         </select>
         <span style="font-size:1rem;color:#ccc; margin-left:10px;">語速</span>
         <select id="floatSpeed" onchange="syncSpeed(this.value); updateCurrentSpeechRate()">
             <option value="0.8">0.8x</option>
             <option value="1.0">1.0x</option>
-            <option value="1.15" selected>1.15x</option>
-            <option value="1.3">1.3x</option>
+            <option value="1.15">1.15x</option>
+            <option value="1.3" selected>1.3x</option>
             <option value="1.5">1.5x</option>
             <option value="2.0">2.0x</option>
         </select>
         <button onclick="window.location.href='index.html'" style="background:rgba(239,68,68,0.2); color:#ef4444; border:1px solid #ef4444; border-radius:4px; padding:2px 8px; margin-left:10px; cursor:pointer;">離開</button>
     </div>
-    <div class="slide" data-text="各位空大的夥伴們，大家好！工作跟家庭兩頭燒，猛然一回頭才發現期末考已經迫在眉睫了嗎？看著厚厚的六大章節講義，是不是覺得心有餘而力不足？別擔心！這支長度剛好 30 分鐘的影片，就是我專為大家準備的「期末考救命丸」！">
-        <h2>💊 期末考 30 分鐘救命丸</h2>
-        <h2>精華考點 ＋ 實戰測驗</h2><div style='font-size: 2rem; line-height: 2;'><p>✅ 間隔重複 (Spaced Repetition)</p><p>✅ 主動回想 (Active Recall)</p></div>
+    <div class="slide" data-text="各位空大的夥伴們，大家好！工作跟家庭兩頭燒，猛然一回頭才發現期末考已經迫在眉睫了嗎？看著厚厚的六大章節講義，是不是覺得心有餘而力不足？別擔心！這支長度約一小時的影片，就是我專為大家準備的「期末考終極大補丸」，為您收錄了全部 60 題的題庫測驗！">
+        <h2>💊 期末考 1小時終極大補丸 (完整版)</h2>
+        <h2>精華考點 ＋ 60 題實戰測驗</h2><div style='font-size: 2rem; line-height: 2;'><p>✅ 間隔重複 (Spaced Repetition)</p><p>✅ 主動回想 (Active Recall)</p></div>
     </div>
-    <div class="slide" data-text="無論期末考題型怎麼變化，你真正需要的，是敏銳的核心概念辨識力，以及看穿題目陷阱的反射神經。在這 30 分鐘裡，我會幫你把六大章節的精華，全部濃縮成表格跟圖解。這是一場高強度的腦力特訓！我要求你做到兩件事：第一，間隔重複。第二，主動回想。在每個章節的最後，我會給你3秒鐘的測驗停格。當畫面出現倒數計時，請你立刻在心裡想出答案！準備好了嗎？我們的 30 分鐘大腦仲訓，現在開始！">
+    <div class="slide" data-text="無論期末考題型怎麼變化，你真正需要的，是敏銳的核心概念辨識力，以及看穿題目陷阱的反射神經。在這 1 小時裡，我會幫你把六大章節的精華濃縮，並帶你親自走過每一道題目。這是一場高強度的腦力特訓！我要求你做到兩件事：第一，間隔重複。第二，主動回想。每講完一題，我會給你3秒鐘的測驗停格，請你立刻在心裡想出答案，隨後我會馬上公佈解答！準備好了嗎？我們的大腦仲訓，現在開始！">
         <h2>不要死背！這是一場高強度的腦力特訓</h2>
-        <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>1. 間隔重複</h3><p style='font-size: 1.5rem;'>考前一週、三天、前一晚<br>把遺忘曲線踩在腳下</p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>2. 主動回想</h3><p style='font-size: 1.5rem;'>看到 3 秒倒數停格<br>立刻在心裡選出答案</p></div></div>
+        <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>1. 間隔重複</h3><p style='font-size: 1.5rem;'>考前一週、三天、前一晚<br>把遺忘曲線踩在腳下</p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>2. 主動回想</h3><p style='font-size: 1.5rem;'>聽完題目後<br>利用 3 秒倒數在心裡想出答案</p></div></div>
     </div>
     <div class="slide" data-text="首先進入第一章：社會轉型與學習觀的變遷。請你在腦海裡畫一條線，切開過去跟現在。過去的工業化社會，學校是為了解決大量生產的問題而存在的，所以傳統教室的設計就像是圓形監獄，老師站在高高的地方，目的是為了監控，培養出聽話、標準化的勞動力。人生劇本也很死板，就是求學、就業、退休三部曲。">
         <h2>第一章：社會轉型與學習觀的變遷</h2>
         <div class='split'><div class='col' style='opacity: 0.5;'><h3 class='danger'>❌ 過去的工業化社會</h3><p style='font-size:1.5rem'>「求學 ➔ 就業 ➔ 退休」單一劇本</p><p style='font-size:1.5rem'>學校像「圓形監獄」(監控/標準化)</p></div><div class='col'><h3 class='success'>✅ 現代長壽社會</h3><p style='font-size:1.5rem'>追求 <span class='highlight'>健康、人際、自我決定</span></p><p style='font-size:1.5rem'>從物質佔有轉向「存在慾望」</p></div></div>
     </div>
-    <div class="slide" data-text="但現在不一樣了！我們來到了長壽社會。工業時代那套佔有物質的慾望已經退流行了，現代人追求的是存在慾望，也就是在人際網絡中尋找自己的價值。考試必考重點來了！決定現代人主觀幸福感的前三大因素，除了健康和良好的人際關係之外，第三大因素是什麼？是金錢嗎？是學歷嗎？都不是！請用力記住這四個字：自我決定！也就是你能不能掌握自己人生的主導權。">
+    <div class="slide" data-text="但現在不一樣了！我們來到了長壽社會。工業時代那套佔有物質的慾望已經退流行了，現代人追求的是存在慾望，也就是在人際網絡中尋找自己的價值。決定現代人主觀幸福感的前三大因素，除了健康和良好的人際關係之外，取代金錢與學歷的，就是：自我決定！">
         <h2>主觀幸福感的三大因素</h2>
         <p style='font-size: 2rem;'>不再是金錢與學歷！</p><div style='display: flex; gap: 20px; justify-content: center; margin-top: 40px;'><div style='background:#38bdf8; padding:30px; border-radius:15px; font-size:2rem; font-weight:bold; color:#0f172a'>健康</div><div style='background:#38bdf8; padding:30px; border-radius:15px; font-size:2rem; font-weight:bold; color:#0f172a'>良好人際</div><div style='background:#facc15; padding:30px; border-radius:15px; font-size:2.5rem; font-weight:bold; color:#0f172a; transform:scale(1.1)'>自我決定</div></div>
     </div>
-    <div class="slide" data-text="接下來，我們來看一個很愛考的專有名詞：伊斯特林悖論。這是什麼意思？簡單來說，就是錢不是萬能的。當經濟發展到一定水準後，人們對生活的滿足感反而會開始下降，轉而去追求精神層面的富足。如果在是非題看到經濟越好，幸福感就無限上升，請毫不猶豫地給它打個大叉叉！">
+    <div class="slide" data-text="接著是一個很愛考的專有名詞：伊斯特林悖論。簡單來說，就是錢不是萬能的。當經濟發展到一定水準後，人們對生活的滿足感反而會開始下降，轉而去追求精神層面的富足。">
         <span style='color:#ef4444'>⚠️ 考題陷阱：伊斯特林悖論</span>
         <h1 style='font-size: 3rem;'>「錢不是萬能的」</h1><p style='font-size: 2rem;'>當經濟發展到一定水準後，人們對生活的滿足感<br><span class='highlight'>反而會開始下降</span>，轉而去追求精神富足。</p><p style='font-size: 1.8rem; color:#94a3b8; margin-top:20px;'>(是非題看到「經濟越好幸福感無限上升」請打叉！)</p>
     </div>
-    <div class="slide" data-text="既然觀念轉變了，學習的場域也要跟著解放。學習不再只能發生在學校！我們來記兩個經典的案例考點：第一個，台中的審計新村，它展現了什麼魔法？答案是老屋空間打開與青年微型創業的魔法。第二個，日本的岡媽媽之家，它是政府花大錢蓋的嗎？錯！它只是把獨居長者遺留的空屋稍微打開，變成零門檻的社區客廳。這兩個案例的核心，都是為了建立人際網絡，預防現代社會的孤立。">
+    <div class="slide" data-text="既然觀念轉變了，學習的場域也要跟著解放。第一個，台中的審計新村，它展現了老屋空間打開與青年微型創業的魔法。第二個，日本的岡媽媽之家，它只是把獨居長者遺留的空屋稍微打開，變成零門檻的社區客廳。核心都是為了預防現代社會的孤立。">
         <h2>學習場域的解放：實踐案例</h2>
         <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>📍 台中審計新村</h3><p style='font-size: 1.5rem;'>老屋「空間打開」<br>青年微型創業</p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>📍 日本岡媽媽之家</h3><p style='font-size: 1.5rem;'>獨居空屋「稍微打開」<br>零門檻的社區客廳 (不是政府出資)</p></div></div><h3 style='margin-top:30px; font-size:1.8rem'>核心目的：建立人際網絡，預防孤立</h3>
     </div>
-    <div class="slide" data-text="好，第一章精華結束。請看畫面，三秒鐘提取挑戰，開始！">
-        <span style='color:#ef4444'>🛑 第一章 提取挑戰</span>
+    <div class="slide" data-text="好，第 1 章精華結束。接下來是本章的 10 道連環測驗，準備好了嗎？">
+        <span style='color:#ef4444'>🛑 第 1 章 測驗開始</span>
+        <h2 style='font-size:3rem'>準備迎接本章的 10 道測驗題</h2>
+    </div>
+    <div class="slide" data-text="第 1 題，決定現代人主觀幸福感的前三大因素中，取代過去「金錢與學歷」成為第三大的是？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q1. 決定現代人主觀幸福感的前三大因素中，取代過去「金錢與學歷」成為第三大的是？</span>
         <div class='timer-circle' id='timer'>3</div>
     </div>
-    <div class="slide" data-text="第一題，決定現代人主觀幸福感的前三大因素中，取代過去「金錢與學歷」成為第三大的是？答案是：自我決定！你答對了嗎？">
-        <span style='color:#facc15; font-size:2rem'>Q1. 決定主觀幸福感的前三大因素中，取代「金錢與學歷」成為第三大的是？</span>
-        <div style='font-size: 2.5rem; margin-top:50px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>自我決定</div>
+    <div class="slide" data-text="正確答案是：自我決定！">
+        <span style='color:#facc15; font-size:1.8rem'>Q1. 決定現代人主觀幸福感的前三大因素中，取代過去「金錢與學歷」成為第三大的是？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>自我決定</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>根據日本研究，決定現代人主觀幸福感的前三大因素為健康、良好的人際關係，以及第三大的「自我決定」。過去被看重的金錢與學歷地位已下降。 對應來源：1-2 學習觀的轉型、百歲人生幸福處方：自我決定的學習導引</div>
     </div>
-    <div class="slide" data-text="來到第二章，百年人生。很多人把少子高齡化看成災難，但牧野篤教授說這其實代表我們成功創造了嬰兒死亡率極低的社會，大家都能活到自然壽命。這叫作「少生少死」。面對 100 歲的人生，人生不再是一場打敗魔王就結束的「英雄旅程」，而是一段「多段式動態故事」。所以絕對不要被「65歲強制退休」這種標準化制度給綁架了！">
+    <div class="slide" data-text="第 2 題，關於「伊斯特林悖論（Easterlin paradox）」，下列哪項描述符合課程的解釋？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q2. 關於「伊斯特林悖論（Easterlin paradox）」，下列哪項描述符合課程的解釋？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：經濟發展到一定水準後，人們對生活的滿足感反而開始下降！">
+        <span style='color:#facc15; font-size:1.8rem'>Q2. 關於「伊斯特林悖論（Easterlin paradox）」，下列哪項描述符合課程的解釋？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>經濟發展到一定水準後，人們對生活的滿足感反而開始下降</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>伊斯特林悖論（Easterlin paradox）指出，經濟發展到一定水準後，人們對生活的滿足感反而開始下降，轉而追求精神層面的富足。 對應來源：1-2 學習觀的轉型</div>
+    </div>
+    <div class="slide" data-text="第 3 題，過去工業化社會的學校制度，主要被設計來培養什麼樣的人才？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q3. 過去工業化社會的學校制度，主要被設計來培養什麼樣的人才？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：能適應大量生產與大量消費的標準化勞動力！">
+        <span style='color:#facc15; font-size:1.8rem'>Q3. 過去工業化社會的學校制度，主要被設計來培養什麼樣的人才？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>能適應大量生產與大量消費的標準化勞動力</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>工業化社會大量生產與消費的經濟模式，促使學校被設計來培養價值觀單一、規格統一，且能適應工廠標準化作業的勞動力。 對應來源：1-2 學習觀的轉型 / 3-1 現代學校制度的形成與批判</div>
+    </div>
+    <div class="slide" data-text="第 4 題，日本「岡媽媽之家」活化空屋的核心作法是什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q4. 日本「岡媽媽之家」活化空屋的核心作法是什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：稍微打開空間，作為零門檻的社區客廳與孩童安全網！">
+        <span style='color:#facc15; font-size:1.8rem'>Q4. 日本「岡媽媽之家」活化空屋的核心作法是什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>稍微打開空間，作為零門檻的社區客廳與孩童安全網</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>：岡媽媽之家將獨居長者遺留的空屋「稍微打開」，做為社區零門檻的客廳與雙薪家庭孩童的安全網，自然促成跨世代交流。 對應來源：1-3 實踐案例：岡媽媽之TOMO</div>
+    </div>
+    <div class="slide" data-text="第 5 題，社會從「佔有慾望」轉向「存在慾望」，代表現代人追求的重心變成了什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q5. 社會從「佔有慾望」轉向「存在慾望」，代表現代人追求的重心變成了什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：在人際網絡中互相承認，尋找自己存在的價值與根基！">
+        <span style='color:#facc15; font-size:1.8rem'>Q5. 社會從「佔有慾望」轉向「存在慾望」，代表現代人追求的重心變成了什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>在人際網絡中互相承認，尋找自己存在的價值與根基</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>「佔有慾望」追求金錢物質，而現代社會轉向「存在慾望」，其核心在於建立人際網絡，透過互相承認與連結來尋找存在的價值與根基。 對應來源：1-4 Makino 幸福講堂</div>
+    </div>
+    <div class="slide" data-text="第 6 題，傳統工業化社會對於人生規劃的「三階段標準化劇本」是指什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q6. 傳統工業化社會對於人生規劃的「三階段標準化劇本」是指什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：求學、就業、退休！">
+        <span style='color:#facc15; font-size:1.8rem'>Q6. 傳統工業化社會對於人生規劃的「三階段標準化劇本」是指什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>求學、就業、退休</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>傳統工業化社會設定了單一的人生路線，即「求學、就業、退休」三個標準化的台階劇本，但這在長壽社會已不再適用。 對應來源：2-1 長壽社會與多段式人生 / 3-2</div>
+    </div>
+    <div class="slide" data-text="第 7 題，課程中提到台中的「審計新村」，主要展現了哪一種魔法？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q7. 課程中提到台中的「審計新村」，主要展現了哪一種魔法？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：老屋空間打開與青年微型創業再利用的魔法！">
+        <span style='color:#facc15; font-size:1.8rem'>Q7. 課程中提到台中的「審計新村」，主要展現了哪一種魔法？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>老屋空間打開與青年微型創業再利用的魔法</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>審計新村原本是荒廢的省府宿舍，透過打破圍牆「空間打開的魔法」，吸引青年進駐微型創業，重新賦予老空間新生命。 對應來源：1-5 Taiwan 幸福處方</div>
+    </div>
+    <div class="slide" data-text="第 8 題，傳統教室中「老師站在高高講台上」的空間設計，源自於哪一種工業社會思想？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q8. 傳統教室中「老師站在高高講台上」的空間設計，源自於哪一種工業社會思想？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：為了高效率管理與規訓聽話個體的「圓形監獄（監控）」！">
+        <span style='color:#facc15; font-size:1.8rem'>Q8. 傳統教室中「老師站在高高講台上」的空間設計，源自於哪一種工業社會思想？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>為了高效率管理與規訓聽話個體的「圓形監獄（監控）」</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>傳統教室老師在高台上的設計源自「圓形監獄（監控，Panopticon）」思想，目的是為了高效率管理並規訓出聽話、標準化的個體。 對應來源：3-1 現代學校制度的形成與批判</div>
+    </div>
+    <div class="slide" data-text="第 9 題，面對長壽社會與 AI 科技快速發展的危機，我們應依靠什麼來重新掌握人生？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q9. 面對長壽社會與 AI 科技快速發展的危機，我們應依靠什麼來重新掌握人生？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：主動的終身學習與自我決定！">
+        <span style='color:#facc15; font-size:1.8rem'>Q9. 面對長壽社會與 AI 科技快速發展的危機，我們應依靠什麼來重新掌握人生？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>主動的終身學習與自我決定</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>面臨 AI 科技與經濟結構快速變遷等危機，個人應透過主動的終身學習，並基於「自我決定權」來適應社會，重掌人生主導權。 對應來源：1-1 社會變遷與個體學習 / 1-2</div>
+    </div>
+    <div class="slide" data-text="第 10 題，關於現代的「學習場域」，課程提出了何種觀念翻轉？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q10. 關於現代的「學習場域」，課程提出了何種觀念翻轉？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：學習場域被解放，生活各個角落皆是豐富的教材！">
+        <span style='color:#facc15; font-size:1.8rem'>Q10. 關於現代的「學習場域」，課程提出了何種觀念翻轉？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>學習場域被解放，生活各個角落皆是豐富的教材</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>打破學校教育的神話，學習不限於學校教室，生活各個角落（如社區、麵攤、農田）都是豐富的社會教室，這就是學習場域的解放。 對應來源：3-2 非正式學習與生活知識再發現</div>
+    </div>
+    <div class="slide" data-text="來到第二章，百年人生。牧野篤教授說少子高齡化其實代表嬰兒死亡率極低，大家都能活到自然壽命。這叫作「少生少死」。面對 100 歲的人生，人生不再是一場打敗魔王就結束的「英雄旅程」，而是一段動態故事。所以不要被65歲強制退休給綁架了！">
         <h2>第二章：百年人生與學習的轉機</h2>
         <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>少生少死</h3><p style='font-size: 1.5rem;'>嬰兒存活率高<br>人口呈「棺材型」</p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>多段式人生</h3><p style='font-size: 1.5rem;'>打破 65 歲強制退休<br>拒絕單線「英雄旅程」</p></div></div>
     </div>
-    <div class="slide" data-text="考試一定會考這個：年紀大了，雖然靠死背的「流體智力」會下降，但我們靠人生經驗累積的什麼智力會上升？答案是：「晶體智力」！也就是你解決複雜問題跟溝通的能力。既然退休後能力還在，長輩能做什麼？">
+    <div class="slide" data-text="年紀大了，雖然靠死背的「流體智力」會下降，但我們靠人生經驗累積的「晶體智力」會上升！也就是解決複雜問題跟溝通的能力。">
         <h2>⚠️ 必考專有名詞：智力與情感</h2>
         <div style='text-align:left; background:#334155; padding:30px; border-radius:15px; margin-bottom:20px;'><h3 class='danger'>流體智力 (下降)</h3><p style='font-size:1.5rem'>純粹的記憶力與反應速度</p></div><div style='text-align:left; background:#334155; padding:30px; border-radius:15px;'><h3 class='success'>晶體智力 (上升) 🌟</h3><p style='font-size:1.5rem'>基於人生經驗的溝通對話與解決問題能力</p></div>
     </div>
-    <div class="slide" data-text="我們來看日本超經典的「小雞蛋計畫」。這個計畫讓獨居長輩去照顧社區裡缺乏父母陪伴的兒童。把「別人家的孫子女」當作自己的來疼愛。這個動作激發了人類一項非常偉大的本能，也就是必考專有名詞：「關懷下一代 (Generativity)」。長輩在付出的過程中找回了被需要感，成為了年輕世代心靈上的「故鄉」。">
+    <div class="slide" data-text="日本的「小雞蛋計畫」讓長輩照顧社區缺乏陪伴的兒童，當作自己的孫子女。這激發了人類本能：「關懷下一代 (Generativity)」。長輩找回被需要感，成為年輕世代的「故鄉」。">
         <h2>社區的小雞蛋計畫</h2>
         <h1 style='font-size: 3rem;'>他人的孫子女</h1><p style='font-size: 2rem;'>激發人類本質：<span class='highlight'>關懷下一代 (Generativity)</span></p><p style='font-size: 1.8rem; margin-top:20px;'>長輩找回被需要感，成為年輕世代的「第二故鄉」</p>
     </div>
-    <div class="slide" data-text="來，三秒鐘提取挑戰！">
-        <span style='color:#ef4444'>🛑 第二章 提取挑戰</span>
+    <div class="slide" data-text="好，第 2 章精華結束。接下來是本章的 10 道連環測驗，準備好了嗎？">
+        <span style='color:#ef4444'>🛑 第 2 章 測驗開始</span>
+        <h2 style='font-size:3rem'>準備迎接本章的 10 道測驗題</h2>
+    </div>
+    <div class="slide" data-text="第 1 題，隨著少子化與高齡化，日本目前的人口年齡結構圖已經從金字塔型轉變為何種形狀？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q1. 隨著少子化與高齡化，日本目前的人口年齡結構圖已經從金字塔型轉變為何種形狀？</span>
         <div class='timer-circle' id='timer'>3</div>
     </div>
-    <div class="slide" data-text="第一題，年紀大記憶力衰退，但什麼能力會持續進化？正確答案是：基於人生經驗的「晶體智力」。">
-        <span style='color:#facc15; font-size:2rem'>Q1. 雖然年齡增長會讓記憶力衰退，但人類的哪一種認知能力會持續進化與上升？</span>
-        <div style='font-size: 2.5rem; margin-top:50px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>基於人生經驗的晶體智力</div>
+    <div class="slide" data-text="正確答案是：棺材型！">
+        <span style='color:#facc15; font-size:1.8rem'>Q1. 隨著少子化與高齡化，日本目前的人口年齡結構圖已經從金字塔型轉變為何種形狀？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>棺材型</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>隨著少子高齡化與人口減少，日本的人口結構圖從底層寬廣的「金字塔型」，逐漸演變成上下窄、中間及高齡層寬的「棺材型」。 對應來源：2-1 長壽社會與多段式人生</div>
     </div>
-    <div class="slide" data-text="進入第三章，非正式學習空間。以前的「私塾」其實是非常進步的！它是「混齡」學習，老師扮演「陪跑教練」，根據每個人的進度給予指導。這時候要引入一個超級必考的「甜甜圈理論」。社區有很多功能，像經濟、文化，這就像甜甜圈的麵包體。甜甜圈中間那個貫穿一切的洞，就是「學習」！透過學習，社區才能活起來。">
+    <div class="slide" data-text="第 2 題，牧野篤教授對於「少子化與人口減少」的高齡社會抱持何種態度？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q2. 牧野篤教授對於「少子化與人口減少」的高齡社會抱持何種態度？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：認為這代表人類成功創造了多數人能安享自然壽命的美好物質條件！">
+        <span style='color:#facc15; font-size:1.8rem'>Q2. 牧野篤教授對於「少子化與人口減少」的高齡社會抱持何種態度？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>認為這代表人類成功創造了多數人能安享自然壽命的美好物質條件</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>牧野篤教授反轉了悲觀情緒，指出少子高齡化代表我們成功創造了嬰兒死亡率極低、多數人能安享自然壽命的美好物質條件，是一個好社會。 對應來源：2-1 長壽社會與多段式人生</div>
+    </div>
+    <div class="slide" data-text="第 3 題，雖然年齡增長會讓記憶力衰退，但人類的哪一種認知能力會持續進化與上升？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q3. 雖然年齡增長會讓記憶力衰退，但人類的哪一種認知能力會持續進化與上升？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：基於人生經驗的晶體智力（如對話與解決問題的能力）！">
+        <span style='color:#facc15; font-size:1.8rem'>Q3. 雖然年齡增長會讓記憶力衰退，但人類的哪一種認知能力會持續進化與上升？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>基於人生經驗的晶體智力（如對話與解決問題的能力）</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>雖然以記憶力為主的「流體智力」可能衰退，但基於人生經驗的「晶體智力」（如溝通對話、解決複雜生活問題的能力）會隨年齡增長而持續進化。 對應來源：2-2 工作與學習的重新定位</div>
+    </div>
+    <div class="slide" data-text="第 4 題，為什麼「強制所有人統一在 65 歲退休」的制度在長壽社會已不再適用？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q4. 為什麼「強制所有人統一在 65 歲退休」的制度在長壽社會已不再適用？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：因為高齡者的個體差異隨年齡逐漸拉大，不能再用同一標準處理！">
+        <span style='color:#facc15; font-size:1.8rem'>Q4. 為什麼「強制所有人統一在 65 歲退休」的制度在長壽社會已不再適用？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>因為高齡者的個體差異隨年齡逐漸拉大，不能再用同一標準處理</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>過去標準化社會用統一年齡處理勞動力，但在現代，高齡者隨年齡增長的個體差異拉大（如能力下降速度與方向不同），統一的強制退休標準已不再適用。 對應來源：2-4 Makino 幸福講堂</div>
+    </div>
+    <div class="slide" data-text="第 5 題，人生 100 年的時代，生命故事的發展應該從過去打敗魔王就結束的「英雄旅程」轉變為何種模式？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q5. 人生 100 年的時代，生命故事的發展應該從過去打敗魔王就結束的「英雄旅程」轉變為何種模式？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：永續且不斷寫下去的動態故事！">
+        <span style='color:#facc15; font-size:1.8rem'>Q5. 人生 100 年的時代，生命故事的發展應該從過去打敗魔王就結束的「英雄旅程」轉變為何種模式？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>永續且不斷寫下去的動態故事</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>長壽意味著退休後還有數十年的時間，人生不該像打敗魔王就結束的「英雄旅程」，而應該成為一段永續且不斷寫下去的動態故事。 對應來源：2-2 工作與學習的重新定位</div>
+    </div>
+    <div class="slide" data-text="第 6 題，日本「小雞蛋計畫」為了解決農村長輩孤獨的問題，採取了什麼創新作法？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q6. 日本「小雞蛋計畫」為了解決農村長輩孤獨的問題，採取了什麼創新作法？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：將別人家的孫子女當作自己的孫子女來陪伴與照顧！">
+        <span style='color:#facc15; font-size:1.8rem'>Q6. 日本「小雞蛋計畫」為了解決農村長輩孤獨的問題，採取了什麼創新作法？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>將別人家的孫子女當作自己的孫子女來陪伴與照顧</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>「小雞蛋計畫」讓沒有血緣關係的獨居高齡者，將社區中缺乏父母陪伴的兒童當作自己的孫子女（他人的孫子女）來照顧，解決雙方的孤獨。 對應來源：2-3 實踐案例：社區的小雞蛋</div>
+    </div>
+    <div class="slide" data-text="第 7 題，「小雞蛋計畫」成功激發了長輩的哪一項人類本質，使他們感到幸福？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q7. 「小雞蛋計畫」成功激發了長輩的哪一項人類本質，使他們感到幸福？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：關懷下一代的情感（Generativity）！">
+        <span style='color:#facc15; font-size:1.8rem'>Q7. 「小雞蛋計畫」成功激發了長輩的哪一項人類本質，使他們感到幸福？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>關懷下一代的情感（Generativity）</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>長輩在照顧下一代的過程中，激發了人類「關懷下一代（Generativity）」的本質，從中獲得被需要感與極大的幸福滿足。 對應來源：2-3 實踐案例：社區的小雞蛋</div>
+    </div>
+    <div class="slide" data-text="第 8 題，過去「多生多死」的社會如今轉變為「少生少死」，其中「少死」主要是指什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q8. 過去「多生多死」的社會如今轉變為「少生少死」，其中「少死」主要是指什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：嬰兒死亡率極低，多數人出生後能活到自然壽命！">
+        <span style='color:#facc15; font-size:1.8rem'>Q8. 過去「多生多死」的社會如今轉變為「少生少死」，其中「少死」主要是指什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>嬰兒死亡率極低，多數人出生後能活到自然壽命</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>「少死」並非指長生不老，而是指社會醫療條件改善，嬰兒夭折率大幅降低，多數人出生後都能順利活到自然壽命的終點。 對應來源：2-1 長壽社會與多段式人生</div>
+    </div>
+    <div class="slide" data-text="第 9 題，台灣南區區公所為長青學院舉辦竹工藝班作品展，主要滿足了長輩的什麼心理需求？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q9. 台灣南區區公所為長青學院舉辦竹工藝班作品展，主要滿足了長輩的什麼心理需求？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：重新獲得社會肯定與強烈的「被需要感」！">
+        <span style='color:#facc15; font-size:1.8rem'>Q9. 台灣南區區公所為長青學院舉辦竹工藝班作品展，主要滿足了長輩的什麼心理需求？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>重新獲得社會肯定與強烈的「被需要感」</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>南區區公所透過長青學院展覽長輩的竹工藝作品，為他們打造發光的舞台，讓長輩在傳承手藝的過程中重新獲得社會肯定與強烈的「被需要感」。 對應來源：2-5 Taiwan 幸福處方</div>
+    </div>
+    <div class="slide" data-text="第 10 題，課程提倡在長壽社會中，我們應該透過經驗傳承，成為年輕世代生命中的什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q10. 課程提倡在長壽社會中，我們應該透過經驗傳承，成為年輕世代生命中的什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：互不相欠的「陌生人」！">
+        <span style='color:#facc15; font-size:1.8rem'>Q10. 課程提倡在長壽社會中，我們應該透過經驗傳承，成為年輕世代生命中的什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>互不相欠的「陌生人」</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>課程鼓勵長輩發揮智慧關懷年輕世代，成為他們心靈依賴的「別人的故鄉」，在互相尊重的互動中找到新的人生價值。 對應來源：2-2 工作與學習的重新定位</div>
+    </div>
+    <div class="slide" data-text="進入第三章。以前的「私塾」是非常進步的混齡學習，老師扮演「陪跑教練」。另外，社區有很多功能就像甜甜圈的麵包體，而中間貫穿一切的洞，就是「學習」！透過學習，社區才能活起來。">
         <h2>第三章：非正式學習空間</h2>
         <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>古代私塾</h3><p style='font-size: 1.5rem;'>混齡學習<br>老師扮演<span class='highlight'>陪跑教練</span></p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>甜甜圈理論</h3><p style='font-size: 1.5rem;'>外圈：經濟/文化/福利<br>中間的洞：<span class='highlight'>學習 (串聯一切)</span></p></div></div>
     </div>
-    <div class="slide" data-text="但社區營造不能硬來。在這個過程中，政府的角色絕對不能是「包辦一切的服務生」。如果政府給太多補助全包了，居民就會退化成被動的消費者，喪失解決問題的「當事者意識」。政府應該做的，是當個「陪走教練」，陪伴居民自己找出答案！">
+    <div class="slide" data-text="社區營造中，政府絕對不能是「包辦一切的服務生」，這會讓居民喪失「當事者意識」。政府應該當個「陪走教練」，陪伴居民自己找出答案！">
         <h2>地方創生：政府該扮演什麼角色？</h2>
         <div style='text-align:left; background:#334155; padding:30px; border-radius:15px; margin-bottom:20px;'><h3 class='danger'>❌ 包辦一切的服務生</h3><p style='font-size:1.5rem'>居民變消費者，喪失「當事者意識」</p></div><div style='text-align:left; background:#334155; padding:30px; border-radius:15px;'><h3 class='success'>✅ 陪走教練</h3><p style='font-size:1.5rem'>陪伴居民尋找解方，激發自治力</p></div>
     </div>
-    <div class="slide" data-text="第三章精華結束，提取挑戰開始！">
-        <span style='color:#ef4444'>🛑 第三章 提取挑戰</span>
+    <div class="slide" data-text="好，第 3 章精華結束。接下來是本章的 10 道連環測驗，準備好了嗎？">
+        <span style='color:#ef4444'>🛑 第 3 章 測驗開始</span>
+        <h2 style='font-size:3rem'>準備迎接本章的 10 道測驗題</h2>
+    </div>
+    <div class="slide" data-text="第 1 題，古代的「私塾」與現代工業化學校最大的不同在於？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q1. 古代的「私塾」與現代工業化學校最大的不同在於？</span>
         <div class='timer-circle' id='timer'>3</div>
     </div>
-    <div class="slide" data-text="第一題，益田市地方創生成功的策略是什麼？答案是：舉辦跨世代對話，讓長輩分享自己真實的人生故事。">
-        <span style='color:#facc15; font-size:2rem'>Q1. 益田市在推動地方創生時，改採什麼有效策略？</span>
-        <div style='font-size: 2rem; margin-top:50px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>舉辦跨世代對話，讓長輩分享自己真實(包含失敗)的人生故事</div>
+    <div class="slide" data-text="正確答案是：私塾是混齡學習，老師扮演陪伴的「陪跑教練」角色！">
+        <span style='color:#facc15; font-size:1.8rem'>Q1. 古代的「私塾」與現代工業化學校最大的不同在於？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>私塾是混齡學習，老師扮演陪伴的「陪跑教練」角色</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>古代私塾沒有統一進度，是混齡的學習空間。老師扮演「陪跑教練」的角色，根據學生的個別需求與進度提供指導。 對應來源：3-1 現代學校制度的形成與批判</div>
     </div>
-    <div class="slide" data-text="第四章，終身學習政策。1965年提出終身教育的初衷，是因為科技發展過快，單靠學校教育已無法跟上社會變化。為了讓在職勞工能安心回歸校園更新技能，OECD提倡「有薪教育假」。但因為老闆會怕員工學完跳槽，所以這不能只靠企業，必須仰賴國家層級的勞動政策來保障。">
+    <div class="slide" data-text="第 2 題，在「非正式學習空間」中，學習的內涵從單向的知識傳授轉變為什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q2. 在「非正式學習空間」中，學習的內涵從單向的知識傳授轉變為什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：建立平等且互相尊重的信任與溝通關係！">
+        <span style='color:#facc15; font-size:1.8rem'>Q2. 在「非正式學習空間」中，學習的內涵從單向的知識傳授轉變為什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>建立平等且互相尊重的信任與溝通關係</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>現代「生活即學習」超越了單純的知識或生存技術傳授，更重視在互動中學習如何與他人建立平等的信任與溝通關係。 對應來源：3-2 非正式學習與生活知識再發現</div>
+    </div>
+    <div class="slide" data-text="第 3 題，日本島根縣益田市在推動地方創生時，發現單向要求年輕人留鄉反而造成反感，後來改採什麼有效策略？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q3. 日本島根縣益田市在推動地方創生時，發現單向要求年輕人留鄉反而造成反感，後來改採什麼有效策略？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：舉辦跨世代對話，讓長輩分享自己真實（包含失敗）的人生故事！">
+        <span style='color:#facc15; font-size:1.8rem'>Q3. 日本島根縣益田市在推動地方創生時，發現單向要求年輕人留鄉反而造成反感，後來改採什麼有效策略？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>舉辦跨世代對話，讓長輩分享自己真實（包含失敗）的人生故事</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>單向要求年輕人留鄉只會帶來壓力與反感。益田市改採「對話」，讓長輩真實分享人生經歷與失敗，反而成功激發年輕人的共鳴。 對應來源：3-3 實踐案例：人們成長的城鎮</div>
+    </div>
+    <div class="slide" data-text="第 4 題，在益田市的跨世代對話中，年輕人聽了長輩的人生故事後產生了什麼改變？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q4. 在益田市的跨世代對話中，年輕人聽了長輩的人生故事後產生了什麼改變？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：打破長輩「無聊」的偏見，對在地與長輩產生親密感與認同感！">
+        <span style='color:#facc15; font-size:1.8rem'>Q4. 在益田市的跨世代對話中，年輕人聽了長輩的人生故事後產生了什麼改變？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>打破長輩「無聊」的偏見，對在地與長輩產生親密感與認同感</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>年輕人聽了故事後，打破了認為長輩無聊的偏見，看見了長輩獨特的生命價值，從而對長輩與故鄉產生了親密感與認同感。 對應來源：3-3 實踐案例：人們成長的城鎮</div>
+    </div>
+    <div class="slide" data-text="第 5 題，課程中將社區各項獨立功能比喻為「甜甜圈」，中間的洞必須靠什麼來貫穿與整合？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q5. 課程中將社區各項獨立功能比喻為「甜甜圈」，中間的洞必須靠什麼來貫穿與整合？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：學習！">
+        <span style='color:#facc15; font-size:1.8rem'>Q5. 課程中將社區各項獨立功能比喻為「甜甜圈」，中間的洞必須靠什麼來貫穿與整合？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>學習</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>社區擁有經濟、文化、福利等各項功能（像甜甜圈的本體），但必須透過「學習」作為核心（甜甜圈的洞），才能將這些功能串聯與整合發揮作用。 對應來源：3-2 非正式學習與生活知識再發現</div>
+    </div>
+    <div class="slide" data-text="第 6 題，在社區營造與學習中，政府最理想的行政哲學與角色應該是什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q6. 在社區營造與學習中，政府最理想的行政哲學與角色應該是什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：陪伴居民一起尋找解方，激發自治力的「陪走」教練！">
+        <span style='color:#facc15; font-size:1.8rem'>Q6. 在社區營造與學習中，政府最理想的行政哲學與角色應該是什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>陪伴居民一起尋找解方，激發自治力的「陪走」教練</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>政府不應將居民當作被動的消費者包辦一切，而應該扮演「陪跑教練（陪走）」，陪伴居民一起尋找解方，激發自治力。 對應來源：3-2 非正式學習與生活知識再發現</div>
+    </div>
+    <div class="slide" data-text="第 7 題，若社區過度依賴政府的補助與直接介入，可能會導致什麼負面結果？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q7. 若社區過度依賴政府的補助與直接介入，可能會導致什麼負面結果？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：居民失去解決問題的「當事者意識」與主動性！">
+        <span style='color:#facc15; font-size:1.8rem'>Q7. 若社區過度依賴政府的補助與直接介入，可能會導致什麼負面結果？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>居民失去解決問題的「當事者意識」與主動性</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>過度依賴政府包辦服務，會使居民退化為被動的「消費者」，喪失主動解決社區問題的「當事者意識」與主人翁尊嚴。 對應來源：3-2 非正式學習與生活知識再發現</div>
+    </div>
+    <div class="slide" data-text="第 8 題，台灣的南和里活動中心在在地實踐中，被課程稱之為什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q8. 台灣的南和里活動中心在在地實踐中，被課程稱之為什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：最好的社會教室！">
+        <span style='color:#facc15; font-size:1.8rem'>Q8. 台灣的南和里活動中心在在地實踐中，被課程稱之為什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>最好的社會教室</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>南和里活動中心打破學習只能在學校發生的觀念，讓長輩透過藝術創作在日常中自然共學，被譽為「最好的社會教室」。 對應來源：3-5 Taiwan 幸福處方</div>
+    </div>
+    <div class="slide" data-text="第 9 題，傳統學校制度下，用單一標準（如考試分數）評估學生，容易帶來什麼影響？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q9. 傳統學校制度下，用單一標準（如考試分數）評估學生，容易帶來什麼影響？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：產生比較與壓力，甚至讓分數否定個體多樣化的真實價值！">
+        <span style='color:#facc15; font-size:1.8rem'>Q9. 傳統學校制度下，用單一標準（如考試分數）評估學生，容易帶來什麼影響？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>產生比較與壓力，甚至讓分數否定個體多樣化的真實價值</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>傳統用統一的考試分數評價學生，容易產生競爭壓力。若分數不理想，常被誤導為能力不足，甚至否定了個體多樣化的真實價值。 對應來源：3-1 現代學校制度的形成與批判</div>
+    </div>
+    <div class="slide" data-text="第 10 題，「生活即學習」的概念強調什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q10. 「生活即學習」的概念強調什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：日常角落如麵攤、農田或管委會，都是獲取生活智慧與建立關係的學習場域！">
+        <span style='color:#facc15; font-size:1.8rem'>Q10. 「生活即學習」的概念強調什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>日常角落如麵攤、農田或管委會，都是獲取生活智慧與建立關係的學習場域</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>「生活即學習」打破了實體教室的圍牆，強調在社區角落、麵攤或農田裡的日常交流與實踐，都是獲取真實生活智慧的場域。 對應來源：3-2 非正式學習與生活知識再發現</div>
+    </div>
+    <div class="slide" data-text="第四章，終身學習政策。1965年提出終身教育，是因為科技發展過快。為了讓在職勞工能安心回歸校園，OECD提倡「有薪教育假」。這必須仰賴國家層級的勞動政策來保障。">
         <h2>第四章：終身學習的政策脈絡</h2>
         <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>終身教育初衷</h3><p style='font-size: 1.5rem;'>因應科技快速發展<br>避免畢業後跟不上時代</p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>回流教育</h3><p style='font-size: 1.5rem;'>OECD提倡：<span class='highlight'>有薪教育假</span><br>需仰賴國家勞動政策保障</p></div></div>
     </div>
-    <div class="slide" data-text="現代醫療界為了解決孤立帶來的身心疾病，提倡「社會處方箋」。長達11年的調查證實，跟朋友或家人一起運動及共餐等社會參與，對延長健康壽命的影響最為顯著！如果總是「一個人孤單的吃飯」，死亡危險度會顯著增加。此外，擁有良好社會連結，罹患「失智症」的比例也會明顯下降！">
+    <div class="slide" data-text="醫療界提倡「社會處方箋」。長達11年的調查證實，社會參與對延長健康壽命影響最顯著！「一個人孤單的吃飯」，死亡危險度會增加。擁有社會連結，罹患「失智症」比例也會明顯下降！">
         <h2>最強的社會處方箋</h2>
         <h1 style='font-size: 3rem;'>良好的人際關係</h1><p style='font-size: 2rem;'>預防孤立與疾病的特效藥</p><ul style='text-align:left; font-size:1.5rem; margin-top:20px;'><li>✅ 降低死亡危險度 (一個人吃飯死亡危險度增加1.5倍)</li><li>✅ 明顯下降「失智症」罹患比例</li></ul>
     </div>
-    <div class="slide" data-text="第四章精華結束，提取挑戰開始！">
-        <span style='color:#ef4444'>🛑 第四章 提取挑戰</span>
+    <div class="slide" data-text="好，第 4 章精華結束。接下來是本章的 10 道連環測驗，準備好了嗎？">
+        <span style='color:#ef4444'>🛑 第 4 章 測驗開始</span>
+        <h2 style='font-size:3rem'>準備迎接本章的 10 道測驗題</h2>
+    </div>
+    <div class="slide" data-text="第 1 題，聯合國教科文組織於1965年提出「終身教育」最初的時空背景為何？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q1. 聯合國教科文組織於1965年提出「終身教育」最初的時空背景為何？</span>
         <div class='timer-circle' id='timer'>3</div>
     </div>
-    <div class="slide" data-text="第一題，OECD提倡政府與企業應推動哪一項制度幫助勞工回流教育？答案是：有薪教育假。">
-        <span style='color:#facc15; font-size:2rem'>Q1. 為了讓在職勞工能安心回歸校園更新技能，OECD提倡應推動哪一項制度？</span>
-        <div style='font-size: 2.5rem; margin-top:50px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>有薪教育假</div>
+    <div class="slide" data-text="正確答案是：因應經濟與科技快速發展，避免人們畢業後跟不上時代變化！">
+        <span style='color:#facc15; font-size:1.8rem'>Q1. 聯合國教科文組織於1965年提出「終身教育」最初的時空背景為何？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>因應經濟與科技快速發展，避免人們畢業後跟不上時代變化</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>1965年保羅·朗格蘭提出終身教育的初衷，是因為經濟與科技發展過快，單靠學校教育已無法跟上社會變化，必須持續更新知識。 對應來源：4-1 終身學習理念的演變與再啟動</div>
     </div>
-    <div class="slide" data-text="進入第五章。面對多樣化的長壽社會，我們應該把生活當作一場「自我設計的實驗」。不要再用傳統高壓的 PDCA 模式，因為傳統學校思維覺得沒考好就是失敗，會讓人不敢跨出第一步。本課程提倡「AAR 模式」：帶著好奇心的預期、大膽行動、以及真實反饋的反思。">
+    <div class="slide" data-text="第 2 題，為了讓在職勞工能安心回歸校園更新技能，OECD提倡政府與企業應推動哪一項制度？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q2. 為了讓在職勞工能安心回歸校園更新技能，OECD提倡政府與企業應推動哪一項制度？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：有薪教育假！">
+        <span style='color:#facc15; font-size:1.8rem'>Q2. 為了讓在職勞工能安心回歸校園更新技能，OECD提倡政府與企業應推動哪一項制度？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>有薪教育假</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>OECD提倡「有薪教育假」，讓在職勞工能夠帶薪請假回到校園更新技能，解決了想學習卻面臨經濟與時間壓力的現實困境。 對應來源：4-1 終身學習理念的演變與再啟動</div>
+    </div>
+    <div class="slide" data-text="第 3 題，過去工業化時期，政府發補助金要求農民「不種田」，這對農民造成了什麼深遠的負面影響？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q3. 過去工業化時期，政府發補助金要求農民「不種田」，這對農民造成了什麼深遠的負面影響？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：嚴重剝奪了農民作為生命主人的自尊心與自豪感！">
+        <span style='color:#facc15; font-size:1.8rem'>Q3. 過去工業化時期，政府發補助金要求農民「不種田」，這對農民造成了什麼深遠的負面影響？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>嚴重剝奪了農民作為生命主人的自尊心與自豪感</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>在工業化高速發展期，國家為了將勞動力推向大都市工廠，發放補助金要農民不種田。這讓農民覺得被否定，嚴重剝奪了他們的自尊心與自豪感。 對應來源：4-3 實踐案例：青年人！走向鄉村吧</div>
+    </div>
+    <div class="slide" data-text="第 4 題，日本豐田市如何成功解決農村荒廢危機？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q4. 日本豐田市如何成功解決農村荒廢危機？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：號召對農村生活有興趣的都市青年來與長輩互相尊重、雙向學習！">
+        <span style='color:#facc15; font-size:1.8rem'>Q4. 日本豐田市如何成功解決農村荒廢危機？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>號召對農村生活有興趣的都市青年來與長輩互相尊重、雙向學習</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>豐田市不強求在地青年返鄉，而是號召對農村生活有興趣的都市青年來到鄉村，與長輩建立互相尊重、雙向學習的關係，成功注入活力。 對應來源：4-3 實踐案例：青年人！走向鄉村吧</div>
+    </div>
+    <div class="slide" data-text="第 5 題，現代醫療界為了解決孤立帶來的身心疾病，開始重視哪一種處方？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q5. 現代醫療界為了解決孤立帶來的身心疾病，開始重視哪一種處方？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：社會處方箋！">
+        <span style='color:#facc15; font-size:1.8rem'>Q5. 現代醫療界為了解決孤立帶來的身心疾病，開始重視哪一種處方？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>社會處方箋</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>現代社會許多身心疾病源自孤立。醫療界提倡「社會處方箋」，不再單純開藥，而是協助患者建立良好的人際互動與社會連結來促進健康。 對應來源：4-4 Makino 幸福講堂</div>
+    </div>
+    <div class="slide" data-text="第 6 題，根據日本長達11年的追蹤調查，下列哪一種日常行為對延長健康壽命的影響最為顯著？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q6. 根據日本長達11年的追蹤調查，下列哪一種日常行為對延長健康壽命的影響最為顯著？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：跟朋友或家人一起運動及共餐等社會參與！">
+        <span style='color:#facc15; font-size:1.8rem'>Q6. 根據日本長達11年的追蹤調查，下列哪一種日常行為對延長健康壽命的影響最為顯著？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>跟朋友或家人一起運動及共餐等社會參與</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>長達11年的追蹤調查證實，雖然運動與營養重要，但「跟朋友或家人一起」進行社會參與（如共餐、運動）的人，健康程度更高、壽命顯著更長。 對應來源：4-4 Makino 幸福講堂</div>
+    </div>
+    <div class="slide" data-text="第 7 題，科學研究指出，若與家人同住卻「一個人孤單的吃飯」，會對健康造成什麼影響？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q7. 科學研究指出，若與家人同住卻「一個人孤單的吃飯」，會對健康造成什麼影響？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：死亡危險度會顯著增加！">
+        <span style='color:#facc15; font-size:1.8rem'>Q7. 科學研究指出，若與家人同住卻「一個人孤單的吃飯」，會對健康造成什麼影響？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>死亡危險度會顯著增加</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>研究顯示，雖然與家人同住，但如果總是「一個人吃飯（孤食）」，男性死亡危險度會增加約1.5倍。這證明共食是確認社會存在連結的重要時刻。 對應來源：4-4 Makino 幸福講堂</div>
+    </div>
+    <div class="slide" data-text="第 8 題，企業老闆常擔憂員工利用教育假學成後「跳槽」，這突顯了回流教育必須仰賴什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q8. 企業老闆常擔憂員工利用教育假學成後「跳槽」，這突顯了回流教育必須仰賴什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：國家層級的勞動政策介入規劃與保障！">
+        <span style='color:#facc15; font-size:1.8rem'>Q8. 企業老闆常擔憂員工利用教育假學成後「跳槽」，這突顯了回流教育必須仰賴什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>國家層級的勞動政策介入規劃與保障</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>企業老闆擔心員工學成後跳槽而不敢放行。因此，回流教育的落實不能單靠企業主判斷，必須仰賴國家層級的勞動政策介入規劃與保障。 對應來源：4-1 終身學習理念的演變與再啟動</div>
+    </div>
+    <div class="slide" data-text="第 9 題，科學預測指出，擁有良好人際關係與社會連結的高齡者，下列哪一種疾病的罹患比例會明顯下降？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q9. 科學預測指出，擁有良好人際關係與社會連結的高齡者，下列哪一種疾病的罹患比例會明顯下降？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：失智症！">
+        <span style='color:#facc15; font-size:1.8rem'>Q9. 科學預測指出，擁有良好人際關係與社會連結的高齡者，下列哪一種疾病的罹患比例會明顯下降？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>失智症</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>科學預測表明，擁有良好人際關係與高度社會連結的高齡者，其罹患失智症（預測未來極為普及的疾病）的比例會明顯下降。 對應來源：4-4 Makino 幸福講堂 / 3-2</div>
+    </div>
+    <div class="slide" data-text="第 10 題，在台灣的實踐案例中，南區區公所與空大台中中心合作，共同撐起了什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q10. 在台灣的實踐案例中，南區區公所與空大台中中心合作，共同撐起了什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：充滿溫度的社區溫暖防護網！">
+        <span style='color:#facc15; font-size:1.8rem'>Q10. 在台灣的實踐案例中，南區區公所與空大台中中心合作，共同撐起了什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>充滿溫度的社區溫暖防護網</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>南區區公所透過結合公部門與空大台中中心的力量，撐起了社區的溫暖防護網，提供在地居民互助共好的實踐場域。 對應來源：4-5 Taiwan 幸福處方</div>
+    </div>
+    <div class="slide" data-text="第五章。我們應該把生活當作一場「自我設計的實驗」。不要再用傳統高壓非黑即白的 PDCA 模式。本課程提倡「AAR 模式」：帶著好奇心的預期、大膽行動、以及真實反饋的反思。">
         <h2>第五章：告別高壓，擁抱實驗</h2>
         <div class='split'><div class='col' style='opacity: 0.5;'><h3 class='danger'>❌ 傳統 PDCA 模式</h3><p style='font-size:1.5rem'>高壓、高門檻<br>非黑即白 (沒滿分就是失敗)</p></div><div class='col'><h3 class='success'>✅ AAR 循環模式</h3><p style='font-size:1.5rem'>把生活當作<span class='highlight'>自我設計的實驗</span></p><p style='font-size:1.5rem'>Anticipation 預期<br>Action 行動<br>Reflection 反思</p></div></div>
     </div>
-    <div class="slide" data-text="當社會充滿多樣性，每個人的優缺點都能互相彌補時，這種零壓力的關係被比喻為「動態拼圖模式」。這個拼圖不是死板靜止的，而是隨著我們的行動與學習，在動態互補中持續探索並改變社會面貌。">
+    <div class="slide" data-text="每個人的優缺點都能互相彌補時，這種零壓力的關係被比喻為「動態拼圖模式」。這個拼圖是隨著我們的行動，在動態互補中持續探索。">
         <h2>動態拼圖模式 (Jigsaw Puzzle)</h2>
         <h1 style='font-size: 3rem;'>🧩 每個人都有凹凸面</h1><p style='font-size: 2rem;'>你的缺點，剛好是別人的優點</p><p style='font-size: 1.8rem; margin-top:20px;'><span class='highlight'>動態互補</span>：在行動與學習中，持續探索並建立良善連結。</p>
     </div>
-    <div class="slide" data-text="第五章精華結束，提取挑戰開始！">
-        <span style='color:#ef4444'>🛑 第五章 提取挑戰</span>
+    <div class="slide" data-text="好，第 5 章精華結束。接下來是本章的 10 道連環測驗，準備好了嗎？">
+        <span style='color:#ef4444'>🛑 第 5 章 測驗開始</span>
+        <h2 style='font-size:3rem'>準備迎接本章的 10 道測驗題</h2>
+    </div>
+    <div class="slide" data-text="第 1 題，面對多樣化的長壽社會，課程提倡我們應該抱持何種心態來面對生活？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q1. 面對多樣化的長壽社會，課程提倡我們應該抱持何種心態來面對生活？</span>
         <div class='timer-circle' id='timer'>3</div>
     </div>
-    <div class="slide" data-text="第一題，審計新村青年如何實踐 AAR 精神？答案是：先推出產品試水溫，再根據反饋立刻反思與彈性調整。">
-        <span style='color:#facc15; font-size:2rem'>Q1. 審計新村的微型創業青年們，如何具體實踐 AAR 實驗精神？</span>
-        <div style='font-size: 2rem; margin-top:50px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>先推出產品試試看，透過客群真實反饋立刻反思與彈性調整</div>
+    <div class="slide" data-text="正確答案是：把生活當作一場「自我設計的實驗」！">
+        <span style='color:#facc15; font-size:1.8rem'>Q1. 面對多樣化的長壽社會，課程提倡我們應該抱持何種心態來面對生活？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>把生活當作一場「自我設計的實驗」</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>面對多樣化的社會，人生不再只有單一的成功路線。我們應打破怕失敗的恐懼，把生活當作一場「自我設計的實驗」，抱持試試看的心態探索。 對應來源：5-1 當代生活型態與自我實驗</div>
     </div>
-    <div class="slide" data-text="最後一章！我們談談「恩送」。這不是傳統的報恩，而是受到恩惠後，將好意無條件傳遞給周遭的人或下一代。學習的終極目標，就是讓我們從被動接受者，轉變為主動發揮正向影響力、付出行動的「實踐者 (Doer)」。">
+    <div class="slide" data-text="第 2 題，傳統高壓的管理模式是「PDCA」，本課程則提倡哪一種低壓且適合終身學習的行動模式？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q2. 傳統高壓的管理模式是「PDCA」，本課程則提倡哪一種低壓且適合終身學習的行動模式？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：AAR （預期、行動、反思） 模式！">
+        <span style='color:#facc15; font-size:1.8rem'>Q2. 傳統高壓的管理模式是「PDCA」，本課程則提倡哪一種低壓且適合終身學習的行動模式？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>AAR （預期、行動、反思） 模式</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>有別於高壓、高門檻的 PDCA，AAR（Anticipation預期, Action行動, Reflection反思）模式強調以輕鬆、充滿好奇心的實驗心態來面對生活與學習。 對應來源：5-4 Makino 幸福講堂</div>
+    </div>
+    <div class="slide" data-text="第 3 題，在 AAR 模式中，驅動第一步「預期 (Anticipation)」的核心動力是什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q3. 在 AAR 模式中，驅動第一步「預期 (Anticipation)」的核心動力是什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：帶有愉悅情感的好奇心與對他人的關懷！">
+        <span style='color:#facc15; font-size:1.8rem'>Q3. 在 AAR 模式中，驅動第一步「預期 (Anticipation)」的核心動力是什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>帶有愉悅情感的好奇心與對他人的關懷</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>AAR 模式的 Anticipation 不是嚴肅的預測，而是帶有愉悅情感、對他人抱持「好奇心與關懷（Compassion）」的期待，讓人有動力起步。 對應來源：5-4 Makino 幸福講堂</div>
+    </div>
+    <div class="slide" data-text="第 4 題，將學習視為「非黑即白（考滿分才算成功）」，這種舊有學校思維在生活中會導致什麼結果？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q4. 將學習視為「非黑即白（考滿分才算成功）」，這種舊有學校思維在生活中會導致什麼結果？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：讓人因為害怕達不到目標或浪費錢，而不敢跨出學習的第一步！">
+        <span style='color:#facc15; font-size:1.8rem'>Q4. 將學習視為「非黑即白（考滿分才算成功）」，這種舊有學校思維在生活中會導致什麼結果？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>讓人因為害怕達不到目標或浪費錢，而不敢跨出學習的第一步</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>傳統學校教育用 100 分定義成功，讓人害怕「沒考好等於浪費錢或徹底失敗」，這種思維制約了人們，導致不敢主動跨出探索與學習的第一步。 對應來源：5-1 當代生活型態與自我實驗</div>
+    </div>
+    <div class="slide" data-text="第 5 題，在農村「自給自足家族（模擬家族）」案例中，都市年輕人一開始是如何幫助長輩分擔天災風險？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q5. 在農村「自給自足家族（模擬家族）」案例中，都市年輕人一開始是如何幫助長輩分擔天災風險？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：以預付資金的方式購買優質稻米！">
+        <span style='color:#facc15; font-size:1.8rem'>Q5. 在農村「自給自足家族（模擬家族）」案例中，都市年輕人一開始是如何幫助長輩分擔天災風險？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>以預付資金的方式購買優質稻米</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>農村長輩面臨天災帶來的農業風險，都市青年透過「預付資金」的方式購買優質稻米，幫助長輩分攤氣候風險，讓他們能安心種田。 對應來源：5-3 實踐案例：自給自足家族</div>
+    </div>
+    <div class="slide" data-text="第 6 題，在「模擬家族」案例中，年輕人與農村長輩的關係發生了什麼最具價值的昇華？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q6. 在「模擬家族」案例中，年輕人與農村長輩的關係發生了什麼最具價值的昇華？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：從單純的買賣關係，昇華為彼此關心、分享生活的「第二故鄉家人」！">
+        <span style='color:#facc15; font-size:1.8rem'>Q6. 在「模擬家族」案例中，年輕人與農村長輩的關係發生了什麼最具價值的昇華？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>從單純的買賣關係，昇華為彼此關心、分享生活的「第二故鄉家人」</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>模擬家族計畫並未停留在單純買賣，長輩邀請年輕人來鄉下吃飯、照顧他們的小孩，雙方打破血緣與利益，昇華成彼此關心的「第二故鄉家人」。 對應來源：5-3 實踐案例：自給自足家族</div>
+    </div>
+    <div class="slide" data-text="第 7 題，當社會充滿多樣性，每個人獨特的優缺點都能互相彌補時，這種零壓力的關係被比喻為什麼模式？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q7. 當社會充滿多樣性，每個人獨特的優缺點都能互相彌補時，這種零壓力的關係被比喻為什麼模式？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：動態拼圖模式（Jigsaw Puzzle）！">
+        <span style='color:#facc15; font-size:1.8rem'>Q7. 當社會充滿多樣性，每個人獨特的優缺點都能互相彌補時，這種零壓力的關係被比喻為什麼模式？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>動態拼圖模式（Jigsaw Puzzle）</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>因為每個人獨特的優點恰好能彌補他人的缺點。這種完美鑲嵌結合、無壓力的互補關係，被生動地比喻為「動態拼圖模式（Jigsaw Puzzle）」。 對應來源：5-4 Makino 幸福講堂 / 6-1</div>
+    </div>
+    <div class="slide" data-text="第 8 題，「動態拼圖模式」強調人際關係的哪一種特性？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q8. 「動態拼圖模式」強調人際關係的哪一種特性？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：隨著行動與學習，在動態互補中持續探索並改變社會面貌！">
+        <span style='color:#facc15; font-size:1.8rem'>Q8. 「動態拼圖模式」強調人際關係的哪一種特性？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>隨著行動與學習，在動態互補中持續探索並改變社會面貌</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>這個拼圖不是靜止的，而是一個動態過程。人們帶著好奇心展開 AAR 循環，在社會中不斷移動、嘗試，並持續與不同的人建立互補的良善連結。 對應來源：5-4 Makino 幸福講堂 / 6-1</div>
+    </div>
+    <div class="slide" data-text="第 9 題，將「生活即學習」帶入家庭，親子關係應如何轉變才能創造出良好的共學空間？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q9. 將「生活即學習」帶入家庭，親子關係應如何轉變才能創造出良好的共學空間？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：建立平行、平等且互相尊重的對話關係！">
+        <span style='color:#facc15; font-size:1.8rem'>Q9. 將「生活即學習」帶入家庭，親子關係應如何轉變才能創造出良好的共學空間？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>建立平行、平等且互相尊重的對話關係</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>「生活即學習」主張打破傳統上對下的權威服從關係，父母做錯同樣要道歉，家庭應轉化為平行、平等且互相尊重的對話共學空間。 對應來源：5-2 制度外學習與家庭共學可能性</div>
+    </div>
+    <div class="slide" data-text="第 10 題，審計新村的微型創業青年們，如何具體實踐 AAR 實驗精神？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q10. 審計新村的微型創業青年們，如何具體實踐 AAR 實驗精神？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：先推出產品試試看，透過客群真實反饋立刻反思與彈性調整！">
+        <span style='color:#facc15; font-size:1.8rem'>Q10. 審計新村的微型創業青年們，如何具體實踐 AAR 實驗精神？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>先推出產品試試看，透過客群真實反饋立刻反思與彈性調整</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>審計新村的微型創業者運用 AAR 模式，不追求一開始就完美的企劃，而是先做出產品試水溫，再根據顧客最真實的回饋迅速反思與彈性調整。 對應來源：5-5 Taiwan 幸福處方</div>
+    </div>
+    <div class="slide" data-text="最後一章！「恩送」是受到恩惠後，將好意無條件傳遞給周遭的人或下一代。學習的終極目標，就是讓我們轉變為主動發揮正向影響力的「實踐者」。">
         <h2>第六章：生命統整與終極幸福</h2>
         <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>恩送 (Pay it forward)</h3><p style='font-size: 1.5rem;'>受到恩惠後<br><span class='highlight'>無條件傳遞</span>給周遭與下一代</p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>實踐者 (Doer)</h3><p style='font-size: 1.5rem;'>學習的終極目標：<br>主動發揮正向影響力</p></div></div>
     </div>
-    <div class="slide" data-text="在日本沖繩的「移動攤販式公民館」，公務人員的最高指導原則居然是「什麼都不做」！為什麼要刻意留白？因為這能激發居民的好奇心，促使居民不再依賴政府，產生當事者意識主動互助。長輩也在協助看顧幼童的過程中獲得尊重，重拾了「我還有用」的主人翁尊嚴！">
+    <div class="slide" data-text="沖繩的「移動公民館」，公務人員的最高原則是「什麼都不做」！刻意留白能激發居民產生當事者意識主動互助。長輩也重拾了「我還有用」的主人翁尊嚴！">
         <h2>刻意留白的藝術</h2>
         <h1 style='font-size: 3rem;'>日本沖繩「移動攤販式公民館」</h1><p style='font-size: 2rem;'>公務人員最高指導原則：<span class='highlight'>什麼都不做 (留白)</span></p><p style='font-size: 1.8rem; margin-top:20px; color:#22c55e'>✅ 激發居民好奇心，促使產生當事者意識主動互助</p><p style='font-size: 1.8rem; color:#22c55e'>✅ 長輩在協助幼童中，重拾「還有用」的主人翁尊嚴</p>
     </div>
-    <div class="slide" data-text="當我們充分發揮對他人的「共感 (Compassion)」，並實踐「關懷下一代」，最終就能達到人生最高境界：「老年期超越」。你會脫離世俗的利害關係，感受到無比的平靜與滿足。">
+    <div class="slide" data-text="當我們實踐「共感」與「關懷下一代」，最終能達到人生最高境界：「老年期超越」。脫離世俗的利害關係，感受到無比的平靜與滿足。">
         <h2>老年期超越 (Gerotranscendence)</h2>
         <h1 style='font-size: 3rem;'>人生的終極境界</h1><p style='font-size: 2rem;'>充分發揮共感 (Compassion) 與關懷下一代</p><p style='font-size: 1.8rem; margin-top:20px;'><span class='highlight'>脫離眼前的利害關係，感受到無比的平靜與滿足</span></p>
     </div>
-    <div class="slide" data-text="第六章精華結束，最後的提取挑戰，開始！">
-        <span style='color:#ef4444'>🛑 第六章 提取挑戰</span>
+    <div class="slide" data-text="好，第 6 章精華結束。接下來是本章的 10 道連環測驗，準備好了嗎？">
+        <span style='color:#ef4444'>🛑 第 6 章 測驗開始</span>
+        <h2 style='font-size:3rem'>準備迎接本章的 10 道測驗題</h2>
+    </div>
+    <div class="slide" data-text="第 1 題，課程提到的「恩送 (Pay it forward)」概念是指什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q1. 課程提到的「恩送 (Pay it forward)」概念是指什麼？</span>
         <div class='timer-circle' id='timer'>3</div>
     </div>
-    <div class="slide" data-text="第一題，當我們充分發揮共感與關懷下一代時，最終能達到什麼境界？答案是：老年期超越！">
-        <span style='color:#facc15; font-size:2rem'>Q1. 當我們充分發揮對他人的共感與「關懷下一代」的本質時，最終能達到什麼境界？</span>
-        <div style='font-size: 2rem; margin-top:50px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>老年期超越，脫離利害關係並感受到平靜與滿足</div>
+    <div class="slide" data-text="正確答案是：受到恩惠後，將這份好意無條件傳遞給周遭的人或下一代！">
+        <span style='color:#facc15; font-size:1.8rem'>Q1. 課程提到的「恩送 (Pay it forward)」概念是指什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>受到恩惠後，將這份好意無條件傳遞給周遭的人或下一代</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>日文的「恩送 (Pay it forward)」超越了傳統單向的報恩。當你受到照顧後，不僅是回報當事人，更是將這份好意無條件送給周遭的人與下一代。 對應來源：6-1 AAR學習歷程與學習的存在轉向</div>
     </div>
-    <div class="slide" data-text="恭喜你撐過了這 30 分鐘的大腦仲訓！只要你能在考前一週、考前三天、考前一晚，反覆打開這個影片進行間隔重複與主動回想，我保證你在考場上絕對是反射神經最快的那一個！期末考特訓團隊祝您高分 All Pass，我們下次見！">
-        <h2>🎉 恭喜完成 30 分鐘大腦重訓！</h2>
+    <div class="slide" data-text="第 2 題，學習的終極目標不僅是吸收知識，更是為了讓自己從被動接受者轉變為什麼角色？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q2. 學習的終極目標不僅是吸收知識，更是為了讓自己從被動接受者轉變為什麼角色？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：主動發揮正向影響力、付出行動的實踐者（Doer）！">
+        <span style='color:#facc15; font-size:1.8rem'>Q2. 學習的終極目標不僅是吸收知識，更是為了讓自己從被動接受者轉變為什麼角色？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>主動發揮正向影響力、付出行動的實踐者（Doer）</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>學習的最終目的，是讓我們從被動接受照顧或吸收知識的人，轉變為一個能主動發揮正面影響力、主動付出的「實踐者 (Doer)」。 對應來源：6-2 Generativity與學習厚度的深化</div>
+    </div>
+    <div class="slide" data-text="第 3 題，台灣花蓮發生水災時，被稱為「鏟子超人」的外地人主動請假前往幫忙，這主要展現了人類的哪一種美好本質？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q3. 台灣花蓮發生水災時，被稱為「鏟子超人」的外地人主動請假前往幫忙，這主要展現了人類的哪一種美好本質？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：共感（Compassion）！">
+        <span style='color:#facc15; font-size:1.8rem'>Q3. 台灣花蓮發生水災時，被稱為「鏟子超人」的外地人主動請假前往幫忙，這主要展現了人類的哪一種美好本質？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>共感（Compassion）</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>台灣的鏟子超人主動幫助災民並非為了還願報恩，而是純粹出於「共感 (Compassion)」，將災民的痛苦視為自己的痛苦，主動幫助他人解決困難。 對應來源：6-1 AAR學習歷程與學習的存在轉向</div>
+    </div>
+    <div class="slide" data-text="第 4 題，在日本沖繩市的「移動攤販式公民館」案例中，公務人員的最高指導原則是什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q4. 在日本沖繩市的「移動攤販式公民館」案例中，公務人員的最高指導原則是什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：什麼都不做（留白），只在旁陪伴與聆聽！">
+        <span style='color:#facc15; font-size:1.8rem'>Q4. 在日本沖繩市的「移動攤販式公民館」案例中，公務人員的最高指導原則是什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>什麼都不做（留白），只在旁陪伴與聆聽</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>沖繩移動攤販式公民館打破了傳統由政府強勢主導的迷思，公務人員的最高指導原則是「什麼都不做」，只在旁陪伴與聆聽居民閒聊。 對應來源：6-3 實踐案例：移動攤販式公民館</div>
+    </div>
+    <div class="slide" data-text="第 5 題，「移動攤販式公民館」刻意「留白」不主動幫居民解決問題，其主要目的是為了什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q5. 「移動攤販式公民館」刻意「留白」不主動幫居民解決問題，其主要目的是為了什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：激發居民的好奇心，促使居民產生當事者意識並主動互助！">
+        <span style='color:#facc15; font-size:1.8rem'>Q5. 「移動攤販式公民館」刻意「留白」不主動幫居民解決問題，其主要目的是為了什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>激發居民的好奇心，促使居民產生當事者意識並主動互助</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>政府職員刻意「留白」不干涉，反而激發了居民的好奇心與當事者意識，促使居民不再依賴政府，主動表示「我來幫忙」以解決彼此的問題。 對應來源：6-3 實踐案例：移動攤販式公民館</div>
+    </div>
+    <div class="slide" data-text="第 6 題，為什麼日本有偏鄉長輩願意讓「國中生」擔任社區發展協會的理事長？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q6. 為什麼日本有偏鄉長輩願意讓「國中生」擔任社區發展協會的理事長？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：建立在跨世代平等與互相尊重的基礎上，年輕人藉此向全社區「恩送」回饋！">
+        <span style='color:#facc15; font-size:1.8rem'>Q6. 為什麼日本有偏鄉長輩願意讓「國中生」擔任社區發展協會的理事長？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>建立在跨世代平等與互相尊重的基礎上，年輕人藉此向全社區「恩送」回饋</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>年輕人感受到長輩關懷而想回饋社區（恩送）；而長輩不輕視年輕人，願意傾聽。這種跨世代的平等與互相尊重促成了年輕人願意承擔重任。 對應來源：6-2 Generativity與學習厚度的深化</div>
+    </div>
+    <div class="slide" data-text="第 7 題，當我們充分發揮對他人的共感與「關懷下一代（Generativity）」的本質時，最終能達到什麼境界？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q7. 當我們充分發揮對他人的共感與「關懷下一代（Generativity）」的本質時，最終能達到什麼境界？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：老年期超越 （Gerotranscendence），脫離利害關係並感受到平靜與滿足！">
+        <span style='color:#facc15; font-size:1.8rem'>Q7. 當我們充分發揮對他人的共感與「關懷下一代（Generativity）」的本質時，最終能達到什麼境界？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>老年期超越 （Gerotranscendence），脫離利害關係並感受到平靜與滿足</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>隨著年齡增長，充分發揮共感與關懷下一代的情感，最終能達到「老年期超越 (Gerotranscendence)」，脫離眼前的利害關係，感受到無比的平靜與滿足。 對應來源：6-4 Makino幸福講堂</div>
+    </div>
+    <div class="slide" data-text="第 8 題，本課程總結認為，在人生100年的長壽社會中，最珍貴的「幸福處方箋」是什麼？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q8. 本課程總結認為，在人生100年的長壽社會中，最珍貴的「幸福處方箋」是什麼？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：建立共感幸福的小社會，將溫暖的連結傳承給下一代！">
+        <span style='color:#facc15; font-size:1.8rem'>Q8. 本課程總結認為，在人生100年的長壽社會中，最珍貴的「幸福處方箋」是什麼？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>建立共感幸福的小社會，將溫暖的連結傳承給下一代</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>課程總結強調，幸福的關鍵在於以「共感」為基礎，建立互相幫助的小型共同體（小社會），並將微小的幸福重疊、擴大並傳承給下一代。 對應來源：6-4 Makino幸福講堂</div>
+    </div>
+    <div class="slide" data-text="第 9 題，社會的典範轉移，已經從過去追求物質與金錢的「佔有慾望」，轉變為何種慾望的追求？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q9. 社會的典範轉移，已經從過去追求物質與金錢的「佔有慾望」，轉變為何種慾望的追求？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：存在慾望（尋找存在的根基與人際價值）！">
+        <span style='color:#facc15; font-size:1.8rem'>Q9. 社會的典範轉移，已經從過去追求物質與金錢的「佔有慾望」，轉變為何種慾望的追求？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>存在慾望（尋找存在的根基與人際價值）</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>社會典範已從過去追求金錢物質的「佔有慾望」，走向「存在慾望」，現代人更渴望在人際互動中尋找自己存在的根基、價值與被需要感。 對應來源：6-4 Makino幸福講堂</div>
+    </div>
+    <div class="slide" data-text="第 10 題，在沖繩移動公民館的運作過程中，當地長輩找回了什麼重要的心理感受？，請作答！">
+        <span style='color:#facc15; font-size:1.8rem'>Q10. 在沖繩移動公民館的運作過程中，當地長輩找回了什麼重要的心理感受？</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="正確答案是：在協助幼童的過程中獲得尊重，重拾了「還有用」的主人翁尊嚴！">
+        <span style='color:#facc15; font-size:1.8rem'>Q10. 在沖繩移動公民館的運作過程中，當地長輩找回了什麼重要的心理感受？</span>
+        <div style='font-size: 2rem; margin-top:30px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>在協助幼童的過程中獲得尊重，重拾了「還有用」的主人翁尊嚴</div><div style='margin-top:20px; font-size:1.3rem; text-align:left; color:#cbd5e1'>透過移動公民館的日常交流，當地長輩在互動與主動協助看顧幼童的過程中獲得尊重，重拾了自己「還有用」的主人翁尊嚴感與生命價值。 對應來源：6-3 實踐案例：移動攤販式公民館</div>
+    </div>
+    <div class="slide" data-text="恭喜你撐過了這完整的 60 題大腦仲訓！只要你能在考前一週、考前三天、考前一晚，反覆打開這個影片進行間隔重複與主動回想，我保證你在考場上絕對是反射神經最快的那一個！期末考特訓團隊祝您高分 All Pass，我們下次見！">
+        <h2>🎉 恭喜完成 1小時大腦重訓！</h2>
         <h1 style='font-size: 3rem; color:#facc15'>期末考必勝！</h1><p style='font-size: 2rem;'>不要忘記我們的約定：<br>考前一週、考前三天、考前一晚<br>開啟這份救命丸進行間隔重複與主動回想！</p><p style='font-size: 1.5rem; margin-top:30px'>祝您高分 All Pass，人生 100 幸福圓滿！</p>
     </div>
 
@@ -322,8 +779,9 @@
     const slides = document.querySelectorAll('.slide');
     let voices = [];
     let selectedVoice = null;
-    let globalSpeechRate = 1.15;
+    let globalSpeechRate = 1.3; // Default to 1.3 since 60 questions will take longer
     let currentUtterance = null;
+    let timerActive = false;
     
     // Initialize slider max
     document.getElementById('timelineSlider').max = slides.length - 1;
@@ -372,7 +830,14 @@
             return;
         }
         
-        slides.forEach(s => s.classList.remove('active'));
+        timerActive = false; // reset any active timers conceptually
+        
+        slides.forEach(s => {
+            s.classList.remove('active');
+            const timerEl = s.querySelector('#timer');
+            if(timerEl) timerEl.innerText = "3"; // Reset timer UI
+        });
+        
         slides[index].classList.add('active');
         currentSlide = index;
         
@@ -382,12 +847,12 @@
         
         // Update Chapter Select UI logic
         const chSelect = document.getElementById('chapterSelect');
-        if(index >= 25) chSelect.value = "25";
-        else if(index >= 21) chSelect.value = "21";
-        else if(index >= 17) chSelect.value = "17";
-        else if(index >= 13) chSelect.value = "13";
-        else if(index >= 8) chSelect.value = "8";
-        else if(index >= 2) chSelect.value = "2";
+        if(index >= 120) chSelect.value = "120";
+        else         if(index >= 97) chSelect.value = "97";
+        else         if(index >= 74) chSelect.value = "74";
+        else         if(index >= 51) chSelect.value = "51";
+        else         if(index >= 27) chSelect.value = "27";
+        else         if(index >= 2) chSelect.value = "2";
         else chSelect.value = "0";
 
         const textToSpeak = slides[index].getAttribute('data-text');
@@ -407,20 +872,39 @@
                 }
             };
             window.speechSynthesis.speak(currentUtterance);
+        } else {
+             // If no text, just check for timer anyway
+             if(slides[index].querySelector('#timer')) {
+                 doTimer();
+             } else {
+                 // Or just stay there if no text and no timer? Usually shouldn't happen.
+             }
         }
     }
 
     function doTimer() {
+        if (timerActive) return;
+        timerActive = true;
         const timerEl = document.getElementById('timer');
+        if(!timerEl) return;
+        
         let count = 3;
         timerEl.innerText = count;
         
         const tick = setInterval(() => {
+            if(currentSlide !== Array.from(slides).findIndex(s => s.querySelector('#timer') === timerEl)) {
+                // We navigated away manually
+                clearInterval(tick);
+                timerActive = false;
+                return;
+            }
+            
             count--;
             if(count > 0) {
                 timerEl.innerText = count;
             } else {
                 clearInterval(tick);
+                timerActive = false;
                 showSlide(currentSlide + 1);
             }
         }, 1000);
