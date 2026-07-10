@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人生100幸福處方箋 考前衝刺特訓影片</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #0f172a; color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+        }
+        #presentation {
+            width: 100%; max-width: 1200px; height: 100%; max-height: 800px;
+            position: relative;
+            background: #1e293b;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            display: none;
+        }
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            padding: 40px; box-sizing: border-box;
+            opacity: 0; transition: opacity 0.5s ease-in-out;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center;
+            pointer-events: none;
+        }
+        .slide.active {
+            opacity: 1; pointer-events: auto;
+        }
+        h1 { font-size: 3.5rem; color: #facc15; margin-bottom: 20px; }
+        h2 { font-size: 2.5rem; color: #38bdf8; margin-bottom: 30px; }
+        .highlight { color: #facc15; font-weight: bold; background: rgba(250, 204, 21, 0.1); padding: 0 10px; border-radius: 8px;}
+        .danger { color: #ef4444; font-weight: bold; }
+        .success { color: #22c55e; font-weight: bold; }
+        .split { display: flex; width: 100%; justify-content: space-around; align-items: stretch; gap: 40px; }
+        .col { flex: 1; background: #334155; padding: 30px; border-radius: 16px; display: flex; flex-direction: column; justify-content: center;}
+        #start-screen {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            height: 100%; text-align: center;
+        }
+        .btn {
+            background: #facc15; color: #0f172a; border: none; padding: 20px 40px;
+            font-size: 1.8rem; font-weight: bold; border-radius: 50px; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(250, 204, 21, 0.3);
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: scale(1.05); }
+        .timer-circle {
+            width: 150px; height: 150px; border-radius: 50%; background: #ef4444;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 5rem; font-weight: bold; margin: 20px auto;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="start-screen">
+    <h1>人生100幸福處方箋</h1>
+    <h2 style="color:white">期末考 30 分鐘救命丸 (全自動播放版)</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 40px;">※ 建議使用全螢幕觀看，包含全程教練語音講解，請開啟音響或戴上耳機。</p>
+    <button class="btn" onclick="startVideo()">▶ 開始 30 分鐘特訓</button>
+</div>
+
+<div id="presentation">
+    <div class="slide" data-text="各位空大的夥伴們，大家好！工作跟家庭兩頭燒，猛然一回頭才發現期末考已經迫在眉睫了嗎？看著厚厚的六大章節講義，是不是覺得心有餘而力不足？別擔心！這支長度剛好 30 分鐘的影片，就是我專為大家準備的「期末考救命丸」！">
+        <h2>💊 期末考 30 分鐘救命丸</h2>
+        <h2>選擇題 60 題 ＋ 是非題 25 題</h2><div style='font-size: 2rem; line-height: 2;'><p>✅ 間隔重複 (Spaced Repetition)</p><p>✅ 主動回想 (Active Recall)</p></div>
+    </div>
+    <div class="slide" data-text="我們的期末考只有選擇題跟是非題。這代表你不需要死背長篇大論去寫申論題！你真正需要的，是敏銳的概念辨識力，以及看穿題目陷阱的反射神經。在這 30 分鐘裡，我會幫你把六大章節最愛考的精華，全部濃縮成表格跟圖解。這是一場高強度的腦力特訓！我要求你做到兩件事：第一，間隔重複。第二，主動回想。在每個章節的最後，我會給你3秒鐘的測驗停格。當畫面出現倒數計時，請你立刻在心裡選出答案！準備好了嗎？我們的 30 分鐘大腦重訓，現在開始！">
+        <h2>不要死背！這是一場高強度的腦力特訓</h2>
+        <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>1. 間隔重複</h3><p style='font-size: 1.5rem;'>考前一週、三天、前一晚<br>把遺忘曲線踩在腳下</p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>2. 主動回想</h3><p style='font-size: 1.5rem;'>看到 3 秒倒數停格<br>立刻在心裡選出答案</p></div></div>
+    </div>
+    <div class="slide" data-text="首先進入第一章：社會轉型與學習觀的變遷。請你在腦海裡畫一條線，切開過去跟現在。過去的工業化社會，學校是為了解決大量生產的問題而存在的，所以傳統教室的設計就像是圓形監獄，老師站在高高的地方，目的是為了監控，培養出聽話、標準化的勞動力。人生劇本也很死板，就是求學、就業、退休三部曲。">
+        <h2>第一章：社會轉型與學習觀的變遷</h2>
+        <div class='split'><div class='col' style='opacity: 0.5;'><h3 class='danger'>❌ 過去的工業化社會</h3><p style='font-size:1.5rem'>「求學 ➔ 就業 ➔ 退休」單一劇本</p><p style='font-size:1.5rem'>學校像「圓形監獄」(監控/標準化)</p></div><div class='col'><h3 class='success'>✅ 現代長壽社會</h3><p style='font-size:1.5rem'>追求 <span class='highlight'>健康、人際、自我決定</span></p><p style='font-size:1.5rem'>從物質佔有轉向「存在慾望」</p></div></div>
+    </div>
+    <div class="slide" data-text="但現在不一樣了！我們來到了長壽社會。工業時代那套佔有物質的慾望已經退流行了，現代人追求的是存在慾望，也就是在人際網絡中尋找自己的價值。考試必考重點來了！決定現代人主觀幸福感的前三大因素，除了健康和良好的人際關係之外，第三大因素是什麼？是金錢嗎？是學歷嗎？都不是！請用力記住這四個字：自我決定！也就是你能不能掌握自己人生的主導權。">
+        <h2>主觀幸福感的三大因素</h2>
+        <p style='font-size: 2rem;'>不再是金錢與學歷！</p><div style='display: flex; gap: 20px; justify-content: center; margin-top: 40px;'><div style='background:#38bdf8; padding:30px; border-radius:15px; font-size:2rem; font-weight:bold; color:#0f172a'>健康</div><div style='background:#38bdf8; padding:30px; border-radius:15px; font-size:2rem; font-weight:bold; color:#0f172a'>良好人際</div><div style='background:#facc15; padding:30px; border-radius:15px; font-size:2.5rem; font-weight:bold; color:#0f172a; transform:scale(1.1)'>自我決定</div></div>
+    </div>
+    <div class="slide" data-text="接下來，我們來看一個很愛考的專有名詞：伊斯特林悖論。這是什麼意思？簡單來說，就是錢不是萬能的。當經濟發展到一定水準後，人們對生活的滿足感反而會開始下降，轉而去追求精神層面的富足。如果在是非題看到經濟越好，幸福感就無限上升，請毫不猶豫地給它打個大叉叉！">
+        <span style='color:#ef4444'>⚠️ 考題陷阱：伊斯特林悖論</span>
+        <h1 style='font-size: 3rem;'>「錢不是萬能的」</h1><p style='font-size: 2rem;'>當經濟發展到一定水準後，人們對生活的滿足感<br><span class='highlight'>反而會開始下降</span>，轉而去追求精神富足。</p><p style='font-size: 1.8rem; color:#94a3b8; margin-top:20px;'>(是非題看到「經濟越好幸福感無限上升」請打叉！)</p>
+    </div>
+    <div class="slide" data-text="既然觀念轉變了，學習的場域也要跟著解放。學習不再只能發生在學校！我們來記兩個經典的案例考點：第一個，台中的審計新村，它展現了什麼魔法？答案是老屋空間打開與青年微型創業的魔法。第二個，日本的岡媽媽之家，它是政府花大錢蓋的嗎？錯！它只是把獨居長者遺留的空屋稍微打開，變成零門檻的社區客廳。這兩個案例的核心，都是為了建立人際網絡，預防現代社會的孤立。">
+        <h2>學習場域的解放：實踐案例</h2>
+        <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>📍 台中審計新村</h3><p style='font-size: 1.5rem;'>老屋「空間打開」<br>青年微型創業</p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>📍 日本岡媽媽之家</h3><p style='font-size: 1.5rem;'>獨居空屋「稍微打開」<br>零門檻的社區客廳 (不是政府出資)</p></div></div><h3 style='margin-top:30px; font-size:1.8rem'>核心目的：建立人際網絡，預防孤立</h3>
+    </div>
+    <div class="slide" data-text="好，第一章精華結束。請看畫面，三秒鐘提取挑戰，開始！">
+        <span style='color:#ef4444'>🛑 第一章 提取挑戰</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="第一題，決定現代人主觀幸福感的前三大因素中，取代過去「金錢與學歷」成為第三大的是？答案是 (B) 自我決定！你答對了嗎？">
+        <span style='color:#facc15; font-size:2rem'>Q1. 決定主觀幸福感的前三大因素中，取代「金錢與學歷」成為第三大的是？</span>
+        <div style='font-size: 2.5rem; margin-top:50px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>(B) 自我決定</div>
+    </div>
+    <div class="slide" data-text="來到第二章，百年人生。很多人把少子高齡化看成災難，但牧野篤教授說這其實代表我們成功創造了嬰兒死亡率極低的社會，大家都能活到自然壽命。這叫作「少生少死」。面對 100 歲的人生，人生不再是一場打敗魔王就結束的「英雄旅程」，而是一段「多段式動態故事」。所以絕對不要被「65歲強制退休」這種標準化制度給綁架了！">
+        <h2>第二章：百年人生與學習的轉機</h2>
+        <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>少生少死</h3><p style='font-size: 1.5rem;'>嬰兒存活率高<br>人口呈「棺材型」</p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>多段式人生</h3><p style='font-size: 1.5rem;'>打破 65 歲強制退休<br>拒絕單線「英雄旅程」</p></div></div>
+    </div>
+    <div class="slide" data-text="考試一定會考這個：年紀大了，雖然靠死背的「流體智力」會下降，但我們靠人生經驗累積的什麼智力會上升？答案是：「晶體智力」！也就是你解決複雜問題跟溝通的能力。既然退休後能力還在，長輩能做什麼？">
+        <h2>⚠️ 必考專有名詞：智力與情感</h2>
+        <div style='text-align:left; background:#334155; padding:30px; border-radius:15px; margin-bottom:20px;'><h3 class='danger'>流體智力 (下降)</h3><p style='font-size:1.5rem'>純粹的記憶力與反應速度</p></div><div style='text-align:left; background:#334155; padding:30px; border-radius:15px;'><h3 class='success'>晶體智力 (上升) 🌟</h3><p style='font-size:1.5rem'>基於人生經驗的溝通對話與解決問題能力</p></div>
+    </div>
+    <div class="slide" data-text="我們來看日本超經典的「小雞蛋計畫」。這個計畫讓獨居長輩去照顧社區裡缺乏父母陪伴的兒童。把「別人家的孫子女」當作自己的來疼愛。這個動作激發了人類一項非常偉大的本能，也就是必考專有名詞：「關懷下一代 (Generativity)」。長輩在付出的過程中找回了被需要感，成為了年輕世代心靈上的「故鄉」。">
+        <h2>社區的小雞蛋計畫</h2>
+        <h1 style='font-size: 3rem;'>他人的孫子女</h1><p style='font-size: 2rem;'>激發人類本質：<span class='highlight'>關懷下一代 (Generativity)</span></p><p style='font-size: 1.8rem; margin-top:20px;'>長輩找回被需要感，成為年輕世代的「第二故鄉」</p>
+    </div>
+    <div class="slide" data-text="來，三秒鐘提取挑戰！">
+        <span style='color:#ef4444'>🛑 第二章 提取挑戰</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="第一題，年紀大記憶力衰退，但什麼能力會持續進化？正確答案是 (A) 基於人生經驗的「晶體智力」。">
+        <span style='color:#facc15; font-size:2rem'>Q1. 雖然年齡增長會讓記憶力衰退，但人類的哪一種認知能力會持續進化與上升？</span>
+        <div style='font-size: 2.5rem; margin-top:50px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>(A) 基於人生經驗的晶體智力</div>
+    </div>
+    <div class="slide" data-text="進入第三章，非正式學習空間。以前的「私塾」其實是非常進步的！它是「混齡」學習，老師扮演「陪跑教練」，根據每個人的進度給予指導。這時候要引入一個超級必考的「甜甜圈理論」。社區有很多功能，像經濟、文化，這就像甜甜圈的麵包體。甜甜圈中間那個貫穿一切的洞，就是「學習」！透過學習，社區才能活起來。">
+        <h2>第三章：非正式學習空間</h2>
+        <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>古代私塾</h3><p style='font-size: 1.5rem;'>混齡學習<br>老師扮演<span class='highlight'>陪跑教練</span></p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>甜甜圈理論</h3><p style='font-size: 1.5rem;'>外圈：經濟/文化/福利<br>中間的洞：<span class='highlight'>學習 (串聯一切)</span></p></div></div>
+    </div>
+    <div class="slide" data-text="但社區營造不能硬來。在這個過程中，政府的角色絕對不能是「包辦一切的服務生」。如果政府給太多補助全包了，居民就會退化成被動的消費者，喪失解決問題的「當事者意識」。政府應該做的，是當個「陪走教練」，陪伴居民自己找出答案！">
+        <h2>地方創生：政府該扮演什麼角色？</h2>
+        <div style='text-align:left; background:#334155; padding:30px; border-radius:15px; margin-bottom:20px;'><h3 class='danger'>❌ 包辦一切的服務生</h3><p style='font-size:1.5rem'>居民變消費者，喪失「當事者意識」</p></div><div style='text-align:left; background:#334155; padding:30px; border-radius:15px;'><h3 class='success'>✅ 陪走教練</h3><p style='font-size:1.5rem'>陪伴居民尋找解方，激發自治力</p></div>
+    </div>
+    <div class="slide" data-text="第三章精華結束，提取挑戰開始！">
+        <span style='color:#ef4444'>🛑 第三章 提取挑戰</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="第一題，益田市地方創生成功的策略是什麼？答案是 (A) 舉辦跨世代對話，讓長輩分享自己真實的人生故事。">
+        <span style='color:#facc15; font-size:2rem'>Q1. 益田市在推動地方創生時，改採什麼有效策略？</span>
+        <div style='font-size: 2rem; margin-top:50px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>(A) 舉辦跨世代對話，讓長輩分享自己真實(包含失敗)的人生故事</div>
+    </div>
+    <div class="slide" data-text="第四章，終身學習政策。1965年提出終身教育的初衷，是因為科技發展過快，單靠學校教育已無法跟上社會變化。為了讓在職勞工能安心回歸校園更新技能，OECD提倡「有薪教育假」。但因為老闆會怕員工學完跳槽，所以這不能只靠企業，必須仰賴國家層級的勞動政策來保障。">
+        <h2>第四章：終身學習的政策脈絡</h2>
+        <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>終身教育初衷</h3><p style='font-size: 1.5rem;'>因應科技快速發展<br>避免畢業後跟不上時代</p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>回流教育</h3><p style='font-size: 1.5rem;'>OECD提倡：<span class='highlight'>有薪教育假</span><br>需仰賴國家勞動政策保障</p></div></div>
+    </div>
+    <div class="slide" data-text="現代醫療界為了解決孤立帶來的身心疾病，提倡「社會處方箋」。長達11年的調查證實，跟朋友或家人一起運動及共餐等社會參與，對延長健康壽命的影響最為顯著！如果總是「一個人孤單的吃飯」，死亡危險度會顯著增加。此外，擁有良好社會連結，罹患「失智症」的比例也會明顯下降！">
+        <h2>最強的社會處方箋</h2>
+        <h1 style='font-size: 3rem;'>良好的人際關係</h1><p style='font-size: 2rem;'>預防孤立與疾病的特效藥</p><ul style='text-align:left; font-size:1.5rem; margin-top:20px;'><li>✅ 降低死亡危險度 (一個人吃飯死亡危險度增加1.5倍)</li><li>✅ 明顯下降「失智症」罹患比例</li></ul>
+    </div>
+    <div class="slide" data-text="第四章精華結束，提取挑戰開始！">
+        <span style='color:#ef4444'>🛑 第四章 提取挑戰</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="第一題，OECD提倡政府與企業應推動哪一項制度幫助勞工回流教育？答案是 (B) 有薪教育假。">
+        <span style='color:#facc15; font-size:2rem'>Q1. 為了讓在職勞工能安心回歸校園更新技能，OECD提倡應推動哪一項制度？</span>
+        <div style='font-size: 2.5rem; margin-top:50px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>(B) 有薪教育假</div>
+    </div>
+    <div class="slide" data-text="進入第五章。面對多樣化的長壽社會，我們應該把生活當作一場「自我設計的實驗」。不要再用傳統高壓的 PDCA 模式，因為傳統學校思維覺得沒考好就是失敗，會讓人不敢跨出第一步。本課程提倡「AAR 模式」：帶著好奇心的預期、大膽行動、以及真實反饋的反思。">
+        <h2>第五章：告別高壓，擁抱實驗</h2>
+        <div class='split'><div class='col' style='opacity: 0.5;'><h3 class='danger'>❌ 傳統 PDCA 模式</h3><p style='font-size:1.5rem'>高壓、高門檻<br>非黑即白 (沒滿分就是失敗)</p></div><div class='col'><h3 class='success'>✅ AAR 循環模式</h3><p style='font-size:1.5rem'>把生活當作<span class='highlight'>自我設計的實驗</span></p><p style='font-size:1.5rem'>Anticipation 預期<br>Action 行動<br>Reflection 反思</p></div></div>
+    </div>
+    <div class="slide" data-text="當社會充滿多樣性，每個人的優缺點都能互相彌補時，這種零壓力的關係被比喻為「動態拼圖模式」。這個拼圖不是死板靜止的，而是隨著我們的行動與學習，在動態互補中持續探索並改變社會面貌。">
+        <h2>動態拼圖模式 (Jigsaw Puzzle)</h2>
+        <h1 style='font-size: 3rem;'>🧩 每個人都有凹凸面</h1><p style='font-size: 2rem;'>你的缺點，剛好是別人的優點</p><p style='font-size: 1.8rem; margin-top:20px;'><span class='highlight'>動態互補</span>：在行動與學習中，持續探索並建立良善連結。</p>
+    </div>
+    <div class="slide" data-text="第五章精華結束，提取挑戰開始！">
+        <span style='color:#ef4444'>🛑 第五章 提取挑戰</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="第一題，審計新村青年如何實踐 AAR 精神？答案是 (C) 先推出產品試水溫，再根據反饋立刻反思與彈性調整。">
+        <span style='color:#facc15; font-size:2rem'>Q1. 審計新村的微型創業青年們，如何具體實踐 AAR 實驗精神？</span>
+        <div style='font-size: 2rem; margin-top:50px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>(C) 先推出產品試試看，透過客群真實反饋立刻反思與彈性調整</div>
+    </div>
+    <div class="slide" data-text="最後一章！我們談談「恩送」。這不是傳統的報恩，而是受到恩惠後，將好意無條件傳遞給周遭的人或下一代。學習的終極目標，就是讓我們從被動接受者，轉變為主動發揮正向影響力、付出行動的「實踐者 (Doer)」。">
+        <h2>第六章：生命統整與終極幸福</h2>
+        <div class='split'><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>恩送 (Pay it forward)</h3><p style='font-size: 1.5rem;'>受到恩惠後<br><span class='highlight'>無條件傳遞</span>給周遭與下一代</p></div><div class='col'><h3 style='font-size: 2rem; color: #facc15;'>實踐者 (Doer)</h3><p style='font-size: 1.5rem;'>學習的終極目標：<br>主動發揮正向影響力</p></div></div>
+    </div>
+    <div class="slide" data-text="在日本沖繩的「移動攤販式公民館」，公務人員的最高指導原則居然是「什麼都不做」！為什麼要刻意留白？因為這能激發居民的好奇心，促使居民不再依賴政府，產生當事者意識主動互助。長輩也在協助看顧幼童的過程中獲得尊重，重拾了「我還有用」的主人翁尊嚴！">
+        <h2>刻意留白的藝術</h2>
+        <h1 style='font-size: 3rem;'>日本沖繩「移動攤販式公民館」</h1><p style='font-size: 2rem;'>公務人員最高指導原則：<span class='highlight'>什麼都不做 (留白)</span></p><p style='font-size: 1.8rem; margin-top:20px; color:#22c55e'>✅ 激發居民好奇心，促使產生當事者意識主動互助</p><p style='font-size: 1.8rem; color:#22c55e'>✅ 長輩在協助幼童中，重拾「還有用」的主人翁尊嚴</p>
+    </div>
+    <div class="slide" data-text="當我們充分發揮對他人的「共感 (Compassion)」，並實踐「關懷下一代」，最終就能達到人生最高境界：「老年期超越」。你會脫離世俗的利害關係，感受到無比的平靜與滿足。">
+        <h2>老年期超越 (Gerotranscendence)</h2>
+        <h1 style='font-size: 3rem;'>人生的終極境界</h1><p style='font-size: 2rem;'>充分發揮共感 (Compassion) 與關懷下一代</p><p style='font-size: 1.8rem; margin-top:20px;'><span class='highlight'>脫離眼前的利害關係，感受到無比的平靜與滿足</span></p>
+    </div>
+    <div class="slide" data-text="第六章精華結束，最後的提取挑戰，開始！">
+        <span style='color:#ef4444'>🛑 第六章 提取挑戰</span>
+        <div class='timer-circle' id='timer'>3</div>
+    </div>
+    <div class="slide" data-text="第一題，當我們充分發揮共感與關懷下一代時，最終能達到什麼境界？答案是 (B) 老年期超越！">
+        <span style='color:#facc15; font-size:2rem'>Q1. 當我們充分發揮對他人的共感與「關懷下一代」的本質時，最終能達到什麼境界？</span>
+        <div style='font-size: 2rem; margin-top:50px; background:#22c55e; padding:20px; border-radius:10px; font-weight:bold;'>(B) 老年期超越，脫離利害關係並感受到平靜與滿足</div>
+    </div>
+    <div class="slide" data-text="恭喜你撐過了這 30 分鐘的大腦重訓！只要你能在考前一週、考前三天、考前一晚，反覆打開這個影片進行間隔重複與主動回想，我保證你在考場上絕對是反射神經最快的那一個！期末考特訓團隊祝您高分 All Pass，我們下次見！">
+        <h2>🎉 恭喜完成 30 分鐘大腦重訓！</h2>
+        <h1 style='font-size: 3rem; color:#facc15'>期末考必勝！</h1><p style='font-size: 2rem;'>不要忘記我們的約定：<br>考前一週、考前三天、考前一晚<br>開啟這份救命丸進行間隔重複與主動回想！</p><p style='font-size: 1.5rem; margin-top:30px'>祝您高分 All Pass，人生 100 幸福圓滿！</p>
+    </div>
+
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    let voices = [];
+    let selectedVoice = null;
+
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = window.speechSynthesis.getVoices();
+        selectedVoice = voices.find(v => v.lang.includes('zh') && (v.name.includes('Male') || v.name.includes('男') || v.name.includes('Zhiwei'))) || 
+                        voices.find(v => v.lang.includes('zh')) || voices[0];
+    };
+
+    function startVideo() {
+        if(document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen().catch(e => console.log(e));
+        }
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('presentation').style.display = 'block';
+        
+        if(!selectedVoice) {
+            voices = window.speechSynthesis.getVoices();
+            selectedVoice = voices.find(v => v.lang.includes('zh')) || voices[0];
+        }
+        
+        showSlide(0);
+    }
+
+    function showSlide(index) {
+        if(index >= slides.length) {
+            alert("全劇終！祝您期末考順利高分通過！");
+            return;
+        }
+        
+        slides.forEach(s => s.classList.remove('active'));
+        slides[index].classList.add('active');
+        currentSlide = index;
+
+        const textToSpeak = slides[index].getAttribute('data-text');
+        window.speechSynthesis.cancel();
+        
+        if(textToSpeak) {
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            if(selectedVoice) utterance.voice = selectedVoice;
+            utterance.rate = 1.15;
+            utterance.pitch = 0.8;
+            
+            utterance.onend = () => {
+                if(slides[index].querySelector('#timer')) {
+                    doTimer();
+                } else {
+                    showSlide(index + 1);
+                }
+            };
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
+    function doTimer() {
+        const timerEl = document.getElementById('timer');
+        let count = 3;
+        timerEl.innerText = count;
+        
+        const tick = setInterval(() => {
+            count--;
+            if(count > 0) {
+                timerEl.innerText = count;
+            } else {
+                clearInterval(tick);
+                showSlide(currentSlide + 1);
+            }
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
