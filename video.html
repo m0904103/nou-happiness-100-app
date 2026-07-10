@@ -48,6 +48,16 @@
             transition: transform 0.2s;
         }
         .btn:hover { transform: scale(1.05); }
+        .back-btn-start {
+            position: absolute; top: 20px; left: 20px;
+            background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.3);
+            padding: 10px 20px; border-radius: 99px; cursor: pointer; font-size: 1.1rem;
+            text-decoration: none; display: flex; align-items: center; gap: 8px;
+            transition: all 0.2s;
+        }
+        .back-btn-start:hover {
+            background: rgba(255,255,255,0.2); transform: scale(1.05);
+        }
         .speed-control {
             margin-top: 20px;
             font-size: 1.2rem;
@@ -86,6 +96,7 @@
 <body>
 
 <div id="start-screen">
+    <a href="index.html" class="back-btn-start">◀ 返回首頁</a>
     <h1>人生100幸福處方箋</h1>
     <h2 style="color:white">期末考 30 分鐘救命丸 (全自動播放版)</h2>
     <p style="font-size: 1.2rem; margin-bottom: 20px;">※ 建議使用全螢幕觀看，包含全程教練語音講解，請開啟音響或戴上耳機。</p>
