@@ -75,18 +75,19 @@ audio::-webkit-media-controls-time-remaining-display {
 
 .lyrics-wrapper {
     flex-grow: 1;
-    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     position: relative;
     mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
 }
+.lyrics-wrapper::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for a cleaner look */
+}
 
 .lyrics-container {
-    position: absolute;
-    top: 50%;
     width: 100%;
-    transform: translateY(0);
-    transition: transform 0.5s ease-out;
+    padding: 40vh 0; /* Allow first and last lines to be centered */
 }
 
 .lyric-line {

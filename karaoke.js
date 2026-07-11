@@ -78,10 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 newEl.classList.add('active');
                 newEl.classList.remove('past');
                 
-                // Scroll container to center the active line
-                const wrapperHeight = document.getElementById('lyrics-wrapper').offsetHeight;
-                const offset = newEl.offsetTop - (wrapperHeight / 2) + (newEl.offsetHeight / 2);
-                lyricsContainer.style.transform = `translateY(-${offset}px)`;
+                // Scroll container to center the active line smoothly
+                newEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
 
             activeIndex = newActiveIndex;
