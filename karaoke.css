@@ -34,27 +34,19 @@ body {
 
 .back-btn {
     position: absolute;
-    top: 25px;
-    left: 25px;
-    color: #e6b981;
+    top: 20px;
+    left: 20px;
+    color: #8c7f70;
     text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    font-weight: 400;
+    transition: color 0.3s ease;
     z-index: 100;
-    padding: 6px 12px;
-    border-radius: 6px;
-    background: rgba(230, 185, 129, 0.15);
-    border: 1px solid rgba(230, 185, 129, 0.4);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    letter-spacing: 1px;
+    padding: 5px 10px;
 }
 
 .back-btn:hover {
-    color: #ffffff;
-    background: rgba(230, 185, 129, 0.3);
-    border-color: rgba(230, 185, 129, 0.7);
-    transform: translateY(-2px);
+    color: #e6b981;
 }
 
 header {
