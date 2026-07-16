@@ -151,9 +151,9 @@
         <label for="startSpeed">語音速度：</label>
         <select id="startSpeed" onchange="syncSpeed(this.value)">
             <option value="0.8">0.8x (慢速)</option>
-            <option value="1.0">1.0x (正常)</option>
+            <option value="1.0" selected>1.0x (正常/推薦)</option>
             <option value="1.15">1.15x (教練節奏)</option>
-            <option value="1.3" selected>1.3x (快速/推薦)</option>
+            <option value="1.3">1.3x (快速)</option>
             <option value="1.5">1.5x (超快)</option>
             <option value="2.0">2.0x (極速)</option>
         </select>
@@ -177,9 +177,9 @@
         <span style="font-size:1rem;color:#ccc; margin-left:10px;">語速</span>
         <select id="floatSpeed" onchange="syncSpeed(this.value); updateCurrentSpeechRate()">
             <option value="0.8">0.8x</option>
-            <option value="1.0">1.0x</option>
+            <option value="1.0" selected>1.0x</option>
             <option value="1.15">1.15x</option>
-            <option value="1.3" selected>1.3x</option>
+            <option value="1.3">1.3x</option>
             <option value="1.5">1.5x</option>
             <option value="2.0">2.0x</option>
         </select>
