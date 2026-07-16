@@ -366,7 +366,7 @@ a{text-decoration:none;color:inherit}
       <p style="font-size:0.85rem; color:var(--muted); margin-bottom: 16px;">點擊卡片，看懂這些日文翻譯背後的「白話文」。</p>
       
       <div class="flip-grid">
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-ibasho" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>居場所 <span style="font-size:0.75rem; font-weight:normal;">(いばしょ)</span></h4><span>Ibasho</span>
@@ -378,7 +378,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-deban" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>出場 <span style="font-size:0.75rem; font-weight:normal;">(出番 / でばん)</span></h4><span>Deban</span>
@@ -390,7 +390,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-sumibiraki" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>微型公共化 <span style="font-size:0.75rem; font-weight:normal;">(住み開き)</span></h4><span>Sumibiraki</span>
@@ -402,7 +402,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-payitforward" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>恩送 <span style="font-size:0.75rem; font-weight:normal;">(恩返し)</span></h4><span>Pay it forward</span>
@@ -414,7 +414,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-hometown" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>關係的故鄉 <span style="font-size:0.75rem; font-weight:normal;">(関係の故郷)</span></h4><span>Hometown</span>
@@ -474,7 +474,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-actionresearch" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>AAR 模式 <span style="font-size:0.75rem; font-weight:normal;">(アクションリサーチ)</span></h4><span>Action Research</span>
@@ -558,7 +558,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-compassion" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>共感 <span style="font-size:0.75rem; font-weight:normal;">(コンパッション)</span></h4><span>Compassion</span>
@@ -654,7 +654,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-panopticon" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>圓形監獄 <span style="font-size:0.75rem; font-weight:normal;">(パノプティコン)</span></h4><span>Panopticon</span>
@@ -666,7 +666,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-disciplinary" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>規訓社會 <span style="font-size:0.75rem; font-weight:normal;">(規律訓練型社会)</span></h4><span>Disciplinary</span>
@@ -678,7 +678,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-anonymous" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>匿名性社會 <span style="font-size:0.75rem; font-weight:normal;">(匿名性社会)</span></h4><span>Anonymous</span>
@@ -690,7 +690,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-recurrent" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>回流教育 <span style="font-size:0.75rem; font-weight:normal;">(リカレント教育)</span></h4><span>Recurrent</span>
@@ -702,7 +702,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-isolation" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>孤立與孤食 <span style="font-size:0.75rem; font-weight:normal;">(孤立と孤食)</span></h4><span>Isolation</span>
@@ -714,7 +714,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div id="card-lifelong" class="flip-card" onclick="this.classList.toggle('flipped')">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <h4>終身學習 <span style="font-size:0.75rem; font-weight:normal;">(生涯学習)</span></h4><span>Lifelong</span>
