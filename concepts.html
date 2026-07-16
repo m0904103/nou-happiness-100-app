@@ -1,795 +1,790 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0f172a">
-<title>大師概念翻譯與理論地圖</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
-<style>
-/* ─── Design Tokens ─── */
-:root {
-  --bg: #0f172a;
-  --surface: #1e293b;
-  --surface2: #263248;
-  --border: rgba(148,163,184,.15);
-  --accent: #818cf8;
-  --accent2: #c084fc;
-  --green: #34d399;
-  --red: #f87171;
-  --amber: #fbbf24;
-  --text: #f1f5f9;
-  --muted: #94a3b8;
-  --card: #1e293b;
-  --r: 20px;
-  --sh: 0 0 0 1px rgba(148,163,184,.1), 0 20px 50px rgba(0,0,0,.5);
-  --safe-top: env(safe-area-inset-top);
-  --safe-bot: env(safe-area-inset-bottom);
-}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;overscroll-behavior-y:none;
-  padding-top:var(--safe-top);padding-bottom:var(--safe-bot)}
-a{text-decoration:none;color:inherit}
-
-/* ─── App Container ─── */
-#app {
-  max-width: 600px;
-  margin: 0 auto;
-  min-height: 100vh;
-  background: var(--bg);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ─── Header ─── */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.btn-back {
-  padding: 0 16px; height: 38px; border-radius: 99px; 
-  background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); 
-  cursor: pointer; display: flex; align-items: center; justify-content: center; 
-  font-size: 0.95rem; font-weight: 700; color: #38bdf8; transition: .2s; 
-  flex-shrink: 0; gap: 4px;
-}
-.btn-back:active { transform: scale(.95); background: rgba(56,189,248,0.2); }
-.header-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #a78bfa, #818cf8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ─── Layout ─── */
-.container {
-  padding: 20px;
-  padding-bottom: 100px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-.section-title {
-  font-size: 1.3rem;
-  font-weight: 900;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.section-title span {
-  font-size: 1.6rem;
-}
-
-/* ─── Timeline (三部曲) ─── */
-.timeline {
-  position: relative;
-  padding-left: 24px;
-}
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 6px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--border);
-}
-.tl-item {
-  position: relative;
-  margin-bottom: 24px;
-}
-.tl-item:last-child { margin-bottom: 0; }
-.tl-dot {
-  position: absolute;
-  left: -24px;
-  top: 4px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  transform: translateX(-4px);
-  z-index: 2;
-  box-shadow: 0 0 0 4px var(--bg);
-}
-.tl-1 .tl-dot { background: var(--red); }
-.tl-2 .tl-dot { background: var(--amber); }
-.tl-3 .tl-dot { background: var(--green); }
-
-.tl-content {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 16px;
-}
-.tl-content h4 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-.tl-1 h4 { color: var(--red); }
-.tl-2 h4 { color: var(--amber); }
-.tl-3 h4 { color: var(--green); }
-
-.tl-content p {
-  font-size: 0.9rem;
-  color: var(--muted);
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
-.kw-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.kw-tag {
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 99px;
-  background: var(--surface2);
-  color: var(--text-light);
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
-  border: 1px solid var(--border);
-}
-.kw-tag:hover {
-  background: var(--accent);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(138,43,226, 0.3);
-}
-
-/* ─── Flip Cards (翻譯蒟蒻) ─── */
-.flip-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.flip-card {
-  background: transparent;
-  height: 120px;
-  perspective: 1000px;
-  cursor: pointer;
-}
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
-}
-.flip-card.flipped .flip-card-inner {
-  transform: rotateY(180deg);
-}
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-  border: 1px solid var(--border);
-}
-.flip-card-front {
-  background: linear-gradient(135deg, var(--surface), var(--surface2));
-}
-.flip-card-front h4 {
-  font-size: 1.2rem;
-  font-weight: 900;
-  color: var(--accent);
-}
-.flip-card-front span {
-  font-size: 0.75rem;
-  color: var(--muted);
-  margin-top: 4px;
-}
-.flip-card-back {
-  background: linear-gradient(135deg, #312e81, #1e1b4b);
-  transform: rotateY(180deg);
-  border-color: var(--accent);
-}
-.flip-card-back p {
-  font-size: 0.85rem;
-  font-weight: 500;
-  line-height: 1.4;
-  color: #fff;
-}
-.click-hint {
-  font-size: 0.7rem;
-  color: var(--accent);
-  margin-top: 8px;
-  opacity: 0.8;
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
-}
-
-/* ─── Comparison Table ─── */
-.comp-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-}
-.comp-table th, .comp-table td {
-  padding: 14px;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-}
-.comp-table th:last-child, .comp-table td:last-child {
-  border-right: none;
-}
-.comp-table tr:last-child td {
-  border-bottom: none;
-}
-.comp-table th {
-  background: var(--surface2);
-  font-size: 0.9rem;
-  font-weight: 900;
-  color: var(--muted);
-  text-align: center;
-}
-.comp-table td {
-  background: var(--surface);
-  font-size: 0.85rem;
-  line-height: 1.5;
-  vertical-align: top;
-  width: 50%;
-}
-.comp-table td.old { color: var(--red); }
-.comp-table td.new { color: var(--green); font-weight: 700;}
-
-/* EASTER EGG */
-.easter-egg { margin-top: 30px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border); border-radius: 12px; padding: 15px; }
-.easter-egg summary { font-size: 0.9rem; font-weight: 700; color: var(--accent); cursor: pointer; user-select: none; list-style: none; display: flex; align-items: center; }
-.easter-egg summary::-webkit-details-marker { display: none; }
-.easter-egg summary::after { content: '▼'; margin-left: auto; font-size: 0.8rem; transition: transform 0.3s; }
-.easter-egg[open] summary::after { transform: rotate(180deg); }
-.egg-content { margin-top: 15px; font-size: 0.85rem; color: var(--muted); line-height: 1.6; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
-.egg-content ul { padding-left: 20px; margin: 10px 0; }
-.egg-content li { margin-bottom: 8px; }
-.egg-content strong { color: #fff; }
-
-</style>
-</head>
-<body>
-<div id="app">
-
-  <div class="header">
-    <button class="btn-back" onclick="window.location.href='index.html'"><span>◀</span> 返回</button>
-    <div class="header-title">概念翻譯與理論地圖</div>
-  </div>
-
-  <div class="container">
-    
-    <!-- Section A: Timeline -->
-    <section class="slide-up" style="animation: slideUp 0.4s ease forwards;">
-      <div class="section-title"><span>🗺️</span> 理論脈絡三部曲</div>
-      <p style="font-size:0.85rem; color:var(--muted); margin-bottom: 16px;">跟著牧野篤教授的邏輯看懂時代的病與藥。</p>
-      
-      <div class="timeline">
-        <div class="tl-item tl-1">
-          <div class="tl-dot"></div>
-          <div class="tl-content">
-            <h4>第一部曲：生病的社會</h4>
-            <p style="text-align: justify; margin-bottom: 15px;">在近代工業社會的發展下，追求效率與資本增殖成為唯一目標，人被異化為規格化的勞動力齒輪。教育淪為找尋「單一標準答案」的規訓牢籠，導致社會陷入匿名與冷漠。在這種高度競爭與績效主義的壓迫下，人們失去了真實的連結，最終走向無可避免的孤立、孤食與生存焦慮。</p>
-            <div class="kw-tags">
-              <span class="kw-tag" onclick="scrollToCard('card-panopticon')">圓形監獄 (パノプティコン)</span>
-              <span class="kw-tag" onclick="scrollToCard('card-disciplinary')">規訓社會 (規律訓練型社会)</span>
-              <span class="kw-tag" onclick="scrollToCard('card-anonymous')">匿名性社會 (匿名性社会)</span>
-              <span class="kw-tag" onclick="scrollToCard('card-recurrent')">回流教育 (リカレント教育)</span>
-              <span class="kw-tag" onclick="scrollToCard('card-isolation')">孤立與孤食 (孤立と孤食)</span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="tl-item tl-2">
-          <div class="tl-dot"></div>
-          <div class="tl-content">
-            <h4>第二部曲：100年時代的處方</h4>
-            <p style="text-align: justify; margin-bottom: 15px;">面對人生100年時代與人口減少的雙重衝擊，傳統依賴國家由上而下的福利體制已逐漸失效。牧野篤教授提出，我們必須重新找回「共感（Compassion）」的能力，主動看見並陪伴他人的苦難。透過「微型公共化」稍微打開私領域，在社區中創造出讓人能安心存在的「居場所」，並賦予每個人貢獻價值的「出場」機會，藉此重建社會信任。</p>
-            <div class="kw-tags">
-              <span class="kw-tag" onclick="scrollToCard('card-compassion')">共感 (コンパッション)</span>
-              <span class="kw-tag" onclick="scrollToCard('card-sumibiraki')">微型公共化 (住み開き)</span>
-              <span class="kw-tag" onclick="scrollToCard('card-ibasho')">居場所 (いばしょ)</span>
-              <span class="kw-tag" onclick="scrollToCard('card-deban')">出場 (出番)</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="tl-item tl-3">
-          <div class="tl-dot"></div>
-          <div class="tl-content">
-            <h4>第三部曲：真正的痊癒</h4>
-            <p style="text-align: justify; margin-bottom: 15px;">當人們在社區中獲得了安心的安全基地後，便能擺脫害怕犯錯的恐懼，勇敢透過「AAR模式」在真實社會中大膽嘗試與修正。此時，「學習」將不再是為了應付考試的痛苦過程，而是回歸人類渴望探索的快樂本能。最終，這種基於互信的人際連結，會透過「恩送」的精神無私地傳遞給下一代，讓社會真正成為我們共同的「關係的故鄉」。</p>
-            <div class="kw-tags">
-              <span class="kw-tag" onclick="scrollToCard('card-payitforward')">恩送 (恩送り)</span>
-              <span class="kw-tag" onclick="scrollToCard('card-actionresearch')">AAR 模式 (アクションリサーチ)</span>
-              <span class="kw-tag" onclick="scrollToCard('card-lifelong')">終身學習 (生涯学習)</span>
-              <span class="kw-tag" onclick="scrollToCard('card-hometown')">關係的故鄉 (関係の故郷)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section B: Flip Cards -->
-    <section class="slide-up" style="animation: slideUp 0.4s ease forwards; animation-delay: 0.1s;">
-      <div class="section-title"><span>🧠</span> 大師語錄翻譯蒟蒻</div>
-      <p style="font-size:0.85rem; color:var(--muted); margin-bottom: 16px;">點擊卡片，看懂這些日文翻譯背後的「白話文」。</p>
-      
-      <div class="flip-grid">
-        <div id="card-ibasho" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>居場所 <span style="font-size:0.75rem; font-weight:normal;">(いばしょ)</span></h4><span>いばしょ</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>不只是一個實體地點，而是一個「即使我不完美，也能被接納的安心空間與歸屬」。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-deban" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>出場 <span style="font-size:0.75rem; font-weight:normal;">(出番)</span></h4><span>でばん</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>不只是出場機會，而是「發現自己被別人需要的那份驕傲」。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-sumibiraki" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>微型公共化 <span style="font-size:0.75rem; font-weight:normal;">(住み開き)</span></h4><span>すみびらき</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>不是把家全打開，而是「稍微打開一點點私人空間，讓善意可以流動」。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-payitforward" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>恩送 <span style="font-size:0.75rem; font-weight:normal;">(恩返し)</span></h4><span>おんがえし</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>不是還債給恩人，而是把得到的溫暖「無條件傳遞給下一個需要的人」。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-hometown" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>關係的故鄉 <span style="font-size:0.75rem; font-weight:normal;">(関係の故郷)</span></h4><span>かんけいのふるさと</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>不再只是物理出生的土地。當長者無私地支持年輕世代，長者自身便化作了下一代的精神「故鄉」，形成跨世代的牽絆。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-panopticon" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>軟著陸 <span style="font-size:0.75rem; font-weight:normal;">(ソフトランディング)</span></h4><span>Soft Landing</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>接受社會正在衰退的事實，不再逼迫大家當血汗齒輪。用社區與連結，為降落的社會鋪上柔軟的安全網。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-disciplinary" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>消費者 <span style="font-size:0.75rem; font-weight:normal;">(消費者)</span></h4><span>しょうひしゃ</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>不再做一個只用錢購買行政服務的「被動客人」，而是要成為主動參與社區、與他人共創連結的「當事者」。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-anonymous" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>甜甜圈 <span style="font-size:0.75rem; font-weight:normal;">(ドーナツ化)</span></h4><span>ドーナツか</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>現代社區就像甜甜圈，中間（傳統地緣與血緣）已經空洞化。必須把「學習」放回中心，重新串聯孤單的人。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-recurrent" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>自我決定 <span style="font-size:0.75rem; font-weight:normal;">(自己決定)</span></h4><span>じこけってい</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>不是新自由主義下孤立無援的個人選擇；真正的自我決定與幸福感，是建立在「與他人產生深刻連結」的互助網絡之中。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-actionresearch" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>AAR 模式 <span style="font-size:0.75rem; font-weight:normal;">(アクションリサーチ)</span></h4><span>Action Research</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>取代工業時代追求標準答案的 PDCA。在無法預測未來的時代，提出預期、大膽行動，並在安心的社群中從做中學與反思。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-isolation" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>PDCA 模式 <span style="font-size:0.75rem; font-weight:normal;">(PDCAサイクル)</span></h4><span>Plan-Do-Check-Act</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>工業時代的產物，假設未來可被精準預測與計畫。但在變動的現代，過度強調 Check(查核) 反而讓人害怕失敗、不敢行動。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-lifelong" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>老年期超越 <span style="font-size:0.75rem; font-weight:normal;">(老年的超越)</span></h4><span>ろうねんてきちょうえつ</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>瑞典學者 Tornstam 提出。高齡者會從物質與理性的算計中超脫，感受到與宇宙、世代的連結，在安寧中獲得極大幸福。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>社會處方箋 <span style="font-size:0.75rem; font-weight:normal;">(社会的処方)</span></h4><span>しゃかいてきしょほう</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>最好的預防醫學不是吃藥，而是「人際連結」。醫生開立的處方是讓孤單的患者走入社區，用陪伴治癒生病的社會。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>陪伴與留白 <span style="font-size:0.75rem; font-weight:normal;">(伴走と余白)</span></h4><span>ばんそうとよはく</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>政府不該強勢主導一切，而是做個「陪走教練」。在施政中刻意「留白」，才能激發社區居民主動參與、創造自己的出場機會。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>動態拼圖 <span style="font-size:0.75rem; font-weight:normal;">(ジグソーパズル)</span></h4><span>Dynamic Puzzle</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>沒有人是完美的。承認自己的脆弱與缺陷（凹），並用自己的優點（凸）去補足別人。像拼圖一樣在社區中互補與支撐。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>創生 <span style="font-size:0.75rem; font-weight:normal;">(地方創生)</span></h4><span>ちほうそうせい</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>真正的創生不是砸大錢蓋硬體或拼經濟，而是以「學習」為核心，重新編織人與人之間的關係，找回失落的社區牽絆。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-compassion" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>共感 <span style="font-size:0.75rem; font-weight:normal;">(コンパッション)</span></h4><span>Compassion</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>超越一般同情心。它是「因為我痛過，所以我懂你的痛（負傷的療癒者）」的深層共鳴，並會因此化為助人的具體行動。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>微型社會 <span style="font-size:0.75rem; font-weight:normal;">(ちいさな社会)</span></h4><span>ちいさなしゃかい</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>不追求國家級的宏大復興，而是用一群人的羈絆，在身邊打造出無數個「充滿溫度與互助的小型社會」。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4 style="font-size:1rem; line-height:1.2;">捨棄故鄉的學力 <span style="font-size:0.65rem; font-weight:normal; display:block;">(ふるさとを捨てる学力)</span></h4><span>ふるさとをすてるがくりょく</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>把孩子訓練成標準化的菁英，代價卻是讓他們徹底與出生的土地斷裂，成為回不了家的異鄉人。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>學習的再定義 <span style="font-size:0.75rem; font-weight:normal;">(学びの再定義)</span></h4><span>まなびのさいていぎ</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>不是坐在教室背標準答案，而是走入人群，在不斷試錯與交流價值的過程中，重新把人與人連結起來的行動。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>世代傳承性 <span style="font-size:0.75rem; font-weight:normal;">(世代継承性)</span></h4><span>せだいけいしょうせい</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>即「關懷下一代」。深植於人類本能，當我們不再只為自己活，而是為下一代付出與傳承時，生命便能獲得超越的昇華。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>晶體智力 <span style="font-size:0.75rem; font-weight:normal;">(結晶性知能)</span></h4><span>けっしょうせいちのう</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>年紀增長雖會讓記憶力(流體智力)衰退，但基於人生歷練與經驗的「晶體智力」卻會持續增長，成為傳承智慧的無價說書人。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>實踐者 <span style="font-size:0.75rem; font-weight:normal;">(実践者)</span></h4><span>じっせんしゃ</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>學習的終極目標，是讓我們從「被動接收行政服務的消費者」，蛻變為「主動發揮影響力、起而行的實踐者(Doer)」。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>存在欲望 <span style="font-size:0.75rem; font-weight:normal;">(存在欲求)</span></h4><span>そんざいよっきゅう</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>現代社會的價值觀轉型。人們不再滿足於盲目賺錢與囤積物質的「佔有欲望」，而是轉向追求人際羈絆與生命意義的「存在欲望」。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-panopticon" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>圓形監獄 <span style="font-size:0.75rem; font-weight:normal;">(パノプティコン)</span></h4><span>Panopticon</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>用考試與分數互相監視，製造出強大的同調壓力，逼迫所有人成為聽話的勞工，不容許偏離標準軌道。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-disciplinary" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>規訓社會 <span style="font-size:0.75rem; font-weight:normal;">(規律訓練型社会)</span></h4><span>きりつくんれんがたしゃかい</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>把學校變成工廠。將形形色色的個人，強行削平稜角，訓練成規格化、順從且可隨時被替換的工業齒輪。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-anonymous" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>匿名性社會 <span style="font-size:0.75rem; font-weight:normal;">(匿名性社会)</span></h4><span>とくめいせいしゃかい</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>工業時代的悲歌。「就算沒有我，別人也能輕易取代我」，這種將人視為免洗筷的邏輯，導致了極度的冷漠與孤立。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-recurrent" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>回流教育 <span style="font-size:0.75rem; font-weight:normal;">(リカレント教育)</span></h4><span>リカレントきょういく</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>舊時代的功利學習觀。把人當作機器，壞了或技能過時了，就送回學校「進廠維修」，修好再丟回工廠繼續壓榨。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-isolation" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>孤立與孤食 <span style="font-size:0.75rem; font-weight:normal;">(孤立と孤食)</span></h4><span>こりつとこしょく</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>地緣與血緣斷裂後的終極病徵。人們獨自生活、獨自吃飯，喪失了與社會的連結，成為高齡者身心衰弱的元兇。</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="card-lifelong" class="flip-card" onclick="this.classList.toggle('flipped')">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <h4>終身學習 <span style="font-size:0.75rem; font-weight:normal;">(生涯学習)</span></h4><span>しょうがいがくしゅう</span>
-              <div class="click-hint">點擊翻轉👆</div>
-            </div>
-            <div class="flip-card-back">
-              <p>不再是為了考證照或找工作。它是出於單純的好奇與熱情，是人類找尋生命意義、與他人建立牽絆的快樂本能。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section C: Comparison Table -->
-    <section class="slide-up" style="animation: slideUp 0.4s ease forwards; animation-delay: 0.2s;">
-      <div class="section-title"><span>⚔️</span> 舊時代 vs 新時代</div>
-      <p style="font-size:0.85rem; color:var(--muted); margin-bottom: 16px;">看懂這張表，就看懂了牧野教授的核心批判。</p>
-      
-      <table class="comp-table">
-        <tr>
-          <th style="color:var(--red);">🏭 工業化社會 (生病)</th>
-          <th style="color:var(--green);">🌱 100年時代 (解藥)</th>
-        </tr>
-        <tr>
-          <td class="old"><b>回流教育：</b><br>把人當機器，壞了或不足，就回學校「進廠維修」。</td>
-          <td class="new"><b>終身學習：</b><br>出於好奇與熱情，是人類找尋生命意義的快樂本能。</td>
-        </tr>
-        <tr>
-          <td class="old"><b>PDCA 模式：</b><br>預測未來，找尋唯一標準答案。不容許偏差與失敗。</td>
-          <td class="new"><b>AAR 模式：</b><br>未來無法預測。大膽行動(Action)，從做中學與反思。</td>
-        </tr>
-        <tr>
-          <td class="old"><b>圓形監獄 (規訓)：</b><br>用考試與分數互相監視，製造出同調壓力與聽話的勞工。</td>
-          <td class="new"><b>社區中心 (關係)：</b><br>成為地方創生的基地，讓每個人互相陪伴、建立連結。</td>
-        </tr>
-        <tr>
-          <td class="old"><b>匿名性社會：</b><br>就算沒有我，別人也能取代我。導致極度的冷漠與孤立。</td>
-          <td class="new"><b>關係的故鄉：</b><br>故鄉不再是土地，而是「人與人之間無血緣的牽絆」。</td>
-        </tr>
-      </table>
-    </section>
-
-    
-
-  </div>
-</div>
-<style>
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-</style>
-<script>
-  function scrollToCard(cardId) {
-    const card = document.getElementById(cardId);
-    if (card) {
-      // Scroll into view with smooth behavior
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      
-      // Add a highlight glow effect
-      const originalBoxShadow = card.style.boxShadow;
-      card.style.transition = 'box-shadow 0.3s ease';
-      card.style.boxShadow = '0 0 25px var(--accent)';
-      
-      // Remove glow after 1.5 seconds
-      setTimeout(() => {
-        card.style.boxShadow = originalBoxShadow || '0 8px 30px rgba(0,0,0,0.5)';
-      }, 1500);
-
-      // Automatically flip the card open if it's not already flipped
-      if (!card.classList.contains('flipped')) {
-        card.classList.add('flipped');
-      }
-    }
-  }
-</script>
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f172a">
+<title>大師概念翻譯與理論地圖</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ─── Design Tokens ─── */
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface2: #263248;
+  --border: rgba(148,163,184,.15);
+  --accent: #818cf8;
+  --accent2: #c084fc;
+  --green: #34d399;
+  --red: #f87171;
+  --amber: #fbbf24;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --card: #1e293b;
+  --r: 20px;
+  --sh: 0 0 0 1px rgba(148,163,184,.1), 0 20px 50px rgba(0,0,0,.5);
+  --safe-top: env(safe-area-inset-top);
+  --safe-bot: env(safe-area-inset-bottom);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;overscroll-behavior-y:none;
+  padding-top:var(--safe-top);padding-bottom:var(--safe-bot)}
+a{text-decoration:none;color:inherit}
+
+/* ─── App Container ─── */
+#app {
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Header ─── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn-back {
+  padding: 0 16px; height: 38px; border-radius: 99px; 
+  background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); 
+  cursor: pointer; display: flex; align-items: center; justify-content: center; 
+  font-size: 0.95rem; font-weight: 700; color: #38bdf8; transition: .2s; 
+  flex-shrink: 0; gap: 4px;
+}
+.btn-back:active { transform: scale(.95); background: rgba(56,189,248,0.2); }
+.header-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #a78bfa, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Layout ─── */
+.container {
+  padding: 20px;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title span {
+  font-size: 1.6rem;
+}
+
+/* ─── Timeline (三部曲) ─── */
+.timeline {
+  position: relative;
+  padding-left: 24px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  left: -24px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: translateX(-4px);
+  z-index: 2;
+  box-shadow: 0 0 0 4px var(--bg);
+}
+.tl-1 .tl-dot { background: var(--red); }
+.tl-2 .tl-dot { background: var(--amber); }
+.tl-3 .tl-dot { background: var(--green); }
+
+.tl-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+}
+.tl-content h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.tl-1 h4 { color: var(--red); }
+.tl-2 h4 { color: var(--amber); }
+.tl-3 h4 { color: var(--green); }
+
+.tl-content p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.kw-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.kw-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: var(--surface2);
+  color: var(--text-light);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  border: 1px solid var(--border);
+}
+.kw-tag:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(138,43,226, 0.3);
+}
+
+/* ─── Flip Cards (翻譯蒟蒻) ─── */
+.flip-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.flip-card {
+  background: transparent;
+  height: 120px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 1px solid var(--border);
+}
+.flip-card-front {
+  background: linear-gradient(135deg, var(--surface), var(--surface2));
+}
+.flip-card-front h4 {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--accent);
+}
+.flip-card-front span {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.flip-card-back {
+  background: linear-gradient(135deg, #312e81, #1e1b4b);
+  transform: rotateY(180deg);
+  border-color: var(--accent);
+}
+.flip-card-back p {
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #fff;
+}
+.click-hint {
+  font-size: 0.7rem;
+  color: var(--accent);
+  margin-top: 8px;
+  opacity: 0.8;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+/* ─── Comparison Table ─── */
+.comp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.comp-table th, .comp-table td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.comp-table th:last-child, .comp-table td:last-child {
+  border-right: none;
+}
+.comp-table tr:last-child td {
+  border-bottom: none;
+}
+.comp-table th {
+  background: var(--surface2);
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: var(--muted);
+  text-align: center;
+}
+.comp-table td {
+  background: var(--surface);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  vertical-align: top;
+  width: 50%;
+}
+.comp-table td.old { color: var(--red); }
+.comp-table td.new { color: var(--green); font-weight: 700;}
+
+/* EASTER EGG */
+.easter-egg { margin-top: 30px; background: rgba(255,255,255,0.03); border: 1px dashed var(--border); border-radius: 12px; padding: 15px; }
+.easter-egg summary { font-size: 0.9rem; font-weight: 700; color: var(--accent); cursor: pointer; user-select: none; list-style: none; display: flex; align-items: center; }
+.easter-egg summary::-webkit-details-marker { display: none; }
+.easter-egg summary::after { content: '▼'; margin-left: auto; font-size: 0.8rem; transition: transform 0.3s; }
+.easter-egg[open] summary::after { transform: rotate(180deg); }
+.egg-content { margin-top: 15px; font-size: 0.85rem; color: var(--muted); line-height: 1.6; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); }
+.egg-content ul { padding-left: 20px; margin: 10px 0; }
+.egg-content li { margin-bottom: 8px; }
+.egg-content strong { color: #fff; }
+
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div class="header">
+    <button class="btn-back" onclick="window.location.href='index.html'"><span>◀</span> 返回</button>
+    <div class="header-title">概念翻譯與理論地圖</div>
+  </div>
+
+  <div class="container">
+    
+    <!-- Section A: Timeline -->
+    <section class="slide-up" style="animation: slideUp 0.4s ease forwards;">
+      <div class="section-title"><span>🗺️</span> 理論脈絡三部曲</div>
+      <p style="font-size:0.85rem; color:var(--muted); margin-bottom: 16px;">跟著牧野篤教授的邏輯看懂時代的病與藥。</p>
+      
+      <div class="timeline">
+        <div class="tl-item tl-1">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h4>第一部曲：生病的社會</h4>
+            <p style="text-align: justify; margin-bottom: 15px;">在近代工業社會的發展下，追求效率與資本增殖成為唯一目標，人被異化為規格化的勞動力齒輪。教育淪為找尋「單一標準答案」的規訓牢籠，導致社會陷入匿名與冷漠。在這種高度競爭與績效主義的壓迫下，人們失去了真實的連結，最終走向無可避免的孤立、孤食與生存焦慮。</p>
+            <div class="kw-tags">
+              <span class="kw-tag" onclick="scrollToCard('card-panopticon')">圓形監獄 (パノプティコン)</span>
+              <span class="kw-tag" onclick="scrollToCard('card-disciplinary')">規訓社會 (規律訓練型社会)</span>
+              <span class="kw-tag" onclick="scrollToCard('card-anonymous')">匿名性社會 (匿名性社会)</span>
+              <span class="kw-tag" onclick="scrollToCard('card-recurrent')">回流教育 (リカレント教育)</span>
+              <span class="kw-tag" onclick="scrollToCard('card-isolation')">孤立與孤食 (孤立と孤食)</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tl-item tl-2">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h4>第二部曲：100年時代的處方</h4>
+            <p style="text-align: justify; margin-bottom: 15px;">面對人生100年時代與人口減少的雙重衝擊，傳統依賴國家由上而下的福利體制已逐漸失效。牧野篤教授提出，我們必須重新找回「共感（Compassion）」的能力，主動看見並陪伴他人的苦難。透過「微型公共化」稍微打開私領域，在社區中創造出讓人能安心存在的「居場所」，並賦予每個人貢獻價值的「出場」機會，藉此重建社會信任。</p>
+            <div class="kw-tags">
+              <span class="kw-tag" onclick="scrollToCard('card-compassion')">共感 (コンパッション)</span>
+              <span class="kw-tag" onclick="scrollToCard('card-sumibiraki')">微型公共化 (住み開き)</span>
+              <span class="kw-tag" onclick="scrollToCard('card-ibasho')">居場所 (いばしょ)</span>
+              <span class="kw-tag" onclick="scrollToCard('card-deban')">出場 (出番)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item tl-3">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h4>第三部曲：真正的痊癒</h4>
+            <p style="text-align: justify; margin-bottom: 15px;">當人們在社區中獲得了安心的安全基地後，便能擺脫害怕犯錯的恐懼，勇敢透過「AAR模式」在真實社會中大膽嘗試與修正。此時，「學習」將不再是為了應付考試的痛苦過程，而是回歸人類渴望探索的快樂本能。最終，這種基於互信的人際連結，會透過「恩送」的精神無私地傳遞給下一代，讓社會真正成為我們共同的「關係的故鄉」。</p>
+            <div class="kw-tags">
+              <span class="kw-tag" onclick="scrollToCard('card-payitforward')">恩送 (恩送り)</span>
+              <span class="kw-tag" onclick="scrollToCard('card-actionresearch')">AAR 模式 (アクションリサーチ)</span>
+              <span class="kw-tag" onclick="scrollToCard('card-lifelong')">終身學習 (生涯学習)</span>
+              <span class="kw-tag" onclick="scrollToCard('card-hometown')">關係的故鄉 (関係の故郷)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section B: Flip Cards -->
+    <section class="slide-up" style="animation: slideUp 0.4s ease forwards; animation-delay: 0.1s;">
+      <div class="section-title"><span>🧠</span> 大師語錄翻譯蒟蒻</div>
+      <p style="font-size:0.85rem; color:var(--muted); margin-bottom: 16px;">點擊卡片，看懂這些日文翻譯背後的「白話文」。</p>
+      
+      <div class="flip-grid">
+        <div id="card-ibasho" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>居場所 <span style="font-size:0.75rem; font-weight:normal;">(いばしょ)</span></h4><span>いばしょ</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>不只是一個實體地點，而是一個「即使我不完美，也能被接納的安心空間與歸屬」。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-deban" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>出場 <span style="font-size:0.75rem; font-weight:normal;">(出番)</span></h4><span>でばん</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>不只是出場機會，而是「發現自己被別人需要的那份驕傲」。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-sumibiraki" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>微型公共化 <span style="font-size:0.75rem; font-weight:normal;">(住み開き)</span></h4><span>すみびらき</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>不是把家全打開，而是「稍微打開一點點私人空間，讓善意可以流動」。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-payitforward" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>恩送 <span style="font-size:0.75rem; font-weight:normal;">(恩返し)</span></h4><span>おんがえし</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>不是還債給恩人，而是把得到的溫暖「無條件傳遞給下一個需要的人」。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-hometown" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>關係的故鄉 <span style="font-size:0.75rem; font-weight:normal;">(関係の故郷)</span></h4><span>かんけいのふるさと</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>不再只是物理出生的土地。當長者無私地支持年輕世代，長者自身便化作了下一代的精神「故鄉」，形成跨世代的牽絆。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-panopticon" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>軟著陸 <span style="font-size:0.75rem; font-weight:normal;">(ソフトランディング)</span></h4><span>Soft Landing</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>接受社會正在衰退的事實，不再逼迫大家當血汗齒輪。用社區與連結，為降落的社會鋪上柔軟的安全網。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-disciplinary" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>消費者 <span style="font-size:0.75rem; font-weight:normal;">(消費者)</span></h4><span>しょうひしゃ</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>不再做一個只用錢購買行政服務的「被動客人」，而是要成為主動參與社區、與他人共創連結的「當事者」。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-anonymous" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>甜甜圈 <span style="font-size:0.75rem; font-weight:normal;">(ドーナツ化)</span></h4><span>ドーナツか</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>現代社區就像甜甜圈，中間（傳統地緣與血緣）已經空洞化。必須把「學習」放回中心，重新串聯孤單的人。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-recurrent" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>自我決定 <span style="font-size:0.75rem; font-weight:normal;">(自己決定)</span></h4><span>じこけってい</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>不是新自由主義下孤立無援的個人選擇；真正的自我決定與幸福感，是建立在「與他人產生深刻連結」的互助網絡之中。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-actionresearch" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>AAR 模式 <span style="font-size:0.75rem; font-weight:normal;">(アクションリサーチ)</span></h4><span>Action Research</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>取代工業時代追求標準答案的 PDCA。在無法預測未來的時代，提出預期、大膽行動，並在安心的社群中從做中學與反思。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-isolation" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>PDCA 模式 <span style="font-size:0.75rem; font-weight:normal;">(PDCAサイクル)</span></h4><span>Plan-Do-Check-Act</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>工業時代的產物，假設未來可被精準預測與計畫。但在變動的現代，過度強調 Check(查核) 反而讓人害怕失敗、不敢行動。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-lifelong" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>老年期超越 <span style="font-size:0.75rem; font-weight:normal;">(老年的超越)</span></h4><span>ろうねんてきちょうえつ</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>瑞典學者 Tornstam 提出。高齡者會從物質與理性的算計中超脫，感受到與宇宙、世代的連結，在安寧中獲得極大幸福。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>社會處方箋 <span style="font-size:0.75rem; font-weight:normal;">(社会的処方)</span></h4><span>しゃかいてきしょほう</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>最好的預防醫學不是吃藥，而是「人際連結」。醫生開立的處方是讓孤單的患者走入社區，用陪伴治癒生病的社會。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>陪伴與留白 <span style="font-size:0.75rem; font-weight:normal;">(伴走と余白)</span></h4><span>ばんそうとよはく</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>政府不該強勢主導一切，而是做個「陪走教練」。在施政中刻意「留白」，才能激發社區居民主動參與、創造自己的出場機會。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>動態拼圖 <span style="font-size:0.75rem; font-weight:normal;">(ジグソーパズル)</span></h4><span>Dynamic Puzzle</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>沒有人是完美的。承認自己的脆弱與缺陷（凹），並用自己的優點（凸）去補足別人。像拼圖一樣在社區中互補與支撐。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>創生 <span style="font-size:0.75rem; font-weight:normal;">(地方創生)</span></h4><span>ちほうそうせい</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>真正的創生不是砸大錢蓋硬體或拼經濟，而是以「學習」為核心，重新編織人與人之間的關係，找回失落的社區牽絆。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-compassion" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>共感 <span style="font-size:0.75rem; font-weight:normal;">(コンパッション)</span></h4><span>Compassion</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>超越一般同情心。它是「因為我痛過，所以我懂你的痛（負傷的療癒者）」的深層共鳴，並會因此化為助人的具體行動。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>微型社會 <span style="font-size:0.75rem; font-weight:normal;">(ちいさな社会)</span></h4><span>ちいさなしゃかい</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>不追求國家級的宏大復興，而是用一群人的羈絆，在身邊打造出無數個「充滿溫度與互助的小型社會」。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4 style="font-size:1rem; line-height:1.2;">捨棄故鄉的學力 <span style="font-size:0.65rem; font-weight:normal; display:block;">(ふるさとを捨てる学力)</span></h4><span>ふるさとをすてるがくりょく</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>把孩子訓練成標準化的菁英，代價卻是讓他們徹底與出生的土地斷裂，成為回不了家的異鄉人。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>學習的再定義 <span style="font-size:0.75rem; font-weight:normal;">(学びの再定義)</span></h4><span>まなびのさいていぎ</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>不是坐在教室背標準答案，而是走入人群，在不斷試錯與交流價值的過程中，重新把人與人連結起來的行動。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>世代傳承性 <span style="font-size:0.75rem; font-weight:normal;">(世代継承性)</span></h4><span>せだいけいしょうせい</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>即「關懷下一代」。深植於人類本能，當我們不再只為自己活，而是為下一代付出與傳承時，生命便能獲得超越的昇華。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>晶體智力 <span style="font-size:0.75rem; font-weight:normal;">(結晶性知能)</span></h4><span>けっしょうせいちのう</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>年紀增長雖會讓記憶力(流體智力)衰退，但基於人生歷練與經驗的「晶體智力」卻會持續增長，成為傳承智慧的無價說書人。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>實踐者 <span style="font-size:0.75rem; font-weight:normal;">(実践者)</span></h4><span>じっせんしゃ</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>學習的終極目標，是讓我們從「被動接收行政服務的消費者」，蛻變為「主動發揮影響力、起而行的實踐者(Doer)」。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>存在欲望 <span style="font-size:0.75rem; font-weight:normal;">(存在欲求)</span></h4><span>そんざいよっきゅう</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>現代社會的價值觀轉型。人們不再滿足於盲目賺錢與囤積物質的「佔有欲望」，而是轉向追求人際羈絆與生命意義的「存在欲望」。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-panopticon" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>圓形監獄 <span style="font-size:0.75rem; font-weight:normal;">(パノプティコン)</span></h4><span>Panopticon</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>用考試與分數互相監視，製造出強大的同調壓力，逼迫所有人成為聽話的勞工，不容許偏離標準軌道。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-disciplinary" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>規訓社會 <span style="font-size:0.75rem; font-weight:normal;">(規律訓練型社会)</span></h4><span>きりつくんれんがたしゃかい</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>把學校變成工廠。將形形色色的個人，強行削平稜角，訓練成規格化、順從且可隨時被替換的工業齒輪。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-anonymous" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>匿名性社會 <span style="font-size:0.75rem; font-weight:normal;">(匿名性社会)</span></h4><span>とくめいせいしゃかい</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>工業時代的悲歌。「就算沒有我，別人也能輕易取代我」，這種將人視為免洗筷的邏輯，導致了極度的冷漠與孤立。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-recurrent" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>回流教育 <span style="font-size:0.75rem; font-weight:normal;">(リカレント教育)</span></h4><span>リカレントきょういく</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>舊時代的功利學習觀。把人當作機器，壞了或技能過時了，就送回學校「進廠維修」，修好再丟回工廠繼續壓榨。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-isolation" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>孤立與孤食 <span style="font-size:0.75rem; font-weight:normal;">(孤立と孤食)</span></h4><span>こりつとこしょく</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>地緣與血緣斷裂後的終極病徵。人們獨自生活、獨自吃飯，喪失了與社會的連結，成為高齡者身心衰弱的元兇。</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-lifelong" class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <h4>終身學習 <span style="font-size:0.75rem; font-weight:normal;">(生涯学習)</span></h4><span>しょうがいがくしゅう</span>
+              <div class="click-hint">點擊翻轉👆</div>
+            </div>
+            <div class="flip-card-back">
+              <p>不再是為了考證照或找工作。它是出於單純的好奇與熱情，是人類找尋生命意義、與他人建立牽絆的快樂本能。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section C: Comparison Table -->
+    <section class="slide-up" style="animation: slideUp 0.4s ease forwards; animation-delay: 0.2s;">
+      <div class="section-title"><span>⚔️</span> 舊時代 vs 新時代</div>
+      <p style="font-size:0.85rem; color:var(--muted); margin-bottom: 16px;">看懂這張表，就看懂了牧野教授的核心批判。</p>
+      
+      <table class="comp-table">
+        <tr>
+          <th style="color:var(--red);">🏭 工業化社會 (生病)</th>
+          <th style="color:var(--green);">🌱 100年時代 (解藥)</th>
+        </tr>
+        <tr>
+          <td class="old"><b>回流教育：</b><br>把人當機器，壞了或不足，就回學校「進廠維修」。</td>
+          <td class="new"><b>終身學習：</b><br>出於好奇與熱情，是人類找尋生命意義的快樂本能。</td>
+        </tr>
+        <tr>
+          <td class="old"><b>PDCA 模式：</b><br>預測未來，找尋唯一標準答案。不容許偏差與失敗。</td>
+          <td class="new"><b>AAR 模式：</b><br>未來無法預測。大膽行動(Action)，從做中學與反思。</td>
+        </tr>
+        <tr>
+          <td class="old"><b>圓形監獄 (規訓)：</b><br>用考試與分數互相監視，製造出同調壓力與聽話的勞工。</td>
+          <td class="new"><b>社區中心 (關係)：</b><br>成為地方創生的基地，讓每個人互相陪伴、建立連結。</td>
+        </tr>
+        <tr>
+          <td class="old"><b>匿名性社會：</b><br>就算沒有我，別人也能取代我。導致極度的冷漠與孤立。</td>
+          <td class="new"><b>關係的故鄉：</b><br>故鄉不再是土地，而是「人與人之間無血緣的牽絆」。</td>
+        </tr>
+      </table>
+    </section>
+
+    
+
+  </div>
+</div>
+<style>
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+<script>
+  function scrollToCard(cardId) {
+    const card = document.getElementById(cardId);
+    if (card) {
+      // Scroll into view with smooth behavior
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Add a highlight glow effect
+      const originalBoxShadow = card.style.boxShadow;
+      card.style.transition = 'box-shadow 0.3s ease';
+      card.style.boxShadow = '0 0 25px var(--accent)';
+      
+      // Remove glow after 1.5 seconds
+      setTimeout(() => {
+        card.style.boxShadow = originalBoxShadow || '0 8px 30px rgba(0,0,0,0.5)';
+      }, 1500);
+    }
+  }
+</script>
+</body>
+</html>
