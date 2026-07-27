@@ -317,7 +317,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
   <!-- MCQ SCREEN -->
   <div class="screen" id="s-mcq">
     <div class="topbar">
-      <button class="btn-back" onclick="show('s-home')"><span>◀</span> 返回</button>
+      <button class="btn-back" onclick="window.location.href='https://m0904103.github.io/happiness-guide/'"><span>◀</span> 返回重點寶典</button>
       <div class="topbar-title">全真模擬選擇題 <button class="btn-progress" onclick="openProgress()">查看進度</button></div>
       <div class="score-badge" id="mcq-score-lbl">✦ 0 答對</div>
     </div>
@@ -327,7 +327,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
   <!-- SWIPE SCREEN -->
   <div class="screen" id="s-swipe">
     <div class="topbar">
-      <button class="btn-back" onclick="show('s-home')"><span>◀</span> 返回</button>
+      <button class="btn-back" onclick="window.location.href='https://m0904103.github.io/happiness-guide/'"><span>◀</span> 返回重點寶典</button>
       <div class="topbar-title">是非題滑滑卡</div>
       <div class="score-badge" id="sw-count">0 / 0</div>
     </div>
@@ -339,7 +339,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
   <!-- STUDY SCREEN -->
   <div class="screen" id="s-study">
     <div class="topbar">
-      <button class="btn-back" onclick="show('s-home')"><span>◀</span> 返回</button>
+      <button class="btn-back" onclick="window.location.href='https://m0904103.github.io/happiness-guide/'"><span>◀</span> 返回重點寶典</button>
       <div class="topbar-title">課程重點精華</div>
     </div>
     <div style="margin-bottom:20px;color:var(--muted);font-size:0.9rem;text-align:center;" class="fade-in">點擊下方章節展開閱讀，建立核心觀念</div>
@@ -960,7 +960,7 @@ function showResult(type) {
                 <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(255,255,255,0.25); padding: 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.4); position: relative; z-index: 1;">得分: ${score} / ${total}</div>
                 <div style="margin-top: 2rem; position: relative; z-index: 1;">
                   <button class="btn-primary" onclick="startMCQ()" style="width:100%; margin-bottom:1rem; background: #fff; color: #009688; font-weight: 900; border: none; box-shadow: 0 6px 20px rgba(0,0,0,0.2); transform: translateY(0); transition: all 0.2s;">進入宗師境界 (隨機複習)</button>
-                  <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: 1px solid rgba(255,255,255,0.3); font-weight: bold;">回首頁</button>
+                  <button class="btn-primary" onclick="window.location.href='https://m0904103.github.io/happiness-guide/'" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: 1px solid rgba(255,255,255,0.3); font-weight: bold;">返回重點寶典</button>
                 </div>
               </div>
             `;
@@ -975,7 +975,7 @@ function showResult(type) {
                 <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 15px;">得分: ${score} / ${total}</div>
                 <div style="margin-top: 2rem;">
                   <button class="btn-primary" onclick="startMCQ()" style="width:100%; margin-bottom:1rem; background: #fff; color: #1e3a8a; font-weight: bold; border: none;">再戰一次 (找回完美)</button>
-                  <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: none;">回首頁</button>
+                  <button class="btn-primary" onclick="window.location.href='https://m0904103.github.io/happiness-guide/'" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: none;">返回重點寶典</button>
                 </div>
               </div>
             `;
@@ -990,7 +990,7 @@ function showResult(type) {
                 <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 15px;">得分: ${score} / ${total}</div>
                 <div style="margin-top: 2rem;">
                   <button class="btn-primary" onclick="startMCQ()" style="width:100%; margin-bottom:1rem; background: #fff; color: #7f1d1d; font-weight: bold; border: none;">緊急特訓 (找回手感)</button>
-                  <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: none;">回首頁</button>
+                  <button class="btn-primary" onclick="window.location.href='https://m0904103.github.io/happiness-guide/'" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: none;">返回重點寶典</button>
                 </div>
               </div>
             `;
@@ -1013,7 +1013,7 @@ function showResult(type) {
           <div style="font-size:1.1rem; color:#0ea5e9; font-weight:bold; margin-top:15px; padding:10px; background:rgba(14,165,233,0.1); border-radius:12px;">${progMsg}</div>
           <div style="margin-top: 2rem;">
             <button class="btn-primary" onclick="startMCQ()" style="width:100%; margin-bottom:1rem">${btnText}</button>
-            <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.05); color:var(--text)">回首頁</button>
+            <button class="btn-primary" onclick="window.location.href='https://m0904103.github.io/happiness-guide/'" style="width:100%; background:rgba(0,0,0,0.05); color:var(--text)">返回重點寶典</button>
           </div>
         `;
     }
@@ -1052,7 +1052,7 @@ function showResult(type) {
                 <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(255,255,255,0.25); padding: 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.4); position: relative; z-index: 1;">得分: ${score} / ${total}</div>
                 <div style="margin-top: 2rem; position: relative; z-index: 1;">
                   <button class="btn-primary" onclick="startSwipe()" style="width:100%; margin-bottom:1rem; background: #fff; color: #E67E22; font-weight: 900; border: none; box-shadow: 0 6px 20px rgba(0,0,0,0.2); transform: translateY(0); transition: all 0.2s;">進入宗師境界 (隨機複習)</button>
-                  <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: 1px solid rgba(255,255,255,0.3); font-weight: bold;">回首頁</button>
+                  <button class="btn-primary" onclick="window.location.href='https://m0904103.github.io/happiness-guide/'" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: 1px solid rgba(255,255,255,0.3); font-weight: bold;">返回重點寶典</button>
                 </div>
               </div>
             `;
@@ -1067,7 +1067,7 @@ function showResult(type) {
                 <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 15px;">得分: ${score} / ${total}</div>
                 <div style="margin-top: 2rem;">
                   <button class="btn-primary" onclick="startSwipe()" style="width:100%; margin-bottom:1rem; background: #fff; color: #475569; font-weight: bold; border: none;">再戰一次 (找回完美)</button>
-                  <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: none;">回首頁</button>
+                  <button class="btn-primary" onclick="window.location.href='https://m0904103.github.io/happiness-guide/'" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: none;">返回重點寶典</button>
                 </div>
               </div>
             `;
@@ -1082,7 +1082,7 @@ function showResult(type) {
                 <div style="font-size:2.5rem; font-weight:900; margin-bottom:1rem; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 15px;">得分: ${score} / ${total}</div>
                 <div style="margin-top: 2rem;">
                   <button class="btn-primary" onclick="startSwipe()" style="width:100%; margin-bottom:1rem; background: #fff; color: #b91c1c; font-weight: bold; border: none;">緊急特訓 (找回手感)</button>
-                  <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: none;">回首頁</button>
+                  <button class="btn-primary" onclick="window.location.href='https://m0904103.github.io/happiness-guide/'" style="width:100%; background:rgba(0,0,0,0.15); color:#fff; border: none;">返回重點寶典</button>
                 </div>
               </div>
             `;
@@ -1103,7 +1103,7 @@ function showResult(type) {
           <div style="font-size:1.1rem; color:#10b981; font-weight:bold; margin-top:15px; padding:10px; background:rgba(16,185,129,0.1); border-radius:12px;">${progMsg}</div>
           <div style="margin-top: 2rem;">
             <button class="btn-primary" onclick="startSwipe()" style="width:100%; margin-bottom:1rem">${btnText}</button>
-            <button class="btn-primary" onclick="show('s-home')" style="width:100%; background:rgba(0,0,0,0.05); color:var(--text)">回首頁</button>
+            <button class="btn-primary" onclick="window.location.href='https://m0904103.github.io/happiness-guide/'" style="width:100%; background:rgba(0,0,0,0.05); color:var(--text)">返回重點寶典</button>
           </div>
         `;
     }
