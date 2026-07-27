@@ -571,7 +571,17 @@ const state = {
 };
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let audioUnlocked = false;
+function unlockAudio() {
+  if (!audioUnlocked && audioCtx.state === 'suspended') {
+    audioCtx.resume().then(() => { audioUnlocked = true; });
+  }
+}
+document.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
+document.addEventListener('click', unlockAudio, { once: true, passive: true });
+
 function playTone(f, t, type) {
+  unlockAudio(); // Ensure it tries to resume if needed
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
   osc.type = type; osc.frequency.value = f;
