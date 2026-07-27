@@ -625,6 +625,9 @@ function handleRoute() {
     const chapter = params.get('chapter');
     startMCQ(chapter);
     window.history.replaceState(null, null, ' ');
+  } else if (hash.startsWith('#/swipe')) {
+    startSwipe();
+    window.history.replaceState(null, null, ' ');
   }
 }
 
