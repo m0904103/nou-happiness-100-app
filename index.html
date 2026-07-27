@@ -245,6 +245,14 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
 </head>
 <body>
 
+<div id="audio-unlock-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.85); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); z-index:99999; flex-direction:column; justify-content:center; align-items:center; color:white; cursor:pointer;">
+  <div style="background: linear-gradient(135deg, #10b981, #059669); padding: 18px 36px; border-radius: 50px; font-size: 22px; font-weight: bold; box-shadow: 0 10px 25px rgba(16,185,129,0.4); display: flex; align-items: center; gap: 12px;">
+    <span>▶</span> 點擊開始刷題
+  </div>
+  <div style="margin-top: 15px; font-size: 14px; opacity: 0.7; letter-spacing: 1px;">(首次進入請點擊以啟用音效)</div>
+</div>
+
+
 <canvas id="confetti"></canvas>
 <div id="app">
   <!-- HOME -->
@@ -772,6 +780,24 @@ function nextMCQ() { state.mcqIdx++; renderMCQ(); }
 // ────────────────────────────────────────────────
 // SWIPE
 // ────────────────────────────────────────────────
+
+function checkAudioOverlay() {
+  if (audioCtx && audioCtx.state === 'suspended') {
+    const overlay = document.getElementById('audio-unlock-overlay');
+    overlay.style.display = 'flex';
+    const unlockFn = () => {
+      unlockAudio();
+      overlay.style.opacity = '0';
+      overlay.style.transition = 'opacity 0.3s ease';
+      setTimeout(() => { overlay.style.display = 'none'; }, 300);
+      overlay.removeEventListener('click', unlockFn);
+      overlay.removeEventListener('touchstart', unlockFn);
+    };
+    overlay.addEventListener('click', unlockFn);
+    overlay.addEventListener('touchstart', unlockFn);
+  }
+}
+
 function startSwipe() {
   let saved = sessionStorage.getItem('sw_state');
   if (saved) {
@@ -780,7 +806,7 @@ function startSwipe() {
       state.swQueue = stateData.queue;
       state.swIdx = stateData.idx;
       state.swScore = stateData.score;
-      show('s-swipe'); renderSwipe();
+      show('s-swipe'); renderSwipe(); checkAudioOverlay();
       return;
     } catch(e) {}
   }
@@ -803,7 +829,7 @@ function startSwipe() {
   state.swQueue = queue.sort(() => .5 - Math.random());
   state.swIdx = 0; state.swScore = 0;
   sessionStorage.setItem('sw_state', JSON.stringify({queue: state.swQueue, idx: 0, score: 0}));
-  show('s-swipe'); renderSwipe();
+  show('s-swipe'); renderSwipe(); checkAudioOverlay();
 }
 function renderSwipe() {
   if (state.swIdx >= state.swQueue.length) { showResult('sw'); return; }
